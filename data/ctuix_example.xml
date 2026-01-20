@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE ctuix_panel SYSTEM "ctuix.dtd">
+
+<ctuix>
+    <ctuix_panel layout="vertical" x="0" y="0" w="50" h="10">
+        <ctuix_label x="1" y="1" w="" h="">
+        LABEL
+        </ctuix_label>
+    </ctuix_panel>
+</ctuix>

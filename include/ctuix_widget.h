@@ -1,5 +1,5 @@
-#ifndef WIDGET_H
-#define WIDGET_H
+#ifndef CTUIX_WIDGET_H
+#define CTUIX_WIDGET_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,12 +8,13 @@
 #include <ncurses.h>
 
 typedef enum {
-    CTUIX_WIDGET_PANEL,
-    CTUIX_WIDGET_SELECTION_BOX,
-    CTUIX_WIDGET_SCROLL_PANEL,
-    CTUIX_WIDGET_LABEL,
-    CTUIX_WIDGET_BUTTON,
-    CTUIX_WIDGET_ENTRY_BOX
+    CTUIX_ROOT,
+    CTUIX_PANEL,
+    CTUIX_SELECTION_BOX,
+    CTUIX_SCROLL_PANEL,
+    CTUIX_LABEL,
+    CTUIX_BUTTON,
+    CTUIX_ENTRY
 } CTUIX_Widget_Type;
 
 typedef struct CTUIX_Widget {
@@ -30,8 +31,8 @@ typedef struct CTUIX_Widget {
     void (*handle_key)(struct CTUIX_Widget *ctuix_widget, int key);
 } CTUIX_Widget;
 
-CTUIX_Widget widget_create(CTUIX_Widget_Type ctuix_widget_type, int x, int y, int w, int h, bool user_input);
-void widget_draw(CTUIX_Widget *ctuix_widget, WINDOW *window);
-void widget_handle_key(CTUIX_Widget *ctuix_widget, int key);
+CTUIX_Widget ctuix_widget_create(CTUIX_Widget_Type ctuix_widget_type, int x, int y, int w, int h, bool user_input);
+void ctuix_widget_draw(CTUIX_Widget *ctuix_widget, WINDOW *window);
+void ctuix_widget_handle_key(CTUIX_Widget *ctuix_widget, int key);
 
 #endif
