@@ -27,7 +27,7 @@ CTUIX_Node* ctuix_parse(char *file_path)
 void _traverse_node(xmlNode *xml_node)
 {
     xmlNode *temp_node = xml_node->children;
-    while(!temp_node)
+    while(temp_node)
     {
         if(temp_node->type == XML_ELEMENT_NODE)
         {

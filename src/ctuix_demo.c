@@ -6,10 +6,10 @@
 
 int main()
 {
-    char* buffer[MAX_FILE_NAME];
+    char buffer[MAX_FILE_NAME];
     scanf("%s", buffer);
 
-    CTUIX_Node ctuix_root = ctuix_parse(buffer);
+    CTUIX_Node *ctuix_root = ctuix_parse(buffer);
 
     return 0;
 }
