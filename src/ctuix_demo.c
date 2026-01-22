@@ -10,6 +10,6 @@ int main()
     scanf("%s", buffer);
 
     CTUIX_Node *ctuix_root = ctuix_parse(buffer);
-
+    
     return 0;
 }

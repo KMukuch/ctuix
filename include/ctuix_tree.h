@@ -1,5 +1,5 @@
-#ifndef CTUIX_WIDGET_H
-#define CTUIX_WIDGET_H
+#ifndef CTUIX_TREE_H
+#define CTUIX_TREE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,31 +7,33 @@
 #include <string.h>
 #include <ncurses.h>
 
-typedef enum {
-    CTUIX_TREE_ELEMENT_ROOT,
-    CTUIX_TREE_ELEMENT_PANEL,
-    CTUIX_TREE_ELEMENT_SELECTION_BOX,
-    CTUIX_TREE_ELEMENT_SCROLL_PANEL,
-    CTUIX_TREE_ELEMENT_LABEL,
-    CTUIX_TREE_ELEMENT_BUTTON,
-    CTUIX_TREE_ELEMENT_ENTRY
+typedef enum
+{
+    CTUIX_ELEMENT_ERROR,
+    CTUIX_ELEMENT_ROOT,
+    CTUIX_ELEMENT_PANEL,
+    CTUIX_ELEMENT_SELECTION_BOX,
+    CTUIX_ELEMENT_SCROLL_PANEL,
+    CTUIX_ELEMENT_LABEL,
+    CTUIX_ELEMENT_BUTTON,
+    CTUIX_ELEMENT_ENTRY
 } CTUIX_Element_Type;
 
-typedef struct CTUIX_Node {
+typedef struct CTUIX_Node
+{
     CTUIX_Element_Type ctuix_element_type;
     int x, y, w, h;
-    bool user_input;
+    bool user_input_enabled;
     bool active;
 
-    struct CTUIX_Widget *parent;
-    struct CTUIX_Widget *children;
-    struct CTUIX_Widget *next;
+    struct CTUIX_Node *parent;
+    struct CTUIX_Node *children;
+    struct CTUIX_Node *next;
 
     void (*draw)(struct CTUIX_Node *ctuix_node, WINDOW *window);
     void (*handle_key)(struct CTUIX_Node *ctuix_node, int key);
 } CTUIX_Node;
 
-CTUIX_Node ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool user_input);
-CTUIX_Node ctuix_node_delete(CTUIX_Node *ctuix_tree, CTUIX_Node *ctuix_node);
+CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool user_input_enabled);
 
 #endif
