@@ -11,5 +11,12 @@ int main()
 
     CTUIX_Node *ctuix_root = ctuix_parse(buffer);
     
+    if(ctuix_root)
+    {
+        printf("The UI Tree was created successfully!\n");
+    }
+
+    free(ctuix_root);
+
     return 0;
 }

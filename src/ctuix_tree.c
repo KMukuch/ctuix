@@ -25,3 +25,17 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
 
     return ctuix_node;
 }
+
+void ctuix_node_free(CTUIX_Node *ctuix_node)
+{
+    if (!ctuix_node) return;
+
+    CTUIX_Node *child_node = ctuix_node->children;
+    while(child_node)
+    {
+        CTUIX_Node *next_node = child_node->next;
+        ctuix_node_free(child_node);
+        child_node = next_node;
+    }
+    free(ctuix_node);
+}
