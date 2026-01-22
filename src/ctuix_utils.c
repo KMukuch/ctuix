@@ -80,6 +80,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(y_value) xmlFree(y_value);
     if(w_value) xmlFree(w_value);
     if(h_value) xmlFree(h_value);
+    xmlFree(xml_name);
 
     return ctuix_node_create(ctuix_element_type, x, y, w, h, user_input_enabled);
 }
@@ -121,4 +122,13 @@ CTUIX_Node* ctuix_parse(char *file_path)
     xmlCleanupParser();
 
     return ctuix_root;
+}
+
+void ctuix_delete(CTUIX_Node *ctuix_node)
+{
+    if(ctuix_node)
+    {
+        ctuix_node_free(ctuix_node);
+        ctuix_node = NULL;
+    }
 }

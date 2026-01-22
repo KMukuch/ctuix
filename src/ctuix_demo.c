@@ -15,8 +15,8 @@ int main()
     {
         printf("The UI Tree was created successfully!\n");
     }
-
-    free(ctuix_root);
-
+    
+    ctuix_delete(ctuix_root);
+    
     return 0;
 }

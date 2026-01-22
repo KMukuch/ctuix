@@ -13,6 +13,6 @@
 
 CTUIX_Node* ctuix_parse(char *file_path);
 
-void ctuix_delete();
+void ctuix_delete(CTUIX_Node *ctuix_node);
 
 #endif
