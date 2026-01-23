@@ -8,6 +8,10 @@
 CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool user_input_enabled)
 {
     CTUIX_Node *ctuix_node = malloc(sizeof(CTUIX_Node));
+    if(!ctuix_node)
+    {
+        return NULL;
+    }
 
     ctuix_node->ctuix_element_type = ctuix_element_type;
     ctuix_node->x = x;
@@ -19,7 +23,7 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
     ctuix_node->parent = NULL;
     ctuix_node->children = NULL;
     ctuix_node->next = NULL;
-
+    
     ctuix_node->draw = NULL;
     ctuix_node->handle_key = NULL;
 

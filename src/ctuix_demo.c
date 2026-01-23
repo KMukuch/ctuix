@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "ctuix_tree.h"
 #include "ctuix_utils.h"
 
 #define MAX_FILE_NAME 500
@@ -17,6 +16,6 @@ int main()
     }
     
     ctuix_delete(ctuix_root);
-    
+
     return 0;
 }
