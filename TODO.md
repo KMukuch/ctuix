@@ -1,5 +1,7 @@
 #Tasks
 
-1. ncurses widgets
+- release 
 
-2. layout
+- ncurses widgets
+
+- layout
