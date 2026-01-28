@@ -35,6 +35,16 @@ add_custom_target(clean-all
     COMMENT "Remove entire build directory"
 )
 
+# Add executable from demo folder
+add_executable(ctuix_demo demo/ctuix_demo.c)
+target_link_libraries(ctuix_demo PRIVATE ctuix)
+
+# Build-only target
+add_custom_target(demo
+    DEPENDS ctuix_demo
+    COMMENT "Build the demo program from demo/ folder"
+)
+
 # Install the static library
 install(TARGETS ctuix
     ARCHIVE DESTINATION lib
