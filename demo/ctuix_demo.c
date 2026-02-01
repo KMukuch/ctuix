@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include "ctuix_utils.h"
+#include <ctuix/ctuix_parse.h>
+#include <ctuix/ctuix_draw.h>
+#include <ctuix/ctuix_utils.h>
 
 #define MAX_FILE_NAME 500
 
@@ -12,10 +14,14 @@ int main()
     
     if(ctuix_root)
     {
-        printf("The UI Tree was created successfully!\n");
+        ctuix_init();
+
+        ctuix_run(ctuix_root);
+
+        ctuix_end();
     }
     
     ctuix_delete(ctuix_root);
-
+    
     return 0;
 }

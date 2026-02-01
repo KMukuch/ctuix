@@ -6,13 +6,13 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ncurses.h>
-#include <libxml/parser.h>
-#include <libxml/tree.h>
-#include <libxml/valid.h>
 #include "ctuix_tree.h"
+#include "ctuix_parse.h"
 
-CTUIX_Node* ctuix_parse(char *file_path);
+void ctuix_init();
 
-void ctuix_delete(CTUIX_Node *ctuix_node);
+int ctuix_run(CTUIX_Node *ctuix_node);
+
+void ctuix_end();
 
 #endif

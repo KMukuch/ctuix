@@ -1,6 +1,6 @@
-#Tasks
+#TODO
 
-- release 
+- public and private headers
 
 - ncurses widgets
 

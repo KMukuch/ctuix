@@ -10,7 +10,9 @@ pkg_check_modules(NCURSES REQUIRED ncurses)
 # Source files
 set(CTUIX_SOURCES
     src/ctuix_tree.c
+    src/ctuix_parse.c
     src/ctuix_utils.c
+    src/ctuix_draw.c
 )
 
 # Create library
@@ -36,7 +38,7 @@ add_custom_target(clean-all
 )
 
 # Add executable from demo folder
-add_executable(ctuix_demo demo/ctuix_demo.c)
+add_executable(ctuix_demo EXCLUDE_FROM_ALL demo/ctuix_demo.c)
 target_link_libraries(ctuix_demo PRIVATE ctuix)
 
 # Build-only target
