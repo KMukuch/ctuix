@@ -3,25 +3,22 @@
 #include <ctuix/ctuix_draw.h>
 #include <ctuix/ctuix_utils.h>
 
-#define MAX_FILE_NAME 500
+#define FILEPATH "../data/ctuix_example.xml"
 
 int main()
-{
-    char buffer[MAX_FILE_NAME];
-    scanf("%s", buffer);
+{   
+    ctuix_init();
 
-    CTUIX_Node *ctuix_root = ctuix_parse(buffer);
+    CTUIX_Node *ctuix_root = ctuix_parse(FILEPATH);
     
     if(ctuix_root)
     {
-        ctuix_init();
-
         ctuix_run(ctuix_root);
-
-        ctuix_end();
     }
     
     ctuix_delete(ctuix_root);
+    
+    ctuix_end();
     
     return 0;
 }

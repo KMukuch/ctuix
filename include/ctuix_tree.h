@@ -29,17 +29,13 @@ typedef struct CTUIX_Node
     int x, y, w, h;
     bool user_input_enabled;
     bool active;
-    char node_name[MAX_LINE];
 
     struct CTUIX_Node *parent;
     struct CTUIX_Node *children;
     struct CTUIX_Node *next;
-
-    void (*draw)(struct CTUIX_Node *ctuix_node);
-    void (*handle_key)(struct CTUIX_Node *ctuix_node, int key);
 } CTUIX_Node;
 
-CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool user_input_enabled, char name_value[MAX_LINE]);
+CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool user_input_enabled);
 
 CTUIX_Node* ctuix_node_get_next_focusable(CTUIX_Node *ctuix_node);
 CTUIX_Node* ctuix_node_get_prev_focusable(CTUIX_Node *ctuix_node);

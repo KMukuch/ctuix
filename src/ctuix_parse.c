@@ -58,7 +58,7 @@ static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *xml_name)
 
 static char* _get_ctuix_element_name(xmlChar *xml_name)
 {
-
+    return NULL;
 }
 
 static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
@@ -88,7 +88,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(h_value) xmlFree(h_value);
     xmlFree(xml_name);
 
-    return ctuix_node_create(ctuix_element_type, x, y, w, h, user_input_enabled, "");
+    return ctuix_node_create(ctuix_element_type, x, y, w, h, user_input_enabled);
 }
 
 static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)

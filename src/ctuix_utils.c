@@ -10,20 +10,17 @@
 void ctuix_init()
 {
     initscr();
-    raw();
+    cbreak();
     keypad(stdscr, TRUE);
     noecho();
+    refresh();
 }
 
 int ctuix_run(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return -1;
-
-    clear();
-    refresh();
-
+    
     ctuix_tree_draw(ctuix_node);
-
     refresh();
 
     getch();
