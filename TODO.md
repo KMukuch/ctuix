@@ -1,6 +1,6 @@
 #TODO
 
-- public and private headers
+- separate attributes and other features from main ctuix_node
 
 - ncurses widgets
 

@@ -12,12 +12,12 @@ void ctuix_node_draw_default(CTUIX_Node *ctuix_node)
 
     if(!ctuix_node->window)
     {
-        if (ctuix_node->parent == NULL)
+        if(ctuix_node->parent == NULL)
         {
             int max_y, max_x;
             getmaxyx(stdscr, max_y, max_x);
             
-            if (ctuix_node->w == 0 || ctuix_node->h == 0)
+            if(ctuix_node->w == 0 || ctuix_node->h == 0)
             {
                 ctuix_node->w = max_x;
                 ctuix_node->h = max_y;
@@ -30,7 +30,7 @@ void ctuix_node_draw_default(CTUIX_Node *ctuix_node)
             ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
         }
         
-        if (ctuix_node->window)
+        if(ctuix_node->window)
         {
             keypad(ctuix_node->window, TRUE);
         }
@@ -46,7 +46,7 @@ void ctuix_node_draw_default(CTUIX_Node *ctuix_node)
 
 void ctuix_tree_draw(CTUIX_Node *ctuix_node)
 {
-    if (!ctuix_node) return;
+    if(!ctuix_node) return;
     
     ctuix_node_draw_default(ctuix_node);
     

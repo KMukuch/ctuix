@@ -20,33 +20,33 @@ static bool _user_interaction_enabled(CTUIX_Element_Type ctuix_element_type)
     }
 }
 
-static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *xml_name)
+static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *node_type)
 {
-    if(xmlStrcmp(xml_name, BAD_CAST "ctuix") == 0)
+    if(xmlStrcmp(node_type, BAD_CAST "ctuix") == 0)
     {
         return CTUIX_ELEMENT_ROOT;
     }
-    else if(xmlStrcmp(xml_name, BAD_CAST "ctuix_panel") == 0)
+    else if(xmlStrcmp(node_type, BAD_CAST "ctuix_panel") == 0)
     {
         return CTUIX_ELEMENT_PANEL;
     }
-    else if(xmlStrcmp(xml_name, BAD_CAST "ctuix_selection_box") == 0)
+    else if(xmlStrcmp(node_type, BAD_CAST "ctuix_selection_box") == 0)
     {
         return CTUIX_ELEMENT_SELECTION_BOX;
     }
-    else if(xmlStrcmp(xml_name, BAD_CAST "ctuix_scroll_panel") == 0)
+    else if(xmlStrcmp(node_type, BAD_CAST "ctuix_scroll_panel") == 0)
     {
         return CTUIX_ELEMENT_SCROLL_PANEL;
     }
-    else if(xmlStrcmp(xml_name, BAD_CAST "ctuix_label") == 0)
+    else if(xmlStrcmp(node_type, BAD_CAST "ctuix_label") == 0)
     {
         return CTUIX_ELEMENT_LABEL;
     }
-    else if(xmlStrcmp(xml_name, BAD_CAST "ctuix_button") == 0)
+    else if(xmlStrcmp(node_type, BAD_CAST "ctuix_button") == 0)
     {
         return CTUIX_ELEMENT_BUTTON;
     }
-    else if(xmlStrcmp(xml_name, BAD_CAST "ctuix_entry") == 0)
+    else if(xmlStrcmp(node_type, BAD_CAST "ctuix_entry") == 0)
     {
         return CTUIX_ELEMENT_ENTRY;
     }
@@ -56,11 +56,6 @@ static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *xml_name)
     }
 }
 
-static char* _get_ctuix_element_name(xmlChar *xml_name)
-{
-    return NULL;
-}
-
 static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
 {
     int x = 0;
@@ -68,27 +63,26 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     int w = 0;
     int h = 0;
 
-    xmlChar *x_value = xmlGetProp(xml_node, BAD_CAST "x");
-    xmlChar *y_value = xmlGetProp(xml_node, BAD_CAST "y");
-    xmlChar *w_value = xmlGetProp(xml_node, BAD_CAST "w");
-    xmlChar *h_value = xmlGetProp(xml_node, BAD_CAST "h");
-    xmlChar *name_value = xmlGetProp(xml_node, BAD_CAST "name");
-    xmlChar *xml_name = xmlStrdup(xml_node->name);;
+    xmlChar *node_x = xmlGetProp(xml_node, BAD_CAST "x");
+    xmlChar *node_y = xmlGetProp(xml_node, BAD_CAST "y");
+    xmlChar *node_w = xmlGetProp(xml_node, BAD_CAST "w");
+    xmlChar *node_h = xmlGetProp(xml_node, BAD_CAST "h");
+    xmlChar *node_name = xmlGetProp(xml_node, BAD_CAST "name");
+    xmlChar *node_type = xmlStrdup(xml_node->name);
+    xmlChar* node_content = xmlNodeGetContent(xml_node);
     
-    if (x_value) x = atoi((char *)x_value);
-    if (y_value) y = atoi((char *)y_value);
-    if (w_value) w = atoi((char *)w_value);
-    if (h_value) h = atoi((char *)h_value);
-    CTUIX_Element_Type ctuix_element_type = _get_ctuix_element_type(xml_name);
-    bool user_input_enabled = _user_interaction_enabled(ctuix_element_type);
+    if(node_x) x = atoi((char *)node_x);
+    if(node_y) y = atoi((char *)node_y);
+    if(node_w) w = atoi((char *)node_w);
+    if(node_h) h = atoi((char *)node_h);
     
-    if(x_value) xmlFree(x_value);
-    if(y_value) xmlFree(y_value);
-    if(w_value) xmlFree(w_value);
-    if(h_value) xmlFree(h_value);
-    xmlFree(xml_name);
+    if(node_x) xmlFree(node_x);
+    if(node_y) xmlFree(node_y);
+    if(node_w) xmlFree(node_w);
+    if(node_h) xmlFree(node_h);
+    xmlFree(node_type);
 
-    return ctuix_node_create(ctuix_element_type, x, y, w, h, user_input_enabled);
+    return ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _user_interaction_enabled(_get_ctuix_element_type(node_type)), node_name, node_content);
 }
 
 static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)
