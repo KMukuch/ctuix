@@ -39,7 +39,11 @@ void ctuix_node_draw_default(CTUIX_Node *ctuix_node)
     if(ctuix_node->window)
     {
         werase(ctuix_node->window);
-        box(ctuix_node->window, 0, 0);
+        if(ctuix_node->value)
+        {
+            mvwprintw(ctuix_node->window, 0, 0, "%s", ctuix_node->value);
+            box(ctuix_node->window, 0, 0);
+        }
         wrefresh(ctuix_node->window);
     }
 }

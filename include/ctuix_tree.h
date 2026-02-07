@@ -29,7 +29,7 @@ typedef struct CTUIX_Node
     bool input_enabled;
     bool active;
     char* name;
-
+    
     char* value;
 
     struct CTUIX_Node *parent;

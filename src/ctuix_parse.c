@@ -58,11 +58,12 @@ static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *node_type)
 
 static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
 {
-    int x = 0;
-    int y = 0;
-    int w = 0;
-    int h = 0;
+    int x = 0, y = 0, w = 0, h = 0;
+    char* name_copy = NULL;
+    char* content_copy = NULL;
 
+    CTUIX_Node *ctuix_node;
+    
     xmlChar *node_x = xmlGetProp(xml_node, BAD_CAST "x");
     xmlChar *node_y = xmlGetProp(xml_node, BAD_CAST "y");
     xmlChar *node_w = xmlGetProp(xml_node, BAD_CAST "w");
@@ -76,13 +77,20 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_w) w = atoi((char *)node_w);
     if(node_h) h = atoi((char *)node_h);
     
+    if(node_name) name_copy = strdup((char*)node_name);
+    if(node_content) content_copy = strdup((char*)node_content);
+    
+    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy);
+    
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);
     if(node_w) xmlFree(node_w);
     if(node_h) xmlFree(node_h);
-    xmlFree(node_type);
-
-    return ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _user_interaction_enabled(_get_ctuix_element_type(node_type)), node_name, node_content);
+    if(node_name) xmlFree(node_name);
+    if(node_type) xmlFree(node_type);
+    if(node_content) xmlFree(node_content);
+    
+    return ctuix_node;
 }
 
 static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)

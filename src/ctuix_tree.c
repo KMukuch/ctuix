@@ -21,9 +21,23 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
     ctuix_node->w = w;
     ctuix_node->h = h;
     ctuix_node->input_enabled = input_enabled;
-    strcpy(ctuix_node->name, name);
+    if(name)
+    {
+        ctuix_node->name = strdup(name);
+    }
+    else
+    {
+        ctuix_node->name = NULL;
+    }
     
-    strcpy(ctuix_node->value, value);
+    if(value)
+    {
+        ctuix_node->value = strdup(value);
+    }
+    else
+    {
+        ctuix_node->value = NULL;
+    }
 
     ctuix_node->parent = NULL;
     ctuix_node->children = NULL;
