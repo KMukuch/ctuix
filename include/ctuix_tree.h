@@ -32,6 +32,8 @@ typedef struct CTUIX_Node
     
     char* value;
 
+    int ch;
+
     struct CTUIX_Node *parent;
     struct CTUIX_Node *children;
     struct CTUIX_Node *next;
