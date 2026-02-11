@@ -7,6 +7,8 @@
 #include <libxml/tree.h>
 #include <libxml/valid.h>
 #include "ctuix_parse.h"
+#include "ctuix_tree.h"
+#include "ctuix_manager.h"
 
 static bool _user_interaction_enabled(CTUIX_Element_Type ctuix_element_type)
 {
@@ -119,24 +121,25 @@ static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)
     }
 }
 
-CTUIX_Node* ctuix_parse(char *file_path)
+CTUIX_Manager* ctuix_parse(char *file_path)
 {
     xmlDoc *xml_doc = xmlReadFile(file_path, NULL, XML_PARSE_DTDLOAD);
     xmlNode *xml_root = xmlDocGetRootElement(xml_doc);
     CTUIX_Node *ctuix_root = _build_ctuix_node(xml_root);
+    CTUIX_Manager *ctuix_manager = ctuix_manager_create(ctuix_root);
     _read_xml_node(xml_root, ctuix_root);
 
     xmlFreeDoc(xml_doc);
     xmlCleanupParser();
 
-    return ctuix_root;
+    return ctuix_manager;
 }
 
-void ctuix_delete(CTUIX_Node *ctuix_node)
+void ctuix_delete(CTUIX_Manager *ctuix_manager)
 {
-    if(ctuix_node)
+    if(ctuix_manager->root_node)
     {
-        ctuix_node_free(ctuix_node);
-        ctuix_node = NULL;
+        ctuix_node_free(ctuix_manager->root_node);
+        ctuix_manager->root_node = NULL;
     }
 }

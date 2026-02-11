@@ -8,4 +8,5 @@
         
         </ctuix_panel>
     </ctuix_panel>
+    <ctuix_button x="2" y="12" w="20" h="3" name="BUTTON">CLICK</ctuix_button>
 </ctuix>

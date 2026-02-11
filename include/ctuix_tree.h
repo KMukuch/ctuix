@@ -27,7 +27,6 @@ typedef struct CTUIX_Node
     
     int x, y, w, h;
     bool input_enabled;
-    bool active;
     char* name;
     
     char* value;

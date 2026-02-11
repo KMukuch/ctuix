@@ -9,9 +9,10 @@
 #include <libxml/tree.h>
 #include <libxml/valid.h>
 #include "ctuix_tree.h"
+#include "ctuix_manager.h"
 
-CTUIX_Node* ctuix_parse(char *file_path);
+CTUIX_Manager* ctuix_parse(char *file_path);
 
-void ctuix_delete(CTUIX_Node *ctuix_node);
+void ctuix_delete(CTUIX_Manager *ctuix_manager);
 
 #endif

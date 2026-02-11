@@ -5,6 +5,7 @@
 #include <ncurses.h>
 #include "ctuix_tree.h"
 #include "ctuix_utils.h"
+#include "ctuix_manager.h"
 #include "ctuix_draw.h"
 
 void ctuix_init()
@@ -16,13 +17,13 @@ void ctuix_init()
     refresh();
 }
 
-int ctuix_run(CTUIX_Node *ctuix_node)
+int ctuix_run(CTUIX_Manager *ctuix_manager)
 {
-    if(!ctuix_node) return -1;
+    if(!ctuix_manager->root_node) return -1;
     
-    ctuix_tree_draw(ctuix_node);
+    ctuix_tree_draw(ctuix_manager->root_node);
     refresh();
-
+    
     getch();
 
     return 0;

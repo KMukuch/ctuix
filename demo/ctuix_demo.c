@@ -9,14 +9,14 @@ int main()
 {   
     ctuix_init();
 
-    CTUIX_Node *ctuix_root = ctuix_parse(FILEPATH);
+    CTUIX_Manager *ctuix_manager = ctuix_parse(FILEPATH);
     
-    if(ctuix_root)
+    if(ctuix_manager->root_node)
     {
-        ctuix_run(ctuix_root);
+        ctuix_run(ctuix_manager);
     }
     
-    ctuix_delete(ctuix_root);
+    ctuix_delete(ctuix_manager);
     
     ctuix_end();
     
