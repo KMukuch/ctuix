@@ -5,6 +5,7 @@
 #include <ncurses.h>
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
+#include "ctuix_manager.h"
 
 // static void _draw_default(CTUIX_Node *ctuix_node)
 // {
@@ -49,7 +50,7 @@
 //     }
 // }
 
-static void _draw_root(CTUIX_Node *ctuix_node)
+void ctuix_draw_root(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
@@ -79,7 +80,7 @@ static void _draw_root(CTUIX_Node *ctuix_node)
     }
 }
 
-static void _draw_panel(CTUIX_Node *ctuix_node)
+void ctuix_draw_panel(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
@@ -97,7 +98,7 @@ static void _draw_panel(CTUIX_Node *ctuix_node)
     }
 }
 
-static void _draw_label(CTUIX_Node *ctuix_node)
+void ctuix_draw_label(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
@@ -113,7 +114,7 @@ static void _draw_label(CTUIX_Node *ctuix_node)
     }
 }
 
-static void _draw_button(CTUIX_Node *ctuix_node)
+void ctuix_draw_button(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
@@ -136,32 +137,45 @@ static void _draw_button(CTUIX_Node *ctuix_node)
     }
 }
 
-static void _draw_dispatcher(CTUIX_Node *ctuix_node)
+void ctuix_draw_dispatcher(CTUIX_Node *ctuix_node)
 {
     if(ctuix_node->ctuix_element_type == 0)
     {
-        _draw_root(ctuix_node);
+        ctuix_draw_root(ctuix_node);
     }
     else if(ctuix_node->ctuix_element_type == 1)
     {
-        _draw_panel(ctuix_node);
+        ctuix_draw_panel(ctuix_node);
     }
     else if(ctuix_node->ctuix_element_type == 4)
     {
-        _draw_label(ctuix_node);
+        ctuix_draw_label(ctuix_node);
     }
     else if(ctuix_node->ctuix_element_type == 5)
     {
-        _draw_button(ctuix_node);
+        ctuix_draw_button(ctuix_node);
     }
     
+}
+
+void ctuix_update_selection(CTUIX_Node *ctuix_current_node, CTUIX_Node *ctuix_next_node)
+{
+    if(!ctuix_current_node) return;
+
+    wattroff(ctuix_current_node->window, A_REVERSE);
+    box(ctuix_current_node->window, 0, 0);
+    wrefresh(ctuix_current_node->window);
+
+    wattron(ctuix_next_node->window, A_REVERSE);
+    box(ctuix_next_node->window, 0, 0);
+    wrefresh(ctuix_next_node->window);
 }
 
 void ctuix_tree_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
     
-    _draw_dispatcher(ctuix_node);
+    ctuix_draw_dispatcher(ctuix_node);
     
     CTUIX_Node *ctuix_node_child = ctuix_node->children;
     while(ctuix_node_child)

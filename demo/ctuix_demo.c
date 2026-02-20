@@ -2,6 +2,7 @@
 #include <ctuix/ctuix_parse.h>
 #include <ctuix/ctuix_draw.h>
 #include <ctuix/ctuix_utils.h>
+#include <ctuix/ctuix_manager.h>
 
 #define FILEPATH "../data/ctuix_example.xml"
 
