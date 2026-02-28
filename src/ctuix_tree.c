@@ -6,7 +6,7 @@
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
 
-CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool input_enabled, char* name, char* value)
+CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value)
 {
     CTUIX_Node *ctuix_node = malloc(sizeof(CTUIX_Node));
     if(!ctuix_node)
@@ -20,6 +20,7 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
     ctuix_node->y = y;
     ctuix_node->w = w;
     ctuix_node->h = h;
+    ctuix_node->focusable = focusable;
     ctuix_node->input_enabled = input_enabled;
     if(name)
     {

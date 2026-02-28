@@ -2,11 +2,19 @@
 <!DOCTYPE ctuix_panel SYSTEM "ctuix.dtd">
 
 <ctuix>
-    <ctuix_panel x="2" y="2" w="60" h="10" name="PANEL">
+    <ctuix_panel x="2" y="2" w="30" h="10" name="PANEL">
         <ctuix_label x="2" y="2">LABEL</ctuix_label>
         <ctuix_panel x="2" y="4" w="10" h="5" name="PANEL">
         
         </ctuix_panel>
     </ctuix_panel>
-    <ctuix_button x="2" y="12" w="20" h="3" name="BUTTON">CLICK</ctuix_button>
+    <ctuix_panel x="34" y="2" w="30" h="10">
+        <ctuix_button x="2" y="2" w="20" h="3" name="BUTTON">CLICK</ctuix_button>
+    </ctuix_panel>
+    <ctuix_panel x="2" y="14" w="30" h="10">
+        <ctuix_label x="2" y="2">LABEL</ctuix_label>
+        <ctuix_panel x="2" y="4" w="10" h="5" name="PANEL">
+        
+        </ctuix_panel>    
+    </ctuix_panel>
 </ctuix>

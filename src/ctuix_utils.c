@@ -21,17 +21,57 @@ CTUIX_Node* ctuix_select_next(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return NULL;
 
-    CTUIX_Node *current_node = ctuix_node;
-    if(current_node->children)
+    CTUIX_Node *root = ctuix_node;
+    CTUIX_Node *current = ctuix_node;
+    CTUIX_Node *child = ctuix_node->children;
+    while(child)
     {
-        current_node = current_node->children;
-    }
-    else if(current_node->next)
-    {
-        current_node = current_node->next;
+        if(child->focusable)
+        {
+            return child;
+        }
+        
+        CTUIX_Node *child_children = ctuix_select_next(child);
+        if(child_children)
+        {
+            return child_children;
+        }
+        
+        child = child->next;
     }
 
-    return current_node;
+    if(ctuix_node->next)
+    {
+        if(ctuix_node->next->focusable)
+        {
+            return ctuix_node->next;
+        }
+        
+        return ctuix_select_next(ctuix_node->next);
+    }
+
+    while(current->parent)
+    {
+        if(current->parent->next)
+        {
+            CTUIX_Node *next_sibling = current->parent->next;
+            
+            if(next_sibling->focusable)
+            {
+                return next_sibling;
+            }
+            
+            return ctuix_select_next(next_sibling);
+        }
+        current = current->parent;
+    }
+    
+    while(root->parent)
+    {
+        root = root->parent;
+    }
+
+    return ctuix_select_next(root);
 }
 
 int ctuix_key_listener(CTUIX_Node *ctuix_node)

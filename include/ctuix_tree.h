@@ -25,20 +25,23 @@ typedef struct CTUIX_Node
 
     CTUIX_Element_Type ctuix_element_type;
     
-    int x, y, w, h;
-    bool input_enabled;
-    char* name;
-    
-    char* value;
-
+    int x, y;
+    int w, h;
     int ch;
+
+    bool focusable;
+    bool input_enabled;
+
+    char* name;
+    char* value;
+    char* id;
 
     struct CTUIX_Node *parent;
     struct CTUIX_Node *children;
     struct CTUIX_Node *next;
 } CTUIX_Node;
 
-CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool input_enabled, char* name, char* value);
+CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value);
 
 CTUIX_Node* ctuix_node_get_next_focusable(CTUIX_Node *ctuix_node);
 CTUIX_Node* ctuix_node_get_prev_focusable(CTUIX_Node *ctuix_node);

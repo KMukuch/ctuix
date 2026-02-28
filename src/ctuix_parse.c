@@ -10,6 +10,18 @@
 #include "ctuix_tree.h"
 #include "ctuix_manager.h"
 
+static bool _focusable(CTUIX_Element_Type ctuix_element_type)
+{
+    if(ctuix_element_type == CTUIX_ELEMENT_LABEL)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 static bool _user_interaction_enabled(CTUIX_Element_Type ctuix_element_type)
 {
     if(ctuix_element_type == CTUIX_ELEMENT_LABEL)
@@ -82,7 +94,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_name) name_copy = strdup((char*)node_name);
     if(node_content) content_copy = strdup((char*)node_content);
     
-    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy);
+    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy);
     
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);
