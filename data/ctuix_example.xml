@@ -11,10 +11,9 @@
     <ctuix_panel x="34" y="2" w="30" h="10">
         <ctuix_button x="2" y="2" w="20" h="3" name="BUTTON">CLICK</ctuix_button>
     </ctuix_panel>
-    <ctuix_panel x="2" y="14" w="30" h="10">
-        <ctuix_label x="2" y="2">LABEL</ctuix_label>
-        <ctuix_panel x="2" y="4" w="10" h="5" name="PANEL">
-        
-        </ctuix_panel>    
-    </ctuix_panel>
+    <ctuix_selection_box x="2" y="14" w="30" h="10">
+        <ctuix_item>RED</ctuix_item>
+        <ctuix_item>GREEN</ctuix_item>
+        <ctuix_item>BLUE</ctuix_item>
+    </ctuix_selection_box>
 </ctuix>

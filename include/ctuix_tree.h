@@ -14,6 +14,7 @@ typedef enum
     CTUIX_ELEMENT_PANEL,
     CTUIX_ELEMENT_SELECTION_BOX,
     CTUIX_ELEMENT_SCROLL_PANEL,
+    CTUIX_ELEMENT_ITEM,
     CTUIX_ELEMENT_LABEL,
     CTUIX_ELEMENT_BUTTON,
     CTUIX_ELEMENT_ENTRY
@@ -28,6 +29,9 @@ typedef struct CTUIX_Node
     int x, y;
     int w, h;
     int ch;
+
+    int selected_index;
+    int scroll_offset;
 
     bool focusable;
     bool input_enabled;

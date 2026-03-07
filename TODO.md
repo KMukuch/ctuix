@@ -1,5 +1,7 @@
 #TODO
 
+- selection box
+
 - handle key, find next active
 
 - API

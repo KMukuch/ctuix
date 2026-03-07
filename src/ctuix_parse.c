@@ -12,7 +12,7 @@
 
 static bool _focusable(CTUIX_Element_Type ctuix_element_type)
 {
-    if(ctuix_element_type == CTUIX_ELEMENT_LABEL)
+    if(ctuix_element_type == CTUIX_ELEMENT_LABEL || ctuix_element_type == CTUIX_ELEMENT_ITEM)
     {
         return false;
     }
@@ -51,6 +51,10 @@ static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *node_type)
     else if(xmlStrcmp(node_type, BAD_CAST "ctuix_scroll_panel") == 0)
     {
         return CTUIX_ELEMENT_SCROLL_PANEL;
+    }
+    else if(xmlStrcmp(node_type, BAD_CAST "ctuix_item") == 0)
+    {
+        return CTUIX_ELEMENT_ITEM;
     }
     else if(xmlStrcmp(node_type, BAD_CAST "ctuix_label") == 0)
     {
