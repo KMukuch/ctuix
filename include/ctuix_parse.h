@@ -9,7 +9,6 @@
 #include <libxml/tree.h>
 #include <libxml/valid.h>
 #include "ctuix_tree.h"
-#include "ctuix_manager.h"
 
 CTUIX_Manager* ctuix_parse(char *file_path);
 

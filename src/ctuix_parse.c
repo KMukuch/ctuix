@@ -8,7 +8,8 @@
 #include <libxml/valid.h>
 #include "ctuix_parse.h"
 #include "ctuix_tree.h"
-#include "ctuix_manager.h"
+#include "ctuix_draw.h"
+#include "ctuix_key.h"
 
 static bool _focusable(CTUIX_Element_Type ctuix_element_type)
 {
@@ -74,6 +75,57 @@ static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *node_type)
     }
 }
 
+static void _set_ctuix_node_fnc_pointer(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return;
+    
+    if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ROOT)
+    {
+        ctuix_node->draw = ctuix_draw_root;
+        ctuix_node->key_handler = ctuix_key_handler_root;
+    }
+    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_PANEL)
+    {
+        ctuix_node->draw = ctuix_draw_panel;
+        ctuix_node->key_handler = ctuix_key_handler_panel;
+    }
+    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
+    {
+        ctuix_node->draw = ctuix_draw_selection_box;
+        ctuix_node->key_handler = ctuix_key_handler_selection_box;
+    }
+    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_SCROLL_PANEL)
+    {
+        ctuix_node->draw = NULL;
+        ctuix_node->key_handler = NULL;
+    }
+    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ITEM)
+    {
+        ctuix_node->draw = NULL;
+        ctuix_node->key_handler = NULL;
+    }
+    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_LABEL)
+    {
+        ctuix_node->draw = ctuix_draw_label;
+        ctuix_node->key_handler = NULL;
+    }
+    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_BUTTON)
+    {
+        ctuix_node->draw = ctuix_draw_button;
+        ctuix_node->key_handler = ctuix_key_handler_button;
+    }
+    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ENTRY)
+    {
+        ctuix_node->draw = NULL;
+        ctuix_node->key_handler = NULL;
+    }
+    else
+    {
+        ctuix_node->draw = NULL;
+        ctuix_node->key_handler = NULL;
+    }
+}
+
 static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
 {
     int x = 0, y = 0, w = 0, h = 0;
@@ -99,6 +151,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_content) content_copy = strdup((char*)node_content);
     
     ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy);
+    _set_ctuix_node_fnc_pointer(ctuix_node);
     
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);
