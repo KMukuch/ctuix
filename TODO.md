@@ -1,8 +1,10 @@
 #TODO
 
+- add key parsing
+
 - selection box
 
-- handle key, find next active
+- select items
 
 - API
 

@@ -5,7 +5,10 @@
 #include "ctuix_tree.h"
 #include "ctuix_parse.h"
 
-CTUIX_Node* ctuix_select_next(CTUIX_Node *ctuix_node);
-CTUIX_Node* ctuix_select_item(CTUIX_Node *ctuix_node);
+void ctuix_init();
+
+int ctuix_run(CTUIX_Manager *ctuix_manager);
+
+void ctuix_end();
 
 #endif

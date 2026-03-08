@@ -12,6 +12,8 @@ set(CTUIX_SOURCES
     src/ctuix_tree.c
     src/ctuix_manager.c
     src/ctuix_parse.c
+    src/ctuix_core.c
+    src/ctuix_key.c
     src/ctuix_utils.c
     src/ctuix_draw.c
 )
