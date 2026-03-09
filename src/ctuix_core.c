@@ -29,7 +29,7 @@ int ctuix_run(CTUIX_Manager *ctuix_manager)
     {
         if(ctuix_manager->active_node->key_handler)
         {
-            ctuix_manager->active_node->key_handler(ctuix_manager);
+            ctuix_manager->active_node = ctuix_manager->active_node->key_handler(ctuix_manager->active_node, &ctuix_manager->ch);
         }
         refresh();
     }

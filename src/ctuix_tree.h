@@ -20,9 +20,6 @@ typedef enum
     CTUIX_ELEMENT_ENTRY
 } CTUIX_Element_Type;
 
-typedef struct CTUIX_Node CTUIX_Node;
-typedef struct CTUIX_Manager CTUIX_Manager;
-
 typedef struct CTUIX_Node
 {
     WINDOW* window;
@@ -42,8 +39,8 @@ typedef struct CTUIX_Node
     char* value;
     char* id;
 
-    void (*draw)(CTUIX_Node*);
-    void (*key_handler)(CTUIX_Manager*);
+    void (*draw)(struct CTUIX_Node*);
+    struct CTUIX_Node* (*key_handler)(struct CTUIX_Node*, int*);
 
     struct CTUIX_Node *parent;
     struct CTUIX_Node *children;
