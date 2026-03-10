@@ -12,5 +12,4 @@ CTUIX_Node* ctuix_select_next_item(CTUIX_Node *ctuix_node);
 
 void ctuix_update_selection(CTUIX_Node *ctuix_current_node, CTUIX_Node *ctuix_next_node);
 
-
 #endif

@@ -9,7 +9,7 @@ int main()
 
     CTUIX_Manager *ctuix_manager = ctuix_parse(FILEPATH);
     
-    if(ctuix_manager->root_node)
+    if(ctuix_manager)
     {
         ctuix_run(ctuix_manager);
     }
