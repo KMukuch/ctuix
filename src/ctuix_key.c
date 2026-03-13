@@ -63,6 +63,10 @@ CTUIX_Node* ctuix_key_handler_button(CTUIX_Node *ctuix_node, int *ch)
 
         return next_node;
     }
+    else if(*ch == '\n' || *ch == '\r' || *ch == KEY_ENTER)
+    {
+        ctuix_node->node_event = ctuix_node->on_click(ctuix_node, 0);
+    }
 
     return ctuix_node;
 }

@@ -109,3 +109,41 @@ void ctuix_update_selection(CTUIX_Node *ctuix_current_node, CTUIX_Node *ctuix_ne
     box(ctuix_next_node->window, 0, 0);
     wrefresh(ctuix_next_node->window);
 }
+
+CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id)
+{
+    if (!ctuix_node || !ctuix_node_id) return NULL;
+    
+    if (ctuix_node->id && strcmp(ctuix_node->id, ctuix_node_id) == 0)
+    {
+        return ctuix_node;
+    }
+    
+    CTUIX_Node *child = ctuix_node->children;
+    while (child)
+    {
+        CTUIX_Node *found = ctuix_find_node_by_id(child, ctuix_node_id);
+        if(found) 
+        {
+            return found;
+        }
+        else
+        {
+            child = child->next;
+        }
+    }
+    
+    return NULL;
+}
+
+void ctuix_set_on_click(CTUIX_Manager *ctuix_manager, char *ctuix_node_id, CTUIX_Event (*on_click)(CTUIX_Node* ctuix_node, void *user_data), void *user_data)
+{
+    if (!ctuix_manager || !ctuix_node_id || !on_click) return;
+
+    CTUIX_Node *ctuix_node = ctuix_find_node_by_id(ctuix_manager->root_node, ctuix_node_id);
+    
+    if(ctuix_node)
+    {
+        ctuix_node->on_click = on_click;
+    }
+}

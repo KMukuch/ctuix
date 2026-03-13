@@ -131,6 +131,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     int x = 0, y = 0, w = 0, h = 0;
     char* name_copy = NULL;
     char* content_copy = NULL;
+    char* id_copy = NULL;
 
     CTUIX_Node *ctuix_node;
     
@@ -141,6 +142,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     xmlChar *node_name = xmlGetProp(xml_node, BAD_CAST "name");
     xmlChar *node_type = xmlStrdup(xml_node->name);
     xmlChar* node_content = xmlNodeGetContent(xml_node);
+    xmlChar* node_id = xmlGetProp(xml_node, BAD_CAST "id");
     
     if(node_x) x = atoi((char *)node_x);
     if(node_y) y = atoi((char *)node_y);
@@ -149,8 +151,9 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     
     if(node_name) name_copy = strdup((char*)node_name);
     if(node_content) content_copy = strdup((char*)node_content);
-    
-    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy);
+    if(node_id) id_copy = strdup((char*)node_id);
+
+    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy, id_copy);
     _set_ctuix_node_fnc_pointer(ctuix_node);
     
     if(node_x) xmlFree(node_x);
@@ -160,6 +163,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_name) xmlFree(node_name);
     if(node_type) xmlFree(node_type);
     if(node_content) xmlFree(node_content);
+    if(node_id) xmlFree(node_id);
     
     return ctuix_node;
 }
@@ -211,4 +215,5 @@ void ctuix_delete(CTUIX_Manager *ctuix_manager)
         ctuix_node_free(ctuix_manager->root_node);
         ctuix_manager->root_node = NULL;
     }
+    free(ctuix_manager);
 }

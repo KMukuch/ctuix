@@ -1,19 +1,21 @@
 #TODO
 
-- add key parsing
+- error handling
+
+- macros for tree traversing
+
+- id
+
+- workflow: run ui -> wait event -> get / send data to ui ->repeat or quit
 
 - selection box
 
 - select items
 
-- API
-
-- workflow: run ui -> wait event -> get / send data to ui ->repeat or quit
+- entry
 
 - layout
 
 - colors
 
 - font
-
-- id

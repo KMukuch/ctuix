@@ -5,14 +5,34 @@
 #define CTUIX_VERSION_MINOR 0
 #define CTUIX_VERSION_PATCH 0
 
+typedef enum
+{
+    CTUIX_EVENT_NONE,
+    CTUIX_EVENT_QUIT,
+    CTUIX_EVENT_SUBMIT,
+    CTUIX_EVENT_LOAD
+} CTUIX_Event_Type;
+
+typedef struct CTUIX_Event
+{
+    CTUIX_Event_Type ctuix_event_type;
+    void *user_data;
+} CTUIX_Event;
+
 typedef struct CTUIX_Node CTUIX_Node;
 typedef struct CTUIX_Manager CTUIX_Manager;
 
-void ctuix_init();
+/*
+ * Function prototypes.
+ */
+
+void ctuix_init(void);
 int ctuix_run(CTUIX_Manager *ctuix_manager);
-void ctuix_end();
+void ctuix_end(void);
 
 CTUIX_Manager* ctuix_parse(char *file_path);
 void ctuix_delete(CTUIX_Manager *ctuix_manager);
+
+void ctuix_set_on_click(CTUIX_Manager *ctuix_manager, char *ctuix_node_id, CTUIX_Event (*on_click)(CTUIX_Node* ctuix_node, void *user_data), void *user_data);
 
 #endif
