@@ -84,10 +84,10 @@ void ctuix_node_free(CTUIX_Node *ctuix_node)
 {
     if (!ctuix_node) return;
 
-    if (ctuix_node->window)
-    {
-        delwin(ctuix_node->window);
-    }
+    if (ctuix_node->window) delwin(ctuix_node->window);
+    if (ctuix_node->name) free(ctuix_node->name);
+    if (ctuix_node->value) free(ctuix_node->value);
+    if (ctuix_node->id) free(ctuix_node->id);
     
     CTUIX_Node *child_node = ctuix_node->children;
     while(child_node)

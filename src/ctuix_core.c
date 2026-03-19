@@ -36,6 +36,7 @@ int ctuix_run(CTUIX_Manager *ctuix_manager)
                 CTUIX_Manager *ctuix_manager_new = ctuix_find_manager_by_path(ctuix_manager, ctuix_manager->active_node->node_event.user_data);
                 if(ctuix_manager_new)
                 {
+                    ctuix_manager_new->ch = 0;
                     ctuix_run(ctuix_manager_new);
                     ctuix_draw_tree(ctuix_manager->root_node);
                 }

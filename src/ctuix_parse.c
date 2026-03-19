@@ -233,10 +233,12 @@ CTUIX_Manager* ctuix_parse_multiple(char **file_path_array, int count)
 
 void ctuix_delete(CTUIX_Manager *ctuix_manager)
 {
-    if(ctuix_manager->root_node)
+    while (ctuix_manager)
     {
+        CTUIX_Manager *next = ctuix_manager->next;
+        if (ctuix_manager->file_name) free(ctuix_manager->file_name);
         ctuix_node_free(ctuix_manager->root_node);
-        ctuix_manager->root_node = NULL;
+        free(ctuix_manager);
+        ctuix_manager = next;
     }
-    free(ctuix_manager);
 }
