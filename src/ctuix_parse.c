@@ -199,13 +199,36 @@ CTUIX_Manager* ctuix_parse(char *file_path)
     xmlDoc *xml_doc = xmlReadFile(file_path, NULL, XML_PARSE_DTDLOAD);
     xmlNode *xml_root = xmlDocGetRootElement(xml_doc);
     CTUIX_Node *ctuix_root = _build_ctuix_node(xml_root);
-    CTUIX_Manager *ctuix_manager = ctuix_manager_create(ctuix_root);
+    CTUIX_Manager *ctuix_manager = ctuix_manager_create(ctuix_root, file_path);
     _read_xml_node(xml_root, ctuix_root);
 
     xmlFreeDoc(xml_doc);
     xmlCleanupParser();
 
     return ctuix_manager;
+}
+
+CTUIX_Manager* ctuix_parse_multiple(char **file_path_array, int count)
+{
+    CTUIX_Manager *head = NULL;
+    CTUIX_Manager *tail = NULL;
+
+    for (int i = 0; i < count; i++)
+    {
+        CTUIX_Manager *ctuix_manager = ctuix_parse(file_path_array[i]);
+        if (!head)
+        {
+            head = ctuix_manager;
+            tail = ctuix_manager;
+        }
+        else
+        {
+            tail->next = ctuix_manager;
+            ctuix_manager->previous = tail;
+            tail = ctuix_manager;
+        }
+    }
+    return head;
 }
 
 void ctuix_delete(CTUIX_Manager *ctuix_manager)

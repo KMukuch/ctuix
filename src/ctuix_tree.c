@@ -59,14 +59,23 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
     return ctuix_node;
 }
 
-CTUIX_Manager* ctuix_manager_create(CTUIX_Node *root_node)
+CTUIX_Manager* ctuix_manager_create(CTUIX_Node *root_node, char *file_path)
 {
     CTUIX_Manager *ctuix_manager = malloc(sizeof(CTUIX_Manager));
+
+    ctuix_manager->file_name = strdup(file_path);;
 
     ctuix_manager->root_node = root_node;
     ctuix_manager->active_node = root_node;
 
+    ctuix_manager->current_event = NULL;
+    ctuix_manager->event_count = 0;
+    ctuix_manager->event_handler = NULL;
+
     ctuix_manager->ch = 0;
+
+    ctuix_manager->previous = NULL;
+    ctuix_manager->next = NULL;
 
     return ctuix_manager;
 }
@@ -79,7 +88,7 @@ void ctuix_node_free(CTUIX_Node *ctuix_node)
     {
         delwin(ctuix_node->window);
     }
-
+    
     CTUIX_Node *child_node = ctuix_node->children;
     while(child_node)
     {

@@ -31,8 +31,9 @@ int ctuix_run(CTUIX_Manager *ctuix_manager);
 void ctuix_end(void);
 
 CTUIX_Manager* ctuix_parse(char *file_path);
+CTUIX_Manager* ctuix_parse_multiple(char **file_path, int count);
 void ctuix_delete(CTUIX_Manager *ctuix_manager);
 
-void ctuix_set_on_click(CTUIX_Manager *ctuix_manager, char *ctuix_node_id, CTUIX_Event (*on_click)(CTUIX_Node* ctuix_node, void *user_data), void *user_data);
+void ctuix_set_on_click(CTUIX_Manager *ctuix_manager, char *file_path, char *ctuix_node_id, CTUIX_Event (*on_click)(CTUIX_Node*, void *user_data), void *user_data);
 
 #endif

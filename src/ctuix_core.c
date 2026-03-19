@@ -33,11 +33,11 @@ int ctuix_run(CTUIX_Manager *ctuix_manager)
 
             if(ctuix_manager->active_node->node_event.ctuix_event_type == CTUIX_EVENT_LOAD)
             {
-                CTUIX_Manager *ctuix_manager_new = ctuix_manager->active_node->node_event.user_data;
+                CTUIX_Manager *ctuix_manager_new = ctuix_find_manager_by_path(ctuix_manager, ctuix_manager->active_node->node_event.user_data);
                 if(ctuix_manager_new)
                 {
                     ctuix_run(ctuix_manager_new);
-                    ctuix_delete(ctuix_manager_new);
+                    ctuix_draw_tree(ctuix_manager->root_node);
                 }
                 ctuix_manager->active_node->node_event.ctuix_event_type = CTUIX_EVENT_NONE;
             }

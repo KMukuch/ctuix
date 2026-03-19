@@ -66,6 +66,8 @@ typedef struct CTUIX_Node
 
 typedef struct CTUIX_Manager
 {
+    char* file_name;
+
     CTUIX_Node* root_node;
     CTUIX_Node* active_node;
     
@@ -74,10 +76,13 @@ typedef struct CTUIX_Manager
     void (*event_handler)(struct CTUIX_Manager *ctuix_manager, CTUIX_Event *ctuix_event);
     
     int ch;
+    
+    struct CTUIX_Manager *previous;
+    struct CTUIX_Manager *next;
 } CTUIX_Manager;
 
 CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id);
-CTUIX_Manager* ctuix_manager_create(CTUIX_Node *ctuix_node);
+CTUIX_Manager* ctuix_manager_create(CTUIX_Node *ctuix_node, char* file_path);
 
 void ctuix_node_free(CTUIX_Node *ctuix_node);
 
