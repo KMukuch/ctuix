@@ -11,6 +11,7 @@ pkg_check_modules(NCURSES REQUIRED ncurses)
 set(CTUIX_SOURCES
     src/ctuix_core.c
     src/ctuix_draw.c
+    src/ctuix_error.c
     src/ctuix_key.c
     src/ctuix_parse.c
     src/ctuix_tree.c

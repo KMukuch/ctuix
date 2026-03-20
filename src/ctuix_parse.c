@@ -6,6 +6,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/valid.h>
+#include "ctuix_error.h"
 #include "ctuix_parse.h"
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
@@ -197,13 +198,17 @@ static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)
 CTUIX_Manager* ctuix_parse(char *file_path)
 {
     xmlDoc *xml_doc = xmlReadFile(file_path, NULL, XML_PARSE_DTDLOAD);
+    if(!xml_doc)
+    {
+        return NULL;
+    }
+
     xmlNode *xml_root = xmlDocGetRootElement(xml_doc);
     CTUIX_Node *ctuix_root = _build_ctuix_node(xml_root);
     CTUIX_Manager *ctuix_manager = ctuix_manager_create(ctuix_root, file_path);
     _read_xml_node(xml_root, ctuix_root);
 
     xmlFreeDoc(xml_doc);
-    xmlCleanupParser();
 
     return ctuix_manager;
 }
@@ -241,4 +246,9 @@ void ctuix_delete(CTUIX_Manager *ctuix_manager)
         free(ctuix_manager);
         ctuix_manager = next;
     }
+}
+
+void ctuix_cleanup()
+{
+    xmlCleanupParser();
 }

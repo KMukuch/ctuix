@@ -1,7 +1,5 @@
 #TODO
 
-- multiple parse
-
 - error handling
 
 - macros for tree traversing

@@ -33,7 +33,11 @@ void ctuix_end(void);
 CTUIX_Manager* ctuix_parse(char *file_path);
 CTUIX_Manager* ctuix_parse_multiple(char **file_path, int count);
 void ctuix_delete(CTUIX_Manager *ctuix_manager);
+void ctuix_cleanup();
 
 void ctuix_set_on_click(CTUIX_Manager *ctuix_manager, char *file_path, char *ctuix_node_id, CTUIX_Event (*on_click)(CTUIX_Node*, void *user_data), void *user_data);
+
+void ctuix_error_show(const char *title, const char *message);
+void ctuix_error_fatal(const char *msg);
 
 #endif

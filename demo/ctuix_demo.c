@@ -12,6 +12,12 @@ int main()
 {   
     ctuix_init();
 
+    CTUIX_Manager *mgr = ctuix_parse("../data/ctuix_example.xml");
+    if(!mgr)
+    {
+        ctuix_error_show("Error", "File not parsed!");
+    }
+
     char *files[] = {FILEPATH1, FILEPATH2, FILEPATH3};
     CTUIX_Manager *ctuix_manager = ctuix_parse_multiple(files, 3);
 
@@ -23,8 +29,8 @@ int main()
     }
     
     ctuix_delete(ctuix_manager);
-    
     ctuix_end();
+    ctuix_cleanup();
     
     return 0;
 }
