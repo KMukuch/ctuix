@@ -5,7 +5,6 @@
 #include <ncurses.h>
 #include "ctuix_tree.h"
 #include "ctuix_utils.h"
-#include "ctuix_draw.h"
 
 int ctuix_count_children(CTUIX_Node *ctuix_node)
 {
@@ -95,19 +94,6 @@ CTUIX_Node* ctuix_select_next_item(CTUIX_Node *ctuix_node)
     {
         return ctuix_node->parent->children;
     }
-}
-
-void ctuix_update_selection(CTUIX_Node *ctuix_current_node, CTUIX_Node *ctuix_next_node)
-{
-    if(!ctuix_current_node) return;
-
-    wattroff(ctuix_current_node->window, A_REVERSE);
-    box(ctuix_current_node->window, 0, 0);
-    wrefresh(ctuix_current_node->window);
-
-    wattron(ctuix_next_node->window, A_REVERSE);
-    box(ctuix_next_node->window, 0, 0);
-    wrefresh(ctuix_next_node->window);
 }
 
 CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id)

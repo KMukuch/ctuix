@@ -6,6 +6,7 @@
 #include "ctuix_key.h"
 #include "ctuix_tree.h"
 #include "ctuix_utils.h"
+#include "ctuix_draw.h"
 
 CTUIX_Node* ctuix_key_handler_root(CTUIX_Node *ctuix_node, int *ch)
 {

@@ -1,5 +1,5 @@
-#ifndef CTUIX_H
-#define CTUIX_H
+#ifndef CTUIX_ERROR_H
+#define CTUIX_ERROR_H
 
 #include <stdio.h>
 #include <stdlib.h>
