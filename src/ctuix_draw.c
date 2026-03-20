@@ -62,15 +62,66 @@ void ctuix_draw_selection_box(CTUIX_Node *ctuix_node)
     {
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
     }
-    
     if(ctuix_node->window)
     {
         keypad(ctuix_node->window, TRUE);
         werase(ctuix_node->window);
         box(ctuix_node->window, 0, 0);
         mvwaddch(ctuix_node->window, 1, ctuix_node->w / 2, '>');
+        CTUIX_Node *current_node = ctuix_node->children;
+        CTUIX_Node *prev_node = NULL;
+        int i = 2;
+        while(current_node)
+        {
+            if(!prev_node)
+            {
+                current_node->y = i;
+            }
+            else
+            {
+                current_node->y = i + prev_node->y;
+            }
+            current_node->x = 1;
+            ctuix_draw_item(current_node);
+            prev_node = current_node;
+            current_node = current_node->next;
+            i++;
+        }
         mvwaddch(ctuix_node->window, ctuix_node->h - 2, ctuix_node->w / 2, '<');
-        
+        wrefresh(ctuix_node->window);
+    }
+}
+
+void ctuix_draw_item(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return;
+
+    if(!ctuix_node->window)
+    {
+        if(ctuix_node->w && ctuix_node->h)
+        {
+            ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
+        }
+        else if(ctuix_node->w)
+        {
+            ctuix_node->window = derwin(ctuix_node->parent->window, 3, ctuix_node->w, ctuix_node->y, ctuix_node->x);
+        }
+        else if(ctuix_node->h)
+        {
+            ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->parent->w - 2, ctuix_node->y, ctuix_node->x);
+        }
+        else
+        {
+            ctuix_node->window = derwin(ctuix_node->parent->window, 3, ctuix_node->parent->w - 2, ctuix_node->y, ctuix_node->x);
+        }
+    }
+
+    if(ctuix_node->window)
+    {
+        keypad(ctuix_node->window, TRUE);
+        werase(ctuix_node->window);
+        box(ctuix_node->window, 0, 0);
+        mvwprintw(ctuix_node->window, 1, 1, "%s", ctuix_node->value);
         wrefresh(ctuix_node->window);
     }
 }

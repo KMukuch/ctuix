@@ -1,8 +1,6 @@
 #TODO
 
-- error handling
-
-- macros for tree traversing
+- error checks
 
 - selection box
 
@@ -13,5 +11,7 @@
 - layout
 
 - colors
+
+- macros for tree traversing
 
 - font
