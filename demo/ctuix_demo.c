@@ -4,6 +4,7 @@
 #define FILEPATH1 "../data/ctuix_example_1.xml"
 #define FILEPATH2 "../data/ctuix_example_2.xml"
 #define FILEPATH3 "../data/ctuix_example_3.xml"
+#define FILEPATH4 "../data/ctuix_example.xml"
 
 CTUIX_Event on_click_btn1(CTUIX_Node*, void *user_data);
 CTUIX_Event on_click_btn2(CTUIX_Node*, void *user_data);
@@ -12,14 +13,12 @@ int main()
 {   
     ctuix_init();
 
-    CTUIX_Manager *mgr = ctuix_parse("../data/ctuix_example.xml");
-    if(!mgr)
+    char *files[] = {FILEPATH1, FILEPATH2, FILEPATH3, FILEPATH4};
+    CTUIX_Manager *ctuix_manager = ctuix_parse_multiple(files, 4);
+    if(!ctuix_manager)
     {
-        ctuix_error_show("Error", "File not parsed!");
+        ctuix_error_show("Error", "No file parsed!");
     }
-
-    char *files[] = {FILEPATH1, FILEPATH2, FILEPATH3};
-    CTUIX_Manager *ctuix_manager = ctuix_parse_multiple(files, 3);
 
     if(ctuix_manager)
     {

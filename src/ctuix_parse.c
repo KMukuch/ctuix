@@ -221,16 +221,24 @@ CTUIX_Manager* ctuix_parse_multiple(char **file_path_array, int count)
     for (int i = 0; i < count; i++)
     {
         CTUIX_Manager *ctuix_manager = ctuix_parse(file_path_array[i]);
-        if (!head)
+
+        if (ctuix_manager)
         {
-            head = ctuix_manager;
-            tail = ctuix_manager;
+            if (!head)
+            {
+                head = ctuix_manager;
+                tail = ctuix_manager;
+            }
+            else
+            {
+                tail->next = ctuix_manager;
+                ctuix_manager->previous = tail;
+                tail = ctuix_manager;
+            }
         }
         else
         {
-            tail->next = ctuix_manager;
-            ctuix_manager->previous = tail;
-            tail = ctuix_manager;
+            ctuix_error_show("Error", "File not parsed!");
         }
     }
     return head;
