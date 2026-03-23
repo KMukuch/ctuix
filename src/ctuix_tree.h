@@ -48,6 +48,7 @@ typedef struct CTUIX_Node
 
     bool focusable;
     bool input_enabled;
+    bool active;
 
     char* name;
     char* value;

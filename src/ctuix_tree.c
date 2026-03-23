@@ -22,6 +22,7 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
     ctuix_node->h = h;
     ctuix_node->focusable = focusable;
     ctuix_node->input_enabled = input_enabled;
+    ctuix_node->active = false;
     if(name)
     {
         ctuix_node->name = strdup(name);

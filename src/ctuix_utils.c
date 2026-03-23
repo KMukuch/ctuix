@@ -8,16 +8,13 @@
 
 int ctuix_count_children(CTUIX_Node *ctuix_node)
 {
-    if(!ctuix_node) return 0;
-    
+    if (!ctuix_node) return 0;
     int count = 0;
-    CTUIX_Node *current_node = ctuix_node;
-    while(current_node)
-    {
+    CTUIX_Node *child = ctuix_node->children;
+    while (child) {
         count++;
-        current_node = current_node->next;
+        child = child->next;
     }
-    
     return count;
 }
 
@@ -78,24 +75,6 @@ CTUIX_Node* ctuix_select_next_window(CTUIX_Node *ctuix_node)
     return ctuix_select_next_window(root);
 }
 
-CTUIX_Node* ctuix_select_next_item(CTUIX_Node *ctuix_node)
-{
-    if(!ctuix_node) return NULL;
-
-    if(ctuix_node->children)
-    {
-        return ctuix_node->children;
-    }
-    else if(ctuix_node->next)
-    {
-        return ctuix_node->next;
-    }
-    else
-    {
-        return ctuix_node->parent->children;
-    }
-}
-
 CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id)
 {
     if (!ctuix_node || !ctuix_node_id) return NULL;
@@ -134,6 +113,23 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
         current_manager = current_manager->next;
     }
 
+    return NULL;
+}
+
+CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return 0;
+    
+    CTUIX_Node *current_node = ctuix_node->children;
+    while(current_node)
+    {
+        if(current_node->selected_index == ctuix_node->selected_index)
+        {
+            return current_node;
+        }
+        current_node = current_node->next;
+    }
+    
     return NULL;
 }
 

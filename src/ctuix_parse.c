@@ -76,7 +76,7 @@ static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *node_type)
     }
 }
 
-static void _set_ctuix_node_fnc_pointer(CTUIX_Node *ctuix_node)
+static void _set_fnc_pointer(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
     
@@ -102,8 +102,8 @@ static void _set_ctuix_node_fnc_pointer(CTUIX_Node *ctuix_node)
     }
     else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ITEM)
     {
-        ctuix_node->draw = NULL;
-        ctuix_node->key_handler = NULL;
+        ctuix_node->draw = ctuix_draw_item;
+        ctuix_node->key_handler = ctuix_key_handler_item;
     }
     else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_LABEL)
     {
@@ -155,8 +155,8 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_id) id_copy = strdup((char*)node_id);
 
     ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy, id_copy);
-    _set_ctuix_node_fnc_pointer(ctuix_node);
-    
+    _set_fnc_pointer(ctuix_node);
+
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);
     if(node_w) xmlFree(node_w);
@@ -167,6 +167,34 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_id) xmlFree(node_id);
     
     return ctuix_node;
+}
+
+static void _set_default(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return;
+    
+    CTUIX_Node *current_node = ctuix_node->children;
+    while(current_node)
+    {
+        if(current_node->ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
+        {
+            int i = 0;
+            CTUIX_Node *child = current_node->children;
+            while(child)
+            {
+                child->selected_index = i;
+                child->y = 2 + i;
+                child->x = 1;
+                child->h = 1;
+                child->w = child->parent->w - 2;
+                child = child->next;
+                i++;
+            }
+            current_node->selected_index = -1;
+        }
+        current_node = current_node->next;
+    }
+    _set_default(ctuix_node->next);
 }
 
 static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)
@@ -207,6 +235,7 @@ CTUIX_Manager* ctuix_parse(char *file_path)
     CTUIX_Node *ctuix_root = _build_ctuix_node(xml_root);
     CTUIX_Manager *ctuix_manager = ctuix_manager_create(ctuix_root, file_path);
     _read_xml_node(xml_root, ctuix_root);
+    _set_default(ctuix_root);
 
     xmlFreeDoc(xml_doc);
 
