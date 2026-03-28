@@ -144,10 +144,12 @@ void ctuix_draw_scroll_panel(CTUIX_Node *ctuix_node)
         char **wrapped_value = ctuix_wrap_value(ctuix_node);
         if(wrapped_value)
         {
-            for(int i = 0; i < ctuix_node->line_count && i < ctuix_node->h - 2; i++)
+            for(int i = 0; i + ctuix_node->scroll_offset < ctuix_node->line_count && i < ctuix_node->h - 2; i++)
             {
                 mvwprintw(ctuix_node->window, i + 1, 1, "%s", wrapped_value[i + ctuix_node->scroll_offset]);
+                free(wrapped_value[i]);
             }
+            free(wrapped_value);
         }
         wrefresh(ctuix_node->window);
     }

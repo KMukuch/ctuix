@@ -103,7 +103,7 @@ CTUIX_Node* ctuix_key_handler_item(CTUIX_Node *ctuix_node, int *ch)
         ctuix_draw_tree(current_active);
         ctuix_draw_tree(next_node);
 
-        return ctuix_node->parent;
+        return next_node;
     }
 
     return ctuix_node;

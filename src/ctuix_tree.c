@@ -20,6 +20,10 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
     ctuix_node->y = y;
     ctuix_node->w = w;
     ctuix_node->h = h;
+    ctuix_node->selected_index = 0;
+    ctuix_node->scroll_offset = 0;
+    ctuix_node->line_count = 0;
+    ctuix_node->visible = 0;
     ctuix_node->focusable = focusable;
     ctuix_node->input_enabled = input_enabled;
     ctuix_node->active = false;
