@@ -99,7 +99,7 @@ static void _set_fnc_pointer(CTUIX_Node *ctuix_node)
     else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_SCROLL_PANEL)
     {
         ctuix_node->draw = ctuix_draw_scroll_panel;
-        ctuix_node->key_handler = NULL;
+        ctuix_node->key_handler = ctuix_key_handler_scroll_panel;
     }
     else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ITEM)
     {
