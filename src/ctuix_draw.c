@@ -80,6 +80,7 @@ void ctuix_draw_selection_box(CTUIX_Node *ctuix_node)
         {
             wattron(ctuix_node->window, A_REVERSE);
             box(ctuix_node->window, 0, 0);
+            wattroff(ctuix_node->window, A_REVERSE);
         }
         else
         {
@@ -95,27 +96,53 @@ void ctuix_draw_selection_box(CTUIX_Node *ctuix_node)
 void ctuix_draw_item(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
-
-    if(!ctuix_node->window)
-    {
-        ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
-    }
     
-    if(ctuix_node->window)
+    if(ctuix_node->parent->window)
     {
-        keypad(ctuix_node->window, TRUE);
-        if(ctuix_node->parent->selected_index == ctuix_node->selected_index)
+        if (ctuix_node->selected_index >= ctuix_node->parent->scroll_offset && ctuix_node->selected_index < ctuix_node->parent->scroll_offset + ctuix_node->parent->visible)
         {
-            wattron(ctuix_node->window, A_REVERSE);
-            mvwprintw(ctuix_node->window, 0, 0, "%s", ctuix_node->value);
+            int row = 2 + (ctuix_node->selected_index - ctuix_node->parent->scroll_offset);
+            if (ctuix_node->parent->selected_index == ctuix_node->selected_index)
+            {
+                wattron(ctuix_node->parent->window, A_REVERSE);
+                mvwprintw(ctuix_node->parent->window, row, ctuix_node->x, "%s", ctuix_node->value);
+                wattroff(ctuix_node->parent->window, A_REVERSE);
+            }
+            else
+            {
+                mvwprintw(ctuix_node->parent->window, row, ctuix_node->x, "%s", ctuix_node->value);
+            }
         }
-        else
-        {
-            wattroff(ctuix_node->window, A_REVERSE);
-            mvwprintw(ctuix_node->window, 0, 0, "%s", ctuix_node->value);
-        }
-        wrefresh(ctuix_node->window);
+        wrefresh(ctuix_node->parent->window);
     }
+}
+
+void ctuix_draw_scroll_panel(CTUIX_Node *ctuix_node)
+{
+    // if(!ctuix_node) return;
+    
+    // if(!ctuix_node->window)
+    // {
+    //     ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
+    // }
+    // if(ctuix_node->window)
+    // {
+    //     keypad(ctuix_node->window, TRUE);
+    //     werase(ctuix_node->window);
+    //     if(ctuix_node->active)
+    //     {
+    //         wattron(ctuix_node->window, A_REVERSE);
+    //         box(ctuix_node->window, 0, 0);
+    //     }
+    //     else
+    //     {
+    //         wattroff(ctuix_node->window, A_REVERSE);
+    //         box(ctuix_node->window, 0, 0);
+    //     }
+    //     mvwaddch(ctuix_node->window, 1, ctuix_node->w / 2, '>');
+    //     mvwaddch(ctuix_node->window, ctuix_node->h - 2, ctuix_node->w / 2, '<');
+    //     wrefresh(ctuix_node->window);
+    // }
 }
 
 void ctuix_draw_label(CTUIX_Node *ctuix_node)
@@ -156,6 +183,7 @@ void ctuix_draw_button(CTUIX_Node *ctuix_node)
         {
             wattron(ctuix_node->window, A_REVERSE);
             box(ctuix_node->window, 0, 0);
+            wattroff(ctuix_node->window, A_REVERSE);
         }
         else
         {
@@ -165,6 +193,23 @@ void ctuix_draw_button(CTUIX_Node *ctuix_node)
         wrefresh(ctuix_node->window);
     }
 }
+
+void ctuix_draw_entry(CTUIX_Node *ctuix_node)
+{
+    // if(!ctuix_node) return;
+
+    // if(!ctuix_node->window)
+    // {
+    //     ctuix_node->window = derwin(ctuix_node->parent->window, 1, strlen(ctuix_node->value), ctuix_node->y, ctuix_node->x);
+    // }
+    
+    // if(ctuix_node->parent->window)
+    // {
+    //     mvwprintw(ctuix_node->window, 0, 0, "%s", ctuix_node->value);
+    //     wrefresh(ctuix_node->window);
+    // }
+}
+
 
 void ctuix_draw_tree(CTUIX_Node *ctuix_node)
 {

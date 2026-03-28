@@ -15,5 +15,53 @@
         <ctuix_item>RED</ctuix_item>
         <ctuix_item>GREEN</ctuix_item>
         <ctuix_item>BLUE</ctuix_item>
+        <ctuix_item>YELLOW</ctuix_item>
+        <ctuix_item>CYAN</ctuix_item>
+        <ctuix_item>MAGENTA</ctuix_item>
+        <ctuix_item>ORANGE</ctuix_item>
+        <ctuix_item>PURPLE</ctuix_item>
+        <ctuix_item>BROWN</ctuix_item>
+        <ctuix_item>PINK</ctuix_item>
+        <ctuix_item>GRAY</ctuix_item>
+        <ctuix_item>WHITE</ctuix_item>
+        <ctuix_item>BLACK</ctuix_item>
+        <ctuix_item>GOLD</ctuix_item>
+        <ctuix_item>SILVER</ctuix_item>
+        <ctuix_item>BRONZE</ctuix_item>
+        <ctuix_item>NAVY</ctuix_item>
+        <ctuix_item>TEAL</ctuix_item>
+        <ctuix_item>LAVENDER</ctuix_item>
+        <ctuix_item>VIOLET</ctuix_item>
+        <ctuix_item>INDIGO</ctuix_item>
+        <ctuix_item>CRIMSON</ctuix_item>
+        <ctuix_item>SCARLET</ctuix_item>
+        <ctuix_item>MAROON</ctuix_item>
+        <ctuix_item>TURQUOISE</ctuix_item>
+        <ctuix_item>AQUA</ctuix_item>
+        <ctuix_item>BEIGE</ctuix_item>
+        <ctuix_item>CORAL</ctuix_item>
+        <ctuix_item>SALMON</ctuix_item>
+        <ctuix_item>OLIVE</ctuix_item>
+        <ctuix_item>LIME</ctuix_item>
+        <ctuix_item>MINT</ctuix_item>
+        <ctuix_item>PEACH</ctuix_item>
+        <ctuix_item>APRICOT</ctuix_item>
+        <ctuix_item>RUBY</ctuix_item>
+        <ctuix_item>EMERALD</ctuix_item>
+        <ctuix_item>SAPPHIRE</ctuix_item>
+        <ctuix_item>AMBER</ctuix_item>
+        <ctuix_item>IVORY</ctuix_item>
+        <ctuix_item>CHARCOAL</ctuix_item>
+        <ctuix_item>PLUM</ctuix_item>
+        <ctuix_item>CHARTREUSE</ctuix_item>
+        <ctuix_item>FUCHSIA</ctuix_item>
+        <ctuix_item>AUBURN</ctuix_item>
+        <ctuix_item>TAUPE</ctuix_item>
+        <ctuix_item>MAUVE</ctuix_item>
+        <ctuix_item>CERULEAN</ctuix_item>
+        <ctuix_item>VERMILION</ctuix_item>
+        <ctuix_item>ULTRAVIOLET</ctuix_item>
+        <ctuix_item>MUSTARD</ctuix_item>
     </ctuix_selection_box>
+    <!-- <ctuix_scroll_panel>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</ctuix_scroll_panel> -->
 </ctuix>

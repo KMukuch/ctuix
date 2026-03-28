@@ -11,6 +11,7 @@
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
 #include "ctuix_key.h"
+#include "ctuix_utils.h"
 
 static bool _focusable(CTUIX_Element_Type ctuix_element_type)
 {
@@ -97,7 +98,7 @@ static void _set_fnc_pointer(CTUIX_Node *ctuix_node)
     }
     else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_SCROLL_PANEL)
     {
-        ctuix_node->draw = NULL;
+        ctuix_node->draw = ctuix_draw_scroll_panel;
         ctuix_node->key_handler = NULL;
     }
     else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ITEM)
@@ -178,19 +179,19 @@ static void _set_default(CTUIX_Node *ctuix_node)
     {
         if(current_node->ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
         {
-            int i = 0;
             CTUIX_Node *child = current_node->children;
-            while(child)
+            current_node->selected_index = 0;
+            current_node->scroll_offset = 0;
+            current_node->visible = current_node->h - 4;
+            for(int i = 0; i < ctuix_count_children(current_node); i++)
             {
                 child->selected_index = i;
-                child->y = 2 + i;
+                child->y = 2 + (i % current_node->visible);
                 child->x = 1;
                 child->h = 1;
                 child->w = child->parent->w - 2;
                 child = child->next;
-                i++;
             }
-            current_node->selected_index = -1;
         }
         current_node = current_node->next;
     }

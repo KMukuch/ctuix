@@ -8,7 +8,6 @@
 int ctuix_count_children(CTUIX_Node *ctuix_node);
 
 CTUIX_Node* ctuix_select_next_window(CTUIX_Node *ctuix_node);
-CTUIX_Node* ctuix_select_next_item(CTUIX_Node *ctuix_node);
 
 CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id);
 CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node);

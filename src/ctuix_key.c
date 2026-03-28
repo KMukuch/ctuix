@@ -59,7 +59,6 @@ CTUIX_Node* ctuix_key_handler_selection_box(CTUIX_Node *ctuix_node, int *ch)
     }
     else if(*ch == KEY_DOWN)
     {
-        ctuix_node->selected_index++;
         ctuix_draw_tree(ctuix_node);
 
         return ctuix_find_item_by_ind(ctuix_node);
@@ -70,14 +69,17 @@ CTUIX_Node* ctuix_key_handler_selection_box(CTUIX_Node *ctuix_node, int *ch)
 
 CTUIX_Node* ctuix_key_handler_item(CTUIX_Node *ctuix_node, int *ch)
 {
-    *ch = wgetch(ctuix_node->window);
+    *ch = wgetch(ctuix_node->parent->window);
     if(*ch == KEY_UP)
     {
         if(ctuix_node->parent->selected_index > 0)
         {
             ctuix_node->parent->selected_index--;
+            if(ctuix_node->parent->selected_index < ctuix_node->parent->scroll_offset)
+            {
+                ctuix_node->parent->scroll_offset = ctuix_node->parent->selected_index;
+            }
             ctuix_draw_tree(ctuix_node->parent);  
-            
         }
         return ctuix_find_item_by_ind(ctuix_node->parent);
     }
@@ -86,21 +88,24 @@ CTUIX_Node* ctuix_key_handler_item(CTUIX_Node *ctuix_node, int *ch)
         if(ctuix_node->parent->selected_index < ctuix_count_children(ctuix_node->parent) - 1)
         {
             ctuix_node->parent->selected_index++;
+            if(ctuix_node->parent->selected_index >= ctuix_node->parent->scroll_offset + ctuix_node->parent->visible)
+            {
+                ctuix_node->parent->scroll_offset = ctuix_node->parent->selected_index - ctuix_node->parent->visible + 1;
+            }
             ctuix_draw_tree(ctuix_node->parent);  
-            
         }
         return ctuix_find_item_by_ind(ctuix_node->parent);
     }
     else if(*ch == '\t')
     {
-        CTUIX_Node *current_active = ctuix_node;
-        CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
-        current_active->parent->active = false;
+        CTUIX_Node *current_active = ctuix_node->parent;
+        CTUIX_Node *next_node = ctuix_select_next_window(current_active);
+        current_active->active = false;
         next_node->active = true;
-        ctuix_draw_tree(current_active->parent);
+        ctuix_draw_tree(current_active);
         ctuix_draw_tree(next_node);
 
-        return next_node;
+        return ctuix_node->parent;
     }
 
     return ctuix_node;
