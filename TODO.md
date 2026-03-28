@@ -2,9 +2,7 @@
 
 - error checks
 
-- selection box
-
-- select items
+- scroll panel
 
 - entry
 

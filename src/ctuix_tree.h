@@ -45,6 +45,7 @@ typedef struct CTUIX_Node
     
     int selected_index;
     int scroll_offset;
+    int line_count;
     int visible;
 
     bool focusable;

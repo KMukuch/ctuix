@@ -1,0 +1,197 @@
+\doxysection{/\+\+Users/\+mkrtichkuloian/\+\+Desktop/\+\+Mkrtich Kuloian/\+hobbies/\+programming/\+projects/\+ctuix/\+include/\+ctuix.h File Reference}
+\hypertarget{ctuix_8h}{}\label{ctuix_8h}\index{/Users/mkrtichkuloian/Desktop/Mkrtich Kuloian/hobbies/programming/projects/ctuix/include/ctuix.h@{/Users/mkrtichkuloian/Desktop/Mkrtich Kuloian/hobbies/programming/projects/ctuix/include/ctuix.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_c_t_u_i_x___event}{CTUIX\+\_\+\+Event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{ctuix_8h_ad20379503fae2bf9fe9e60e40fc1c973}{CTUIX\+\_\+\+VERSION\+\_\+\+MAJOR}}~0
+\item 
+\+\#define \doxymbox{\hyperlink{ctuix_8h_a5116f1b844556fcc170f93fdc5aefc9a}{CTUIX\+\_\+\+VERSION\+\_\+\+MINOR}}~0
+\item 
+\+\#define \doxymbox{\hyperlink{ctuix_8h_a1dca07c358f54a8292720b3ed1e0ba19}{CTUIX\+\_\+\+VERSION\+\_\+\+PATCH}}~0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct CTUIX\+\_\+\+Event \doxymbox{\hyperlink{ctuix_8h_a44f53d2879f10425b828d105a6deb98d}{CTUIX\+\_\+\+Event}}
+\item 
+typedef struct CTUIX\+\_\+\+Node \doxymbox{\hyperlink{ctuix_8h_a20ca2a071c7aef83d5acb4c81a4fb4c4}{CTUIX\+\_\+\+Node}}
+\item 
+typedef struct CTUIX\+\_\+\+Manager \doxymbox{\hyperlink{ctuix_8h_ad72027e5b93928a8a4824eadab769955}{CTUIX\+\_\+\+Manager}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{ctuix_8h_ade362982ab54104562704166f745602d}{CTUIX\+\_\+\+Event\+\_\+\+Type}} \{ \doxymbox{\hyperlink{ctuix_8h_ade362982ab54104562704166f745602da2e5d1ac9b40cec099b35f347941393a2}{CTUIX\+\_\+\+EVENT\+\_\+\+NONE}}
+, \doxymbox{\hyperlink{ctuix_8h_ade362982ab54104562704166f745602da5807c6c8fda150f9bf61d6f65b562a8a}{CTUIX\+\_\+\+EVENT\+\_\+\+QUIT}}
+, \doxymbox{\hyperlink{ctuix_8h_ade362982ab54104562704166f745602da87b6aaea1bd11eb1dac994f3afa5f7c5}{CTUIX\+\_\+\+EVENT\+\_\+\+SUBMIT}}
+, \doxymbox{\hyperlink{ctuix_8h_ade362982ab54104562704166f745602dacf82aca3740badce8375e934ebda24b8}{CTUIX\+\_\+\+EVENT\+\_\+\+LOAD}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{ctuix_8h_a8f92e55d3523d0756a4f9f7d9e278578}{ctuix\+\_\+init}} (void)
+\item 
+int \doxymbox{\hyperlink{ctuix_8h_af7be5bb74aae6b1636f5bfa976a8df8f}{ctuix\+\_\+run}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+manager)
+\item 
+void \doxymbox{\hyperlink{ctuix_8h_a721e58166e8c44e01448bd705ddc7ad3}{ctuix\+\_\+end}} (void)
+\item 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{ctuix_8h_a6ff4aeb13d499047e24d188b8e8af615}{ctuix\+\_\+parse}} (char \texorpdfstring{$\ast$}{*}file\+\_\+path)
+\item 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{ctuix_8h_aa53864df98219c8c95edb435b5ac2150}{ctuix\+\_\+parse\+\_\+multiple}} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}file\+\_\+path, int count)
+\item 
+void \doxymbox{\hyperlink{ctuix_8h_a1acc1e9f7ab14ec2b08ecd681965a8c0}{ctuix\+\_\+delete}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+manager)
+\item 
+void \doxymbox{\hyperlink{ctuix_8h_a2de559f240605b6671971cfd1353ca7a}{ctuix\+\_\+cleanup}} ()
+\item 
+void \doxymbox{\hyperlink{ctuix_8h_a8dde2fb58d639581fabf9911b005aaae}{ctuix\+\_\+set\+\_\+on\+\_\+click}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+manager, char \texorpdfstring{$\ast$}{*}file\+\_\+path, char \texorpdfstring{$\ast$}{*}ctuix\+\_\+node\+\_\+id, \doxymbox{\hyperlink{struct_c_t_u_i_x___event}{CTUIX\+\_\+\+Event}}(\texorpdfstring{$\ast$}{*}on\+\_\+click)(\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}, void \texorpdfstring{$\ast$}{*}user\+\_\+data), void \texorpdfstring{$\ast$}{*}user\+\_\+data)
+\item 
+void \doxymbox{\hyperlink{ctuix_8h_a4216b2cc2bd9b47948d666256609cfc7}{ctuix\+\_\+error\+\_\+show}} (const char \texorpdfstring{$\ast$}{*}title, const char \texorpdfstring{$\ast$}{*}message)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{ctuix_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ctuix_8h_ad20379503fae2bf9fe9e60e40fc1c973}\index{ctuix.h@{ctuix.h}!CTUIX\_VERSION\_MAJOR@{CTUIX\_VERSION\_MAJOR}}
+\index{CTUIX\_VERSION\_MAJOR@{CTUIX\_VERSION\_MAJOR}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_VERSION\_MAJOR}{CTUIX\_VERSION\_MAJOR}}
+{\footnotesize\ttfamily \label{ctuix_8h_ad20379503fae2bf9fe9e60e40fc1c973} 
+\+\#define CTUIX\+\_\+\+VERSION\+\_\+\+MAJOR~0}
+
+\Hypertarget{ctuix_8h_a5116f1b844556fcc170f93fdc5aefc9a}\index{ctuix.h@{ctuix.h}!CTUIX\_VERSION\_MINOR@{CTUIX\_VERSION\_MINOR}}
+\index{CTUIX\_VERSION\_MINOR@{CTUIX\_VERSION\_MINOR}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_VERSION\_MINOR}{CTUIX\_VERSION\_MINOR}}
+{\footnotesize\ttfamily \label{ctuix_8h_a5116f1b844556fcc170f93fdc5aefc9a} 
+\+\#define CTUIX\+\_\+\+VERSION\+\_\+\+MINOR~0}
+
+\Hypertarget{ctuix_8h_a1dca07c358f54a8292720b3ed1e0ba19}\index{ctuix.h@{ctuix.h}!CTUIX\_VERSION\_PATCH@{CTUIX\_VERSION\_PATCH}}
+\index{CTUIX\_VERSION\_PATCH@{CTUIX\_VERSION\_PATCH}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_VERSION\_PATCH}{CTUIX\_VERSION\_PATCH}}
+{\footnotesize\ttfamily \label{ctuix_8h_a1dca07c358f54a8292720b3ed1e0ba19} 
+\+\#define CTUIX\+\_\+\+VERSION\+\_\+\+PATCH~0}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{ctuix_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{ctuix_8h_a44f53d2879f10425b828d105a6deb98d}\index{ctuix.h@{ctuix.h}!CTUIX\_Event@{CTUIX\_Event}}
+\index{CTUIX\_Event@{CTUIX\_Event}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Event}{CTUIX\_Event}}
+{\footnotesize\ttfamily \label{ctuix_8h_a44f53d2879f10425b828d105a6deb98d} 
+typedef struct CTUIX\+\_\+\+Event CTUIX\+\_\+\+Event}
+
+\Hypertarget{ctuix_8h_ad72027e5b93928a8a4824eadab769955}\index{ctuix.h@{ctuix.h}!CTUIX\_Manager@{CTUIX\_Manager}}
+\index{CTUIX\_Manager@{CTUIX\_Manager}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Manager}{CTUIX\_Manager}}
+{\footnotesize\ttfamily \label{ctuix_8h_ad72027e5b93928a8a4824eadab769955} 
+typedef struct CTUIX\+\_\+\+Manager CTUIX\+\_\+\+Manager}
+
+\Hypertarget{ctuix_8h_a20ca2a071c7aef83d5acb4c81a4fb4c4}\index{ctuix.h@{ctuix.h}!CTUIX\_Node@{CTUIX\_Node}}
+\index{CTUIX\_Node@{CTUIX\_Node}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Node}{CTUIX\_Node}}
+{\footnotesize\ttfamily \label{ctuix_8h_a20ca2a071c7aef83d5acb4c81a4fb4c4} 
+typedef struct CTUIX\+\_\+\+Node CTUIX\+\_\+\+Node}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{ctuix_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{ctuix_8h_ade362982ab54104562704166f745602d}\index{ctuix.h@{ctuix.h}!CTUIX\_Event\_Type@{CTUIX\_Event\_Type}}
+\index{CTUIX\_Event\_Type@{CTUIX\_Event\_Type}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Event\_Type}{CTUIX\_Event\_Type}}
+{\footnotesize\ttfamily \label{ctuix_8h_ade362982ab54104562704166f745602d} 
+enum \doxymbox{\hyperlink{ctuix_8h_ade362982ab54104562704166f745602d}{CTUIX\+\_\+\+Event\+\_\+\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_NONE@{CTUIX\_EVENT\_NONE}!ctuix.h@{ctuix.h}}
+\index{ctuix.h@{ctuix.h}!CTUIX\_EVENT\_NONE@{CTUIX\_EVENT\_NONE}}
+}\Hypertarget{ctuix_8h_ade362982ab54104562704166f745602da2e5d1ac9b40cec099b35f347941393a2}\label{ctuix_8h_ade362982ab54104562704166f745602da2e5d1ac9b40cec099b35f347941393a2} 
+CTUIX\+\_\+\+EVENT\+\_\+\+NONE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_QUIT@{CTUIX\_EVENT\_QUIT}!ctuix.h@{ctuix.h}}
+\index{ctuix.h@{ctuix.h}!CTUIX\_EVENT\_QUIT@{CTUIX\_EVENT\_QUIT}}
+}\Hypertarget{ctuix_8h_ade362982ab54104562704166f745602da5807c6c8fda150f9bf61d6f65b562a8a}\label{ctuix_8h_ade362982ab54104562704166f745602da5807c6c8fda150f9bf61d6f65b562a8a} 
+CTUIX\+\_\+\+EVENT\+\_\+\+QUIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_SUBMIT@{CTUIX\_EVENT\_SUBMIT}!ctuix.h@{ctuix.h}}
+\index{ctuix.h@{ctuix.h}!CTUIX\_EVENT\_SUBMIT@{CTUIX\_EVENT\_SUBMIT}}
+}\Hypertarget{ctuix_8h_ade362982ab54104562704166f745602da87b6aaea1bd11eb1dac994f3afa5f7c5}\label{ctuix_8h_ade362982ab54104562704166f745602da87b6aaea1bd11eb1dac994f3afa5f7c5} 
+CTUIX\+\_\+\+EVENT\+\_\+\+SUBMIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_LOAD@{CTUIX\_EVENT\_LOAD}!ctuix.h@{ctuix.h}}
+\index{ctuix.h@{ctuix.h}!CTUIX\_EVENT\_LOAD@{CTUIX\_EVENT\_LOAD}}
+}\Hypertarget{ctuix_8h_ade362982ab54104562704166f745602dacf82aca3740badce8375e934ebda24b8}\label{ctuix_8h_ade362982ab54104562704166f745602dacf82aca3740badce8375e934ebda24b8} 
+CTUIX\+\_\+\+EVENT\+\_\+\+LOAD&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{ctuix_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ctuix_8h_a2de559f240605b6671971cfd1353ca7a}\index{ctuix.h@{ctuix.h}!ctuix\_cleanup@{ctuix\_cleanup}}
+\index{ctuix\_cleanup@{ctuix\_cleanup}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_cleanup()}{ctuix\_cleanup()}}
+{\footnotesize\ttfamily \label{ctuix_8h_a2de559f240605b6671971cfd1353ca7a} 
+void ctuix\+\_\+cleanup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_a1acc1e9f7ab14ec2b08ecd681965a8c0}\index{ctuix.h@{ctuix.h}!ctuix\_delete@{ctuix\_delete}}
+\index{ctuix\_delete@{ctuix\_delete}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_delete()}{ctuix\_delete()}}
+{\footnotesize\ttfamily \label{ctuix_8h_a1acc1e9f7ab14ec2b08ecd681965a8c0} 
+void ctuix\+\_\+delete (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+manager}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_a721e58166e8c44e01448bd705ddc7ad3}\index{ctuix.h@{ctuix.h}!ctuix\_end@{ctuix\_end}}
+\index{ctuix\_end@{ctuix\_end}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_end()}{ctuix\_end()}}
+{\footnotesize\ttfamily \label{ctuix_8h_a721e58166e8c44e01448bd705ddc7ad3} 
+void ctuix\+\_\+end (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_a4216b2cc2bd9b47948d666256609cfc7}\index{ctuix.h@{ctuix.h}!ctuix\_error\_show@{ctuix\_error\_show}}
+\index{ctuix\_error\_show@{ctuix\_error\_show}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_error\_show()}{ctuix\_error\_show()}}
+{\footnotesize\ttfamily \label{ctuix_8h_a4216b2cc2bd9b47948d666256609cfc7} 
+void ctuix\+\_\+error\+\_\+show (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{title}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{message}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_a8f92e55d3523d0756a4f9f7d9e278578}\index{ctuix.h@{ctuix.h}!ctuix\_init@{ctuix\_init}}
+\index{ctuix\_init@{ctuix\_init}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_init()}{ctuix\_init()}}
+{\footnotesize\ttfamily \label{ctuix_8h_a8f92e55d3523d0756a4f9f7d9e278578} 
+void ctuix\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_a6ff4aeb13d499047e24d188b8e8af615}\index{ctuix.h@{ctuix.h}!ctuix\_parse@{ctuix\_parse}}
+\index{ctuix\_parse@{ctuix\_parse}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_parse()}{ctuix\_parse()}}
+{\footnotesize\ttfamily \label{ctuix_8h_a6ff4aeb13d499047e24d188b8e8af615} 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} ctuix\+\_\+parse (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{file\+\_\+path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_aa53864df98219c8c95edb435b5ac2150}\index{ctuix.h@{ctuix.h}!ctuix\_parse\_multiple@{ctuix\_parse\_multiple}}
+\index{ctuix\_parse\_multiple@{ctuix\_parse\_multiple}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_parse\_multiple()}{ctuix\_parse\_multiple()}}
+{\footnotesize\ttfamily \label{ctuix_8h_aa53864df98219c8c95edb435b5ac2150} 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} ctuix\+\_\+parse\+\_\+multiple (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{file\+\_\+path}{, }\item[{int}]{count}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_af7be5bb74aae6b1636f5bfa976a8df8f}\index{ctuix.h@{ctuix.h}!ctuix\_run@{ctuix\_run}}
+\index{ctuix\_run@{ctuix\_run}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_run()}{ctuix\_run()}}
+{\footnotesize\ttfamily \label{ctuix_8h_af7be5bb74aae6b1636f5bfa976a8df8f} 
+int ctuix\+\_\+run (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+manager}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix_8h_a8dde2fb58d639581fabf9911b005aaae}\index{ctuix.h@{ctuix.h}!ctuix\_set\_on\_click@{ctuix\_set\_on\_click}}
+\index{ctuix\_set\_on\_click@{ctuix\_set\_on\_click}!ctuix.h@{ctuix.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_set\_on\_click()}{ctuix\_set\_on\_click()}}
+{\footnotesize\ttfamily \label{ctuix_8h_a8dde2fb58d639581fabf9911b005aaae} 
+void ctuix\+\_\+set\+\_\+on\+\_\+click (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+manager}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{file\+\_\+path}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+node\+\_\+id}{, }\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___event}{CTUIX\+\_\+\+Event}}(\texorpdfstring{$\ast$}{*}}]{on\+\_\+click~}{)(\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}, void \texorpdfstring{$\ast$}{*}user\+\_\+data), }\item[{void \texorpdfstring{$\ast$}{*}}]{user\+\_\+data}{}\end{DoxyParamCaption})}
+

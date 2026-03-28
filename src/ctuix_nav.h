@@ -1,5 +1,5 @@
-#ifndef CTUIX_UTILS_H
-#define CTUIX_UTILS_H
+#ifndef CTUIX_NAV_H
+#define CTUIX_NAV_H
 
 #include <stdio.h>
 #include "ctuix_tree.h"

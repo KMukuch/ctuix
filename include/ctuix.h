@@ -23,7 +23,7 @@ typedef struct CTUIX_Node CTUIX_Node;
 typedef struct CTUIX_Manager CTUIX_Manager;
 
 /*
- * Function prototypes.
+ * Function prototypes
  */
 
 void ctuix_init(void);

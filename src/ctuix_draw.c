@@ -6,6 +6,7 @@
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
 #include "ctuix_nav.h"
+#include "ctuix_utils.h"
 
 void ctuix_draw_root(CTUIX_Node *ctuix_node)
 {
@@ -140,8 +141,14 @@ void ctuix_draw_scroll_panel(CTUIX_Node *ctuix_node)
             wattroff(ctuix_node->window, A_REVERSE);
             box(ctuix_node->window, 0, 0);
         }
-        mvwaddch(ctuix_node->window, 1, ctuix_node->w / 2, '>');
-        mvwaddch(ctuix_node->window, ctuix_node->h - 2, ctuix_node->w / 2, '<');
+        char **wrapped_value = ctuix_wrap_value(ctuix_node);
+        if(wrapped_value)
+        {
+            for(int i = 0; i < ctuix_node->line_count && i < ctuix_node->h - 2; i++)
+            {
+                mvwprintw(ctuix_node->window, i + 1, 1, "%s", wrapped_value[i + ctuix_node->scroll_offset]);
+            }
+        }
         wrefresh(ctuix_node->window);
     }
 }

@@ -36,6 +36,7 @@ target_include_directories(ctuix PRIVATE
 # Link dependencies
 target_link_libraries(ctuix PUBLIC ${LIBXML2_LIBRARIES} ${NCURSES_LIBRARIES})
 
+# Remove installed files
 add_custom_target(clean-all
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}
     COMMENT "Remove entire build directory"

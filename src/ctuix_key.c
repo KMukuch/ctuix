@@ -59,8 +59,6 @@ CTUIX_Node* ctuix_key_handler_selection_box(CTUIX_Node *ctuix_node, int *ch)
     }
     else if(*ch == KEY_DOWN)
     {
-        ctuix_draw_tree(ctuix_node);
-
         return ctuix_find_item_by_ind(ctuix_node);
     }
 
@@ -114,7 +112,25 @@ CTUIX_Node* ctuix_key_handler_item(CTUIX_Node *ctuix_node, int *ch)
 CTUIX_Node* ctuix_key_handler_scroll_panel(CTUIX_Node *ctuix_node, int *ch)
 {
     *ch = wgetch(ctuix_node->window);
-    if(*ch == '\t')
+    if(*ch == KEY_UP)
+    {
+        if(ctuix_node->scroll_offset > 0)
+        {
+            ctuix_node->scroll_offset--;
+            ctuix_draw_tree(ctuix_node);
+        }
+        return ctuix_node;
+    }
+    else if(*ch == KEY_DOWN)
+    {
+        if(ctuix_node->scroll_offset < ctuix_node->line_count - 1)
+        {
+            ctuix_node->scroll_offset++;
+            ctuix_draw_tree(ctuix_node);
+        }
+        return ctuix_node;
+    }
+    else if(*ch == '\t')
     {
         CTUIX_Node *current_active = ctuix_node;
         CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);

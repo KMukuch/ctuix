@@ -1,0 +1,234 @@
+\doxysection{/\+\+Users/\+mkrtichkuloian/\+\+Desktop/\+\+Mkrtich Kuloian/\+hobbies/\+programming/\+projects/\+ctuix/\+src/\+ctuix\+\_\+tree.h File Reference}
+\hypertarget{ctuix__tree_8h}{}\label{ctuix__tree_8h}\index{/Users/mkrtichkuloian/Desktop/Mkrtich Kuloian/hobbies/programming/projects/ctuix/src/ctuix\_tree.h@{/Users/mkrtichkuloian/Desktop/Mkrtich Kuloian/hobbies/programming/projects/ctuix/src/ctuix\_tree.h}}
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include $<$ncurses.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_c_t_u_i_x___event}{CTUIX\+\_\+\+Event}}
+\item 
+struct \doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}}
+\item 
+struct \doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct CTUIX\+\_\+\+Event \doxymbox{\hyperlink{ctuix__tree_8h_a44f53d2879f10425b828d105a6deb98d}{CTUIX\+\_\+\+Event}}
+\item 
+typedef struct CTUIX\+\_\+\+Node \doxymbox{\hyperlink{ctuix__tree_8h_a20ca2a071c7aef83d5acb4c81a4fb4c4}{CTUIX\+\_\+\+Node}}
+\item 
+typedef struct CTUIX\+\_\+\+Manager \doxymbox{\hyperlink{ctuix__tree_8h_ad72027e5b93928a8a4824eadab769955}{CTUIX\+\_\+\+Manager}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2}{CTUIX\+\_\+\+Element\+\_\+\+Type}} \{ \newline
+\doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a1040a6f54cebf499e8a28f5d6ebc49d6}{CTUIX\+\_\+\+ELEMENT\+\_\+\+ERROR}} = -\/1
+, \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a0bada8ddf54ba8d55f5095615bf90e0b}{CTUIX\+\_\+\+ELEMENT\+\_\+\+ROOT}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a0292d33765ea2a3c42efaa56466002fc}{CTUIX\+\_\+\+ELEMENT\+\_\+\+PANEL}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a427103999877a37476874af9dba6c6cc}{CTUIX\+\_\+\+ELEMENT\+\_\+\+SELECTION\+\_\+\+BOX}}
+, \newline
+\doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a67f77abbfca42278f57224788907c78e}{CTUIX\+\_\+\+ELEMENT\+\_\+\+SCROLL\+\_\+\+PANEL}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2abf068fb0e1553fb2562e08ab9c2d8fbe}{CTUIX\+\_\+\+ELEMENT\+\_\+\+ITEM}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a89b1a8c0272dd56a3e541eed660941a4}{CTUIX\+\_\+\+ELEMENT\+\_\+\+LABEL}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a648f047e2323daa5a0f509aa98450507}{CTUIX\+\_\+\+ELEMENT\+\_\+\+BUTTON}}
+, \newline
+\doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a2c0bbfc61574cfbac5c78243da3a65cc}{CTUIX\+\_\+\+ELEMENT\+\_\+\+ENTRY}}
+ \}
+\item 
+enum \doxymbox{\hyperlink{ctuix__tree_8h_ade362982ab54104562704166f745602d}{CTUIX\+\_\+\+Event\+\_\+\+Type}} \{ \doxymbox{\hyperlink{ctuix__tree_8h_ade362982ab54104562704166f745602da2e5d1ac9b40cec099b35f347941393a2}{CTUIX\+\_\+\+EVENT\+\_\+\+NONE}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_ade362982ab54104562704166f745602da5807c6c8fda150f9bf61d6f65b562a8a}{CTUIX\+\_\+\+EVENT\+\_\+\+QUIT}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_ade362982ab54104562704166f745602da87b6aaea1bd11eb1dac994f3afa5f7c5}{CTUIX\+\_\+\+EVENT\+\_\+\+SUBMIT}}
+, \doxymbox{\hyperlink{ctuix__tree_8h_ade362982ab54104562704166f745602dacf82aca3740badce8375e934ebda24b8}{CTUIX\+\_\+\+EVENT\+\_\+\+LOAD}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{ctuix__tree_8h_acbb9c72c4206345bf6d870695cd0a57f}{ctuix\+\_\+node\+\_\+create}} (\doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2}{CTUIX\+\_\+\+Element\+\_\+\+Type}} ctuix\+\_\+element\+\_\+type, int x, int y, int w, int h, bool focusable, bool input\+\_\+enabled, char \texorpdfstring{$\ast$}{*}name, char \texorpdfstring{$\ast$}{*}value, char \texorpdfstring{$\ast$}{*}id)
+\item 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{ctuix__tree_8h_a00da175c102a498b7f1cb24b37bfda70}{ctuix\+\_\+manager\+\_\+create}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+node, char \texorpdfstring{$\ast$}{*}file\+\_\+path)
+\item 
+int \doxymbox{\hyperlink{ctuix__tree_8h_ad202a9c7ca6fa041e85564cc01b21afa}{ctuix\+\_\+count\+\_\+children}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+node)
+\item 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{ctuix__tree_8h_a8fb872188b3a14362b912d0e7eaf45e7}{ctuix\+\_\+find\+\_\+node\+\_\+by\+\_\+id}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+node, char \texorpdfstring{$\ast$}{*}ctuix\+\_\+node\+\_\+id)
+\item 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{ctuix__tree_8h_a46b5fe410de49964633c97c264f80f13}{ctuix\+\_\+find\+\_\+item\+\_\+by\+\_\+ind}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+node)
+\item 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{ctuix__tree_8h_a5f18a4b052bba23ca6b97ff839fc5af3}{ctuix\+\_\+find\+\_\+manager\+\_\+by\+\_\+path}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+manager, char \texorpdfstring{$\ast$}{*}file\+\_\+path)
+\item 
+void \doxymbox{\hyperlink{ctuix__tree_8h_ae33a7356c9076e236b487816d4d78b3e}{ctuix\+\_\+node\+\_\+free}} (\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}ctuix\+\_\+node)
+\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{ctuix__tree_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{ctuix__tree_8h_a44f53d2879f10425b828d105a6deb98d}\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_Event@{CTUIX\_Event}}
+\index{CTUIX\_Event@{CTUIX\_Event}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Event}{CTUIX\_Event}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_a44f53d2879f10425b828d105a6deb98d} 
+typedef struct CTUIX\+\_\+\+Event CTUIX\+\_\+\+Event}
+
+\Hypertarget{ctuix__tree_8h_ad72027e5b93928a8a4824eadab769955}\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_Manager@{CTUIX\_Manager}}
+\index{CTUIX\_Manager@{CTUIX\_Manager}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Manager}{CTUIX\_Manager}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_ad72027e5b93928a8a4824eadab769955} 
+typedef struct CTUIX\+\_\+\+Manager CTUIX\+\_\+\+Manager}
+
+\Hypertarget{ctuix__tree_8h_a20ca2a071c7aef83d5acb4c81a4fb4c4}\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_Node@{CTUIX\_Node}}
+\index{CTUIX\_Node@{CTUIX\_Node}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Node}{CTUIX\_Node}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_a20ca2a071c7aef83d5acb4c81a4fb4c4} 
+typedef struct CTUIX\+\_\+\+Node CTUIX\+\_\+\+Node}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{ctuix__tree_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2}\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_Element\_Type@{CTUIX\_Element\_Type}}
+\index{CTUIX\_Element\_Type@{CTUIX\_Element\_Type}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Element\_Type}{CTUIX\_Element\_Type}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2} 
+enum \doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2}{CTUIX\+\_\+\+Element\+\_\+\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_ERROR@{CTUIX\_ELEMENT\_ERROR}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_ERROR@{CTUIX\_ELEMENT\_ERROR}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a1040a6f54cebf499e8a28f5d6ebc49d6}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a1040a6f54cebf499e8a28f5d6ebc49d6} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_ROOT@{CTUIX\_ELEMENT\_ROOT}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_ROOT@{CTUIX\_ELEMENT\_ROOT}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a0bada8ddf54ba8d55f5095615bf90e0b}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a0bada8ddf54ba8d55f5095615bf90e0b} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+ROOT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_PANEL@{CTUIX\_ELEMENT\_PANEL}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_PANEL@{CTUIX\_ELEMENT\_PANEL}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a0292d33765ea2a3c42efaa56466002fc}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a0292d33765ea2a3c42efaa56466002fc} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+PANEL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_SELECTION\_BOX@{CTUIX\_ELEMENT\_SELECTION\_BOX}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_SELECTION\_BOX@{CTUIX\_ELEMENT\_SELECTION\_BOX}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a427103999877a37476874af9dba6c6cc}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a427103999877a37476874af9dba6c6cc} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+SELECTION\+\_\+\+BOX&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_SCROLL\_PANEL@{CTUIX\_ELEMENT\_SCROLL\_PANEL}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_SCROLL\_PANEL@{CTUIX\_ELEMENT\_SCROLL\_PANEL}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a67f77abbfca42278f57224788907c78e}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a67f77abbfca42278f57224788907c78e} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+SCROLL\+\_\+\+PANEL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_ITEM@{CTUIX\_ELEMENT\_ITEM}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_ITEM@{CTUIX\_ELEMENT\_ITEM}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2abf068fb0e1553fb2562e08ab9c2d8fbe}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2abf068fb0e1553fb2562e08ab9c2d8fbe} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+ITEM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_LABEL@{CTUIX\_ELEMENT\_LABEL}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_LABEL@{CTUIX\_ELEMENT\_LABEL}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a89b1a8c0272dd56a3e541eed660941a4}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a89b1a8c0272dd56a3e541eed660941a4} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+LABEL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_BUTTON@{CTUIX\_ELEMENT\_BUTTON}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_BUTTON@{CTUIX\_ELEMENT\_BUTTON}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a648f047e2323daa5a0f509aa98450507}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a648f047e2323daa5a0f509aa98450507} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+BUTTON&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_ELEMENT\_ENTRY@{CTUIX\_ELEMENT\_ENTRY}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_ELEMENT\_ENTRY@{CTUIX\_ELEMENT\_ENTRY}}
+}\Hypertarget{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a2c0bbfc61574cfbac5c78243da3a65cc}\label{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2a2c0bbfc61574cfbac5c78243da3a65cc} 
+CTUIX\+\_\+\+ELEMENT\+\_\+\+ENTRY&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{ctuix__tree_8h_ade362982ab54104562704166f745602d}\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_Event\_Type@{CTUIX\_Event\_Type}}
+\index{CTUIX\_Event\_Type@{CTUIX\_Event\_Type}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{CTUIX\_Event\_Type}{CTUIX\_Event\_Type}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_ade362982ab54104562704166f745602d} 
+enum \doxymbox{\hyperlink{ctuix_8h_ade362982ab54104562704166f745602d}{CTUIX\+\_\+\+Event\+\_\+\+Type}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_NONE@{CTUIX\_EVENT\_NONE}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_EVENT\_NONE@{CTUIX\_EVENT\_NONE}}
+}\Hypertarget{ctuix__tree_8h_ade362982ab54104562704166f745602da2e5d1ac9b40cec099b35f347941393a2}\label{ctuix__tree_8h_ade362982ab54104562704166f745602da2e5d1ac9b40cec099b35f347941393a2} 
+CTUIX\+\_\+\+EVENT\+\_\+\+NONE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_QUIT@{CTUIX\_EVENT\_QUIT}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_EVENT\_QUIT@{CTUIX\_EVENT\_QUIT}}
+}\Hypertarget{ctuix__tree_8h_ade362982ab54104562704166f745602da5807c6c8fda150f9bf61d6f65b562a8a}\label{ctuix__tree_8h_ade362982ab54104562704166f745602da5807c6c8fda150f9bf61d6f65b562a8a} 
+CTUIX\+\_\+\+EVENT\+\_\+\+QUIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_SUBMIT@{CTUIX\_EVENT\_SUBMIT}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_EVENT\_SUBMIT@{CTUIX\_EVENT\_SUBMIT}}
+}\Hypertarget{ctuix__tree_8h_ade362982ab54104562704166f745602da87b6aaea1bd11eb1dac994f3afa5f7c5}\label{ctuix__tree_8h_ade362982ab54104562704166f745602da87b6aaea1bd11eb1dac994f3afa5f7c5} 
+CTUIX\+\_\+\+EVENT\+\_\+\+SUBMIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CTUIX\_EVENT\_LOAD@{CTUIX\_EVENT\_LOAD}!ctuix\_tree.h@{ctuix\_tree.h}}
+\index{ctuix\_tree.h@{ctuix\_tree.h}!CTUIX\_EVENT\_LOAD@{CTUIX\_EVENT\_LOAD}}
+}\Hypertarget{ctuix__tree_8h_ade362982ab54104562704166f745602dacf82aca3740badce8375e934ebda24b8}\label{ctuix__tree_8h_ade362982ab54104562704166f745602dacf82aca3740badce8375e934ebda24b8} 
+CTUIX\+\_\+\+EVENT\+\_\+\+LOAD&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{ctuix__tree_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ctuix__tree_8h_ad202a9c7ca6fa041e85564cc01b21afa}\index{ctuix\_tree.h@{ctuix\_tree.h}!ctuix\_count\_children@{ctuix\_count\_children}}
+\index{ctuix\_count\_children@{ctuix\_count\_children}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_count\_children()}{ctuix\_count\_children()}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_ad202a9c7ca6fa041e85564cc01b21afa} 
+int ctuix\+\_\+count\+\_\+children (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+node}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix__tree_8h_a46b5fe410de49964633c97c264f80f13}\index{ctuix\_tree.h@{ctuix\_tree.h}!ctuix\_find\_item\_by\_ind@{ctuix\_find\_item\_by\_ind}}
+\index{ctuix\_find\_item\_by\_ind@{ctuix\_find\_item\_by\_ind}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_find\_item\_by\_ind()}{ctuix\_find\_item\_by\_ind()}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_a46b5fe410de49964633c97c264f80f13} 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} ctuix\+\_\+find\+\_\+item\+\_\+by\+\_\+ind (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+node}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix__tree_8h_a5f18a4b052bba23ca6b97ff839fc5af3}\index{ctuix\_tree.h@{ctuix\_tree.h}!ctuix\_find\_manager\_by\_path@{ctuix\_find\_manager\_by\_path}}
+\index{ctuix\_find\_manager\_by\_path@{ctuix\_find\_manager\_by\_path}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_find\_manager\_by\_path()}{ctuix\_find\_manager\_by\_path()}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_a5f18a4b052bba23ca6b97ff839fc5af3} 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} ctuix\+\_\+find\+\_\+manager\+\_\+by\+\_\+path (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+manager}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{file\+\_\+path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix__tree_8h_a8fb872188b3a14362b912d0e7eaf45e7}\index{ctuix\_tree.h@{ctuix\_tree.h}!ctuix\_find\_node\_by\_id@{ctuix\_find\_node\_by\_id}}
+\index{ctuix\_find\_node\_by\_id@{ctuix\_find\_node\_by\_id}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_find\_node\_by\_id()}{ctuix\_find\_node\_by\_id()}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_a8fb872188b3a14362b912d0e7eaf45e7} 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} ctuix\+\_\+find\+\_\+node\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+node}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+node\+\_\+id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix__tree_8h_a00da175c102a498b7f1cb24b37bfda70}\index{ctuix\_tree.h@{ctuix\_tree.h}!ctuix\_manager\_create@{ctuix\_manager\_create}}
+\index{ctuix\_manager\_create@{ctuix\_manager\_create}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_manager\_create()}{ctuix\_manager\_create()}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_a00da175c102a498b7f1cb24b37bfda70} 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___manager}{CTUIX\+\_\+\+Manager}} \texorpdfstring{$\ast$}{*} ctuix\+\_\+manager\+\_\+create (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+node}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{file\+\_\+path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix__tree_8h_acbb9c72c4206345bf6d870695cd0a57f}\index{ctuix\_tree.h@{ctuix\_tree.h}!ctuix\_node\_create@{ctuix\_node\_create}}
+\index{ctuix\_node\_create@{ctuix\_node\_create}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_node\_create()}{ctuix\_node\_create()}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_acbb9c72c4206345bf6d870695cd0a57f} 
+\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} ctuix\+\_\+node\+\_\+create (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{ctuix__tree_8h_a933e272d17b229ad8d28fcf7df6cc1d2}{CTUIX\+\_\+\+Element\+\_\+\+Type}}}]{ctuix\+\_\+element\+\_\+type}{, }\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{int}]{w}{, }\item[{int}]{h}{, }\item[{bool}]{focusable}{, }\item[{bool}]{input\+\_\+enabled}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{value}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ctuix__tree_8h_ae33a7356c9076e236b487816d4d78b3e}\index{ctuix\_tree.h@{ctuix\_tree.h}!ctuix\_node\_free@{ctuix\_node\_free}}
+\index{ctuix\_node\_free@{ctuix\_node\_free}!ctuix\_tree.h@{ctuix\_tree.h}}
+\doxysubsubsection{\texorpdfstring{ctuix\_node\_free()}{ctuix\_node\_free()}}
+{\footnotesize\ttfamily \label{ctuix__tree_8h_ae33a7356c9076e236b487816d4d78b3e} 
+void ctuix\+\_\+node\+\_\+free (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_c_t_u_i_x___node}{CTUIX\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}}]{ctuix\+\_\+node}{}\end{DoxyParamCaption})}
+

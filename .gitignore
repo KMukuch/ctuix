@@ -5,3 +5,7 @@ build/
 *.so
 *.dylib
 *.o
+build/docs/latex
+build/docs/rtf
+build/docs/html
+build/docs/Doxyfile
