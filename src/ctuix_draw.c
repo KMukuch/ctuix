@@ -5,7 +5,7 @@
 #include <ncurses.h>
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
-#include "ctuix_utils.h"
+#include "ctuix_nav.h"
 
 void ctuix_draw_root(CTUIX_Node *ctuix_node)
 {

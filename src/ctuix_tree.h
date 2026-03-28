@@ -86,6 +86,12 @@ typedef struct CTUIX_Manager
 CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id);
 CTUIX_Manager* ctuix_manager_create(CTUIX_Node *ctuix_node, char* file_path);
 
+int ctuix_count_children(CTUIX_Node *ctuix_node);
+
+CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id);
+CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node);
+CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *file_path);
+
 void ctuix_node_free(CTUIX_Node *ctuix_node);
 
 #endif
