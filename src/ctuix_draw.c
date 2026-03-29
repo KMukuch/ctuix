@@ -61,6 +61,10 @@ void ctuix_draw_panel(CTUIX_Node *ctuix_node)
             wattroff(ctuix_node->window, A_REVERSE);
             box(ctuix_node->window, 0, 0);
         }
+        if(ctuix_node->name)
+        {
+            mvwprintw(ctuix_node->window, 0, 1, "%s", ctuix_node->name);
+        }
         wrefresh(ctuix_node->window);
     }
 }
@@ -87,6 +91,10 @@ void ctuix_draw_selection_box(CTUIX_Node *ctuix_node)
         {
             wattroff(ctuix_node->window, A_REVERSE);
             box(ctuix_node->window, 0, 0);
+        }
+        if(ctuix_node->name)
+        {
+            mvwprintw(ctuix_node->window, 0, 1, "%s", ctuix_node->name);
         }
         mvwaddch(ctuix_node->window, 1, ctuix_node->w / 2, '>');
         mvwaddch(ctuix_node->window, ctuix_node->h - 2, ctuix_node->w / 2, '<');
@@ -150,6 +158,10 @@ void ctuix_draw_scroll_panel(CTUIX_Node *ctuix_node)
                 free(wrapped_value[i]);
             }
             free(wrapped_value);
+        }
+        if(ctuix_node->name)
+        {
+            mvwprintw(ctuix_node->window, 0, 0, "%s", ctuix_node->name);
         }
         wrefresh(ctuix_node->window);
     }

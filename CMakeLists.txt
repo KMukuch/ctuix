@@ -1,6 +1,13 @@
-# CMakeLists.txt for your C library
+# CMakeLists.txt for your C library – works with GCC and Clang
 cmake_minimum_required(VERSION 3.10)
 project(ctuix VERSION 1.0.0 LANGUAGES C)
+
+# Set C standard (adjust to your needs: 99, 11, 17, etc.)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+
+# Common warning flags for both GCC and Clang
+add_compile_options(-Wall -Wextra)
 
 # Dependencies
 find_package(PkgConfig REQUIRED)
@@ -19,37 +26,35 @@ set(CTUIX_SOURCES
     src/ctuix_utils.c
 )
 
-# Create library
+# Create static library
 add_library(ctuix STATIC ${CTUIX_SOURCES})
 
-# Include paths (PUBLIC = users also need these)
-target_include_directories(ctuix PUBLIC 
+# Include paths (PUBLIC for users of the library)
+target_include_directories(ctuix PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
-# Private includes for your code only
-target_include_directories(ctuix PRIVATE 
+# Private includes for the library itself (including dependencies)
+target_include_directories(ctuix PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${LIBXML2_INCLUDE_DIRS}
+    ${NCURSES_INCLUDE_DIRS}
 )
 
 # Link dependencies
-target_link_libraries(ctuix PUBLIC ${LIBXML2_LIBRARIES} ${NCURSES_LIBRARIES})
-
-# Remove installed files
-add_custom_target(clean-all
-    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}
-    COMMENT "Remove entire build directory"
+target_link_libraries(ctuix PUBLIC
+    ${LIBXML2_LIBRARIES}
+    ${NCURSES_LIBRARIES}
 )
 
-# Add executable from demo folder
-add_executable(ctuix_demo EXCLUDE_FROM_ALL demo/ctuix_demo.c)
+# Add demo executable (built by default)
+add_executable(ctuix_demo demo/ctuix_demo.c)
 target_link_libraries(ctuix_demo PRIVATE ctuix)
 
-# Build-only target
-add_custom_target(demo
-    DEPENDS ctuix_demo
-    COMMENT "Build the demo program from demo/ folder"
+# The demo needs the library’s public headers
+target_include_directories(ctuix_demo PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 # Install the static library
@@ -57,5 +62,5 @@ install(TARGETS ctuix
     ARCHIVE DESTINATION lib
 )
 
-# Install headers manually (alternative to PUBLIC_HEADER above)
+# Install headers
 install(DIRECTORY include/ DESTINATION include/ctuix)

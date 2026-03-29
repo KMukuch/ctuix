@@ -11,7 +11,7 @@
     <ctuix_panel x="34" y="2" w="30" h="10">
         <ctuix_button x="2" y="2" w="20" h="3" name="BUTTON" id="btn1">CLICK</ctuix_button>
     </ctuix_panel>
-    <ctuix_selection_box x="2" y="14" w="30" h="10">
+    <ctuix_selection_box x="2" y="14" w="30" h="10" name="ITEM LIST">
         <ctuix_item>RED</ctuix_item>
         <ctuix_item>GREEN</ctuix_item>
         <ctuix_item>BLUE</ctuix_item>
