@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE ctuix_panel SYSTEM "ctuix.dtd">
+<!DOCTYPE ctuix SYSTEM "ctuix.dtd">
 
 <ctuix>
     <ctuix_panel x="2" y="2" w="30" h="10" name="PANEL">
@@ -11,5 +11,5 @@
     <ctuix_panel x="34" y="2" w="30" h="10">
         <ctuix_button x="2" y="2" w="20" h="3" name="BUTTON" id="btn2">CLICK</ctuix_button>
     </ctuix_panel>
-    <!-- <ctuix_entry x="34" y="2" w="30" h="10"></ctuix_entry> -->
+    <ctuix_entry x="2" y="14" w="30" h="5" name="ENTRY"></ctuix_entry>
 </ctuix>

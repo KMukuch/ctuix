@@ -1,19 +1,16 @@
-<!ELEMENT ctuix (ctuix_panel | ctuix_selection_box | ctuix_scroll_panel)+>
+<!ELEMENT ctuix (#PCDATA | ctuix_panel | ctuix_selection_box | ctuix_scroll_panel | ctuix_entry | ctuix_label)*>
 
 <!ELEMENT ctuix_panel (ctuix_label | ctuix_button | ctuix_entry | ctuix_panel | ctuix_selection_box | ctuix_scroll_panel)*>
 <!ELEMENT ctuix_selection_box (ctuix_item+)>
-<!ELEMENT ctuix_scroll_panel (ctuix_label | ctuix_button | ctuix_entry | ctuix_panel | ctuix_selection_box | ctuix_scroll_panel)*>
-
+<!ELEMENT ctuix_scroll_panel (#PCDATA)>
 <!ELEMENT ctuix_item (#PCDATA)>
-
 <!ELEMENT ctuix_label (#PCDATA)>
 <!ELEMENT ctuix_button (#PCDATA)>
-<!ELEMENT ctuix_entry EMPTY>
+<!ELEMENT ctuix_entry (#PCDATA)>
 
 <!ATTLIST ctuix_panel layout (grid | horizontal | vertical) "vertical" x CDATA #REQUIRED y CDATA #REQUIRED w CDATA #REQUIRED h CDATA #REQUIRED user_input (true | false) "false" name CDATA #IMPLIED>
 <!ATTLIST ctuix_selection_box layout (horizontal | vertical) "vertical" x CDATA #REQUIRED y CDATA #REQUIRED w CDATA #REQUIRED h CDATA #REQUIRED user_input (true | false) "false" name CDATA #IMPLIED>
 <!ATTLIST ctuix_scroll_panel layout (horizontal | vertical) "vertical" x CDATA #REQUIRED y CDATA #REQUIRED w CDATA #REQUIRED h CDATA #REQUIRED user_input (true | false) "false" name CDATA #IMPLIED>
-
 <!ATTLIST ctuix_label x CDATA #REQUIRED y CDATA #REQUIRED name CDATA #IMPLIED>
 <!ATTLIST ctuix_button x CDATA #REQUIRED y CDATA #REQUIRED w CDATA #REQUIRED h CDATA #REQUIRED user_input (true | false) "false" name CDATA #IMPLIED>
 <!ATTLIST ctuix_entry x CDATA #REQUIRED y CDATA #REQUIRED w CDATA #REQUIRED h CDATA #REQUIRED name CDATA #IMPLIED>

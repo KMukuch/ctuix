@@ -38,7 +38,6 @@ char** ctuix_wrap_value(CTUIX_Node *ctuix_node)
     {
         int width = ctuix_node->w - 2;
         int start = 0;
-        int pos = start;
         int len = strlen(text);
         
         for (int i = 0; i < max_lines && start < len; i++)

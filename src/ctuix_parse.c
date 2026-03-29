@@ -118,8 +118,8 @@ static void _set_fnc_pointer(CTUIX_Node *ctuix_node)
     }
     else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ENTRY)
     {
-        ctuix_node->draw = NULL;
-        ctuix_node->key_handler = NULL;
+        ctuix_node->draw = ctuix_draw_entry;
+        ctuix_node->key_handler = ctuix_key_handler_entry;
     }
     else
     {
@@ -143,8 +143,8 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     xmlChar *node_h = xmlGetProp(xml_node, BAD_CAST "h");
     xmlChar *node_name = xmlGetProp(xml_node, BAD_CAST "name");
     xmlChar *node_type = xmlStrdup(xml_node->name);
-    xmlChar* node_content = xmlNodeGetContent(xml_node);
-    xmlChar* node_id = xmlGetProp(xml_node, BAD_CAST "id");
+    xmlChar *node_content = xmlNodeGetContent(xml_node);
+    xmlChar *node_id = xmlGetProp(xml_node, BAD_CAST "id");
     
     if(node_x) x = atoi((char *)node_x);
     if(node_y) y = atoi((char *)node_y);
@@ -226,7 +226,7 @@ static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)
 
 CTUIX_Manager* ctuix_parse(char *file_path)
 {
-    xmlDoc *xml_doc = xmlReadFile(file_path, NULL, XML_PARSE_DTDLOAD);
+    xmlDoc *xml_doc = xmlReadFile(file_path, NULL, XML_PARSE_DTDLOAD | XML_PARSE_DTDVALID);
     if(!xml_doc)
     {
         return NULL;

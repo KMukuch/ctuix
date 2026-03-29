@@ -7,6 +7,8 @@
 #include <string.h>
 #include <ncurses.h>
 
+#define MAX_ENTRY 256
+
 typedef enum
 {
     CTUIX_ELEMENT_ERROR = -1,
@@ -56,6 +58,9 @@ typedef struct CTUIX_Node
     char* value;
     char* id;
 
+    char buffer[MAX_ENTRY];
+    int cursor_x;
+    
     void (*draw)(struct CTUIX_Node*);
     struct CTUIX_Node* (*key_handler)(struct CTUIX_Node* ctuix_node, int* ch);
 

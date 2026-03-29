@@ -55,6 +55,7 @@ void ctuix_draw_panel(CTUIX_Node *ctuix_node)
         {
             wattron(ctuix_node->window, A_REVERSE);
             box(ctuix_node->window, 0, 0);
+            wattroff(ctuix_node->window, A_REVERSE);
         }
         else
         {
@@ -218,20 +219,36 @@ void ctuix_draw_button(CTUIX_Node *ctuix_node)
 
 void ctuix_draw_entry(CTUIX_Node *ctuix_node)
 {
-    // if(!ctuix_node) return;
+    if(!ctuix_node) return;
 
-    // if(!ctuix_node->window)
-    // {
-    //     ctuix_node->window = derwin(ctuix_node->parent->window, 1, strlen(ctuix_node->value), ctuix_node->y, ctuix_node->x);
-    // }
+    if(!ctuix_node->window)
+    {
+        ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
+    }
     
-    // if(ctuix_node->parent->window)
-    // {
-    //     mvwprintw(ctuix_node->window, 0, 0, "%s", ctuix_node->value);
-    //     wrefresh(ctuix_node->window);
-    // }
+    if(ctuix_node->window)
+    {
+        keypad(ctuix_node->window, TRUE);
+        werase(ctuix_node->window);
+        if(ctuix_node->active)
+        {
+            wattron(ctuix_node->window, A_REVERSE);
+            box(ctuix_node->window, 0, 0);
+            wattroff(ctuix_node->window, A_REVERSE);
+        }
+        else
+        {
+            wattroff(ctuix_node->window, A_REVERSE);
+            box(ctuix_node->window, 0, 0);
+        }
+        if(ctuix_node->name)
+        {
+            mvwprintw(ctuix_node->window, 0, 1, "%s", ctuix_node->name);
+        }
+        mvwprintw(ctuix_node->window, 1, 1, "%s", ctuix_node->buffer);
+        wrefresh(ctuix_node->window);
+    }
 }
-
 
 void ctuix_draw_tree(CTUIX_Node *ctuix_node)
 {

@@ -166,3 +166,31 @@ CTUIX_Node* ctuix_key_handler_button(CTUIX_Node *ctuix_node, int *ch)
 
     return ctuix_node;
 }
+
+CTUIX_Node* ctuix_key_handler_entry(CTUIX_Node *ctuix_node, int *ch)
+{
+    *ch = wgetch(ctuix_node->window);
+    if(*ch == '\t')
+    {
+        CTUIX_Node *current_active = ctuix_node;
+        CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
+        current_active->active = false;
+        next_node->active = true;
+        ctuix_draw_tree(current_active);
+        ctuix_draw_tree(next_node);
+
+        return next_node;
+    }
+    else if(*ch == '\n' || *ch == '\r' || *ch == KEY_ENTER)
+    {
+        ctuix_node->node_event = ctuix_node->on_click(ctuix_node, 0);
+    }
+    else
+    {
+        size_t len = strlen(ctuix_node->buffer);
+        snprintf(ctuix_node->buffer + len, sizeof(ctuix_node->buffer) - len, "%c", wgetch(ctuix_node->window));
+        ctuix_draw_tree(ctuix_node);
+    }
+
+    return ctuix_node;
+}
