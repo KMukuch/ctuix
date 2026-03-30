@@ -102,9 +102,9 @@ The library provides a function to catch errors:
 void ctuix_error_show(const char *title, const char *message);
 ```
 
-The function stops **ncurses* and prints a titled error message, and waits for the user to press Enter before restoring the UI. It is suitable for non‑critical errors.
+The function stops **ncurses** and prints a titled error message, and waits for the user to press Enter before restoring the UI. It is suitable for non‑critical errors.
 
-## Core loop
+## Core
 
 The main function that user must call in order to run the UI is:
 
@@ -112,17 +112,26 @@ The main function that user must call in order to run the UI is:
 int ctuix_run(CTUIX_Manager *ctuix_manager);
 ```
 
-The ctuix_run function starts the main event loop for a given UI manager (or head UI manager in case of multiple XML files). It first draws the initial window tree, then repeatedly waits for user input, processes key events (including tab navigation and button activation), and handles any generated events (such as loading another UI screen). The loop continues until the user presses 'q' or an event triggers an exit. The function returns 1 upon normal termination.
+The ctuix_run function starts the main event loop for a given UI manager (or head UI manager in case of multiple XML files). It first draws the initial window tree, then repeatedly waits for user input, processes key events (including tab navigation and button activation), and handles any generated events (such as loading another UI screen). The loop continues until the user presses `q` or an event triggers an exit. The function returns `1` upon normal termination.
 
-## Program exit (cleaning the allocated resources)
+## Exit
 
 To end the program properly we need to clean all the resources used by **ncurses**, **libxml** and **ctuix**.
 
-- `void ctuix_end(void)` – restores the terminal to its original state after ncurses mode was activated. It must be called before your program exits to avoid leaving the terminal in an unusable state.
+```c
+void ctuix_end(void)
+````
+restores the terminal to its original state after ncurses mode was activated. It must be called before your program exits to avoid leaving the terminal in an unusable state.
 
-`void ctuix_delete(CTUIX_Manager *ctuix_manager)` – frees all memory associated with the given UI manager, including its window tree, node names, values, and identifiers. It also recursively destroys any child windows. Call this when you no longer need a particular UI screen to prevent memory leaks.
+```c
+void ctuix_delete(CTUIX_Manager *ctuix_manager)
+```
+frees all memory associated with the given UI manager, including its window tree, node names, values, and identifiers. It also recursively destroys any child windows. Call this when you no longer need a particular UI screen to prevent memory leaks.
 
-- `void ctuix_cleanup(void)` – releases internal resources used by libxml2. It should be invoked after all XML parsing is finished and before the program terminates. This is especially important when multiple XML files are processed.
+```c
+void ctuix_cleanup(void)
+```
+releases internal resources used by libxml2. It should be invoked after all XML parsing is finished and before the program terminates. This is especially important when multiple XML files are processed.
 
 # Event system
 
