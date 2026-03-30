@@ -1,5 +1,7 @@
 #TODO
 
+- replace or delete unused bool in node
+
 - error checks
 
 - scroll panel
