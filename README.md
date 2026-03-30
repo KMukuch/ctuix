@@ -154,6 +154,20 @@ void ctuix_cleanup(void)
 ```
 releases internal resources used by libxml2. It should be invoked after all XML parsing is finished and before the program terminates. This is especially important when multiple XML files are processed.
 
+# Navigation
+
+CTUIX uses a simple set of keyboard controls for navigation and interaction:
+
+- `Tab` Move focus to the next focusable element (buttons, entries, selection boxes, panels)
+
+- `Enter / Return`	Activate the focused button or submit the focused entry field
+
+- `Arrow UP`	Move selection up in a selection box or scroll up in a scroll panel
+
+- `Arrow DOWN`	Move selection down in a selection box or scroll down in a scroll panel
+
+- `q` Quit the current UI screen and exit the main loop
+
 # Event system
 
 The event system in CTUIX is very simple and is designed to handle user interactions and transitions between different UI screens (XML files).
@@ -213,7 +227,7 @@ To build the demo file run in `build`foler:
 make demo
 ```
 
-See `data` and `demo` folders
+See `data` and `demo` folders for more informtation
 
 # Docs
 
