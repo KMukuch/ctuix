@@ -29,6 +29,11 @@ In order to build the library with CMake on a Unix platform, run CMake in the pr
 
 ```c
 cmake -B build
+```
+
+Then run in build folder:
+
+```
 make install
 make demo
 ```

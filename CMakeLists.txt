@@ -29,7 +29,7 @@ set(CTUIX_SOURCES
 # Create library
 add_library(ctuix STATIC ${CTUIX_SOURCES})
 
-# Include paths (PUBLIC = users also need these)
+# Include paths (PUBLIC for users of the library)
 target_include_directories(ctuix PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
@@ -38,6 +38,8 @@ target_include_directories(ctuix PUBLIC
 # Private includes for your code only
 target_include_directories(ctuix PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${LIBXML2_INCLUDE_DIRS}
+    ${NCURSES_INCLUDE_DIRS}
 )
 
 # Link dependencies
