@@ -1,3 +1,7 @@
+# License
+
+
+
 # Description
 
 A C library for building **event driven TUI programs** on UNIX-like systems (macOS, Linux, etc.) using XML
@@ -189,10 +193,7 @@ The event system is stiill in development and `CTUIX_EVENT_QUIT` and `CTUIX_EVEN
 
 # Example
 
-
-
-# Demo
-
+see `data` and `demo` folders
 
 # Docs
 
