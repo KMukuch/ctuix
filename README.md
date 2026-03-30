@@ -23,6 +23,16 @@ The easiest way to install the library is to download the source code and run th
 
 In order to build the library you need **ncurses** and **libxml** already installed on your system. If the dependancies are not installed the cmake will output an error.
 
+## CMake
+
+In order to build cJSON with CMake on a Unix platform, make a build directory and run CMake inside it:
+
+```c
+cmake -B build
+make install
+make demo
+```
+
 # Data structure
 
 CTUIX represents XML files using `CTUIX_Node` and `CTUIX_Manager` struct data type:
