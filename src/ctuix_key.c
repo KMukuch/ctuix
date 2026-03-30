@@ -183,13 +183,26 @@ CTUIX_Node* ctuix_key_handler_entry(CTUIX_Node *ctuix_node, int *ch)
     }
     else if(*ch == '\n' || *ch == '\r' || *ch == KEY_ENTER)
     {
-        ctuix_node->node_event = ctuix_node->on_click(ctuix_node, 0);
-    }
-    else
-    {
-        size_t len = strlen(ctuix_node->buffer);
-        snprintf(ctuix_node->buffer + len, sizeof(ctuix_node->buffer) - len, "%c", wgetch(ctuix_node->window));
-        ctuix_draw_tree(ctuix_node);
+        *ch = wgetch(ctuix_node->window);
+        while(*ch != '\n' && *ch != '\r' && *ch != KEY_ENTER)
+        {
+            *ch = wgetch(ctuix_node->window);
+            if(*ch == '\b' || *ch == KEY_BACKSPACE || *ch == KEY_DC || *ch == 127)
+            {
+                size_t len = strlen(ctuix_node->buffer);
+                if(len > 0)
+                {
+                    ctuix_node->buffer[len - 1] = '\0';
+                    ctuix_draw_tree(ctuix_node);
+                }
+            }
+            else
+            {
+                size_t len = strlen(ctuix_node->buffer);
+                snprintf(ctuix_node->buffer + len, sizeof(ctuix_node->buffer) - len, "%c", *ch);
+                ctuix_draw_tree(ctuix_node);
+            }
+        }
     }
 
     return ctuix_node;

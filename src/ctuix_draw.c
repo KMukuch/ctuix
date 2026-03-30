@@ -230,6 +230,7 @@ void ctuix_draw_entry(CTUIX_Node *ctuix_node)
     {
         keypad(ctuix_node->window, TRUE);
         werase(ctuix_node->window);
+        mvwprintw(ctuix_node->window, 1, 1, "%s", ctuix_node->buffer);
         if(ctuix_node->active)
         {
             wattron(ctuix_node->window, A_REVERSE);
@@ -245,7 +246,6 @@ void ctuix_draw_entry(CTUIX_Node *ctuix_node)
         {
             mvwprintw(ctuix_node->window, 0, 1, "%s", ctuix_node->name);
         }
-        mvwprintw(ctuix_node->window, 1, 1, "%s", ctuix_node->buffer);
         wrefresh(ctuix_node->window);
     }
 }
