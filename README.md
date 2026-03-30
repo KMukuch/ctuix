@@ -193,4 +193,4 @@ The event system is stiill in development and `CTUIX_EVENT_QUIT` and `CTUIX_EVEN
 
 # Docs
 
-For developer documentation (docs/private) and public API (docs/public) details see the Doxygen-generated HTML files.
+For developer documentation (docs/private) and public API details (docs/public) see the Doxygen-generated HTML files.
