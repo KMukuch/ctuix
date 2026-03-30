@@ -31,11 +31,10 @@ In order to build the library with CMake on a Unix platform, run CMake in the pr
 cmake -B build
 ```
 
-Then run in build folder:
+Then run in `build` folder:
 
 ```
 make install
-make demo
 ```
 
 # Data structure
@@ -208,7 +207,13 @@ The event system is stiill in development and `CTUIX_EVENT_QUIT` and `CTUIX_EVEN
 
 # Example
 
-see `data` and `demo` folders
+To build the demo file run in `build`foler:
+
+```c
+make demo
+```
+
+See `data` and `demo` folders
 
 # Docs
 
