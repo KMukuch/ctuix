@@ -156,7 +156,7 @@ releases internal resources used by libxml2. It should be invoked after all XML 
 
 # Navigation
 
-CTUIX uses a simple set of keyboard controls for navigation and interaction:
+CTUIX uses a simple set of keyboard controls for navigation and interaction. The navigation is **case sensetive**:
 
 - `Tab` Move focus to the next focusable element (buttons, entries, selection boxes, panels)
 
