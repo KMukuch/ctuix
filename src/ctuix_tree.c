@@ -57,6 +57,8 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int 
     ctuix_node->draw = NULL;
     ctuix_node->key_handler = NULL;
 
+    ctuix_node->on_click = NULL;
+
     ctuix_node->parent = NULL;
     ctuix_node->children = NULL;
     ctuix_node->next = NULL;

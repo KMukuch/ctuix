@@ -1,6 +1,7 @@
 build/
 build-asan/
-docs/
+Doxyfile
+TODO.md
 .DS_Store
 .vscode
 *.a

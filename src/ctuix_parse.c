@@ -229,6 +229,7 @@ CTUIX_Manager* ctuix_parse(char *file_path)
     xmlDoc *xml_doc = xmlReadFile(file_path, NULL, XML_PARSE_DTDLOAD | XML_PARSE_DTDVALID);
     if(!xml_doc)
     {
+        ctuix_error_show("Error", "File not parsed!");
         return NULL;
     }
 
@@ -265,10 +266,6 @@ CTUIX_Manager* ctuix_parse_multiple(char **file_path_array, int count)
                 ctuix_manager->previous = tail;
                 tail = ctuix_manager;
             }
-        }
-        else
-        {
-            ctuix_error_show("Error", "File not parsed!");
         }
     }
     return head;
