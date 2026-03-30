@@ -25,7 +25,7 @@ In order to build the library you need **ncurses** and **libxml** already instal
 
 ## CMake
 
-In order to build cJSON with CMake on a Unix platform, make a build directory and run CMake inside it:
+In order to build the library with CMake on a Unix platform, run CMake in the project directory:
 
 ```c
 cmake -B build
