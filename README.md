@@ -144,8 +144,8 @@ Events are defined by the `CTUIX_Event_Type` enumeration:
 ```c
 typedef enum
 {
-    CTUIX_EVENT_NONE, //default, no event
-    CTUIX_EVENT_QUIT, //exit the application
+    CTUIX_EVENT_NONE, // default, no event
+    CTUIX_EVENT_QUIT, // exit the application
     CTUIX_EVENT_SUBMIT, // submit user data
     CTUIX_EVENT_LOAD // load new XML file
 } CTUIX_Event_Type;
@@ -157,7 +157,7 @@ Each event is represented by the `CTUIX_Event` struct:
 typedef struct CTUIX_Event
 {
     CTUIX_Event_Type ctuix_event_type;
-    void *user_data; //a pointer to user defined data (file path)
+    void *user_data; // pointer to user defined data (file path)
 } CTUIX_Event;
 ```
 
@@ -176,7 +176,7 @@ CTUIX_Event my_button_callback(CTUIX_Node *button_node, void *user_data)
 {
     // Create an event of the desired type
     CTUIX_Event event;
-    event.ctuix_event_type = CTUIX_EVENT_LOAD; // for example
+    event.ctuix_event_type = CTUIX_EVENT_LOAD; // example
     event.user_data = (void *)"other_screen.xml"; // file path to load
     return event;
 }
