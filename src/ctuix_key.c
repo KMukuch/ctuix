@@ -199,8 +199,11 @@ CTUIX_Node* ctuix_key_handler_entry(CTUIX_Node *ctuix_node, int *ch)
             else
             {
                 size_t len = strlen(ctuix_node->buffer);
-                snprintf(ctuix_node->buffer + len, sizeof(ctuix_node->buffer) - len, "%c", *ch);
-                ctuix_draw_tree(ctuix_node);
+                if(len < ctuix_node->visible)
+                {
+                    snprintf(ctuix_node->buffer + len, sizeof(ctuix_node->buffer) - len, "%c", *ch);
+                    ctuix_draw_tree(ctuix_node);
+                }
             }
         }
     }

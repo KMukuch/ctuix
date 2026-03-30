@@ -193,6 +193,10 @@ static void _set_default(CTUIX_Node *ctuix_node)
                 child = child->next;
             }
         }
+        else if(current_node->ctuix_element_type == CTUIX_ELEMENT_ENTRY)
+        {
+            current_node->visible = (current_node->h - 2) * (current_node->w - 2);
+        }
         current_node = current_node->next;
     }
     _set_default(ctuix_node->next);
