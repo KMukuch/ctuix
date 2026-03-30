@@ -8,6 +8,9 @@ The library helps to avoid the frustration with **ncurses** and **libxml**, whic
 
 The library is in early development and should be considered a work in progress.
 
+This project was has purely educational purposes. It began while I was developing a text based game and needed a simple library to handle the output.
+This project serves as a personal foundation for understanding how UI systems work.
+
 # Building
 
 The easiest way to install the library is to download the source code and run the cmake file. It installs the static library on your system and lets you also build some demo files.
