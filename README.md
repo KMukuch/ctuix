@@ -2,7 +2,7 @@
 
 A C library for building **event driven TUI programs** on UNIX-like systems (macOS, Linux, etc.) using XML
 
-The library helps to avoid the frustration with **ncurses** and **libxml**, which can be difficult to learn, and helps to create user friendly TUIs embed in C code.
+The library helps to avoid the frustration with **ncurses** and **libxml**, which can be difficult to learn, and helps to create user-friendly TUIs embedded in C code.
 
 # Disclaimer
 
