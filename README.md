@@ -8,7 +8,7 @@ The library helps to avoid the frustration with **ncurses** and **libxml**, whic
 
 The library is in early development and should be considered a work in progress.
 
-This project was has purely educational purposes. It began while I was developing a text based game and needed a simple library to handle the output.
+This project has purely educational purposes. It began while I was developing a text based game and needed a simple library to handle the output.
 This project serves as a personal foundation for understanding how UI systems work.
 
 # Building
