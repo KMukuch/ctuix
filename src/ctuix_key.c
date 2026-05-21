@@ -15,11 +15,14 @@ CTUIX_Node* ctuix_key_handler_root(CTUIX_Node *ctuix_node, int *ch)
     {
         CTUIX_Node *current_active = ctuix_node;
         CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
-        current_active->active = false;
-        next_node->active = true;
-        ctuix_draw_tree(next_node);
+        if(next_node)
+        {
+            current_active->active = false;
+            next_node->active = true;
+            ctuix_draw_tree(next_node);
 
-        return next_node;
+            return next_node;
+        }
     }
 
     return ctuix_node;
@@ -32,12 +35,15 @@ CTUIX_Node* ctuix_key_handler_panel(CTUIX_Node *ctuix_node, int *ch)
     {
         CTUIX_Node *current_active = ctuix_node;
         CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
-        current_active->active = false;
-        next_node->active = true;
-        ctuix_draw_tree(current_active);
-        ctuix_draw_tree(next_node);
-        
-        return next_node;
+        if(next_node)
+        {
+            current_active->active = false;
+            next_node->active = true;
+            ctuix_draw_tree(current_active);
+            ctuix_draw_tree(next_node);
+            
+            return next_node;
+        }
     }
 
     return ctuix_node;
@@ -50,12 +56,15 @@ CTUIX_Node* ctuix_key_handler_selection_box(CTUIX_Node *ctuix_node, int *ch)
     {
         CTUIX_Node *current_active = ctuix_node;
         CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
-        current_active->active = false;
-        next_node->active = true;
-        ctuix_draw_tree(current_active);
-        ctuix_draw_tree(next_node);
+        if(next_node)
+        {
+            current_active->active = false;
+            next_node->active = true;
+            ctuix_draw_tree(current_active);
+            ctuix_draw_tree(next_node);
 
-        return next_node;
+            return next_node;
+        }
     }
     else if(*ch == KEY_DOWN)
     {
@@ -98,12 +107,15 @@ CTUIX_Node* ctuix_key_handler_item(CTUIX_Node *ctuix_node, int *ch)
     {
         CTUIX_Node *current_active = ctuix_node->parent;
         CTUIX_Node *next_node = ctuix_select_next_window(current_active);
-        current_active->active = false;
-        next_node->active = true;
-        ctuix_draw_tree(current_active);
-        ctuix_draw_tree(next_node);
+        if(next_node)
+        {
+            current_active->active = false;
+            next_node->active = true;
+            ctuix_draw_tree(current_active);
+            ctuix_draw_tree(next_node);
 
-        return next_node;
+            return next_node;
+        }
     }
 
     return ctuix_node;
@@ -134,12 +146,15 @@ CTUIX_Node* ctuix_key_handler_scroll_panel(CTUIX_Node *ctuix_node, int *ch)
     {
         CTUIX_Node *current_active = ctuix_node;
         CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
-        current_active->active = false;
-        next_node->active = true;
-        ctuix_draw_tree(current_active);
-        ctuix_draw_tree(next_node);
+        if(next_node)
+        {
+            current_active->active = false;
+            next_node->active = true;
+            ctuix_draw_tree(current_active);
+            ctuix_draw_tree(next_node);
 
-        return next_node;
+            return next_node;
+        }
     }
 
     return ctuix_node;
@@ -152,16 +167,22 @@ CTUIX_Node* ctuix_key_handler_button(CTUIX_Node *ctuix_node, int *ch)
     {
         CTUIX_Node *current_active = ctuix_node;
         CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
-        current_active->active = false;
-        next_node->active = true;
-        ctuix_draw_tree(current_active);
-        ctuix_draw_tree(next_node);
+        if(next_node)
+        {
+            current_active->active = false;
+            next_node->active = true;
+            ctuix_draw_tree(current_active);
+            ctuix_draw_tree(next_node);
 
-        return next_node;
+            return next_node;
+        }
     }
     else if(*ch == '\n' || *ch == '\r' || *ch == KEY_ENTER)
     {
-        ctuix_node->node_event = ctuix_node->on_click(ctuix_node, 0);
+        if (ctuix_node->on_click)
+        {
+            ctuix_node->node_event = ctuix_node->on_click(ctuix_node, 0);
+        }
     }
 
     return ctuix_node;
