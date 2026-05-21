@@ -60,5 +60,5 @@ CTUIX_Node* ctuix_select_next_window(CTUIX_Node *ctuix_node)
         root = root->parent;
     }
 
-    return ctuix_select_next_window(root);
+    return root;
 }
