@@ -6,7 +6,7 @@
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
 
-CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id)
+CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Element_Units ctuix_element_x_units, CTUIX_Element_Units ctuix_element_y_units, CTUIX_Element_Units ctuix_element_w_units, CTUIX_Element_Units ctuix_element_h_units, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id)
 {
     CTUIX_Node *ctuix_node = malloc(sizeof(CTUIX_Node));
     if(!ctuix_node)
@@ -18,6 +18,10 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Eleme
     ctuix_node->ctuix_element_type = ctuix_element_type;
     ctuix_node->ctuix_element_x_alignment = ctuix_element_x_alignment;
     ctuix_node->ctuix_element_y_alignment = ctuix_element_y_alignment;
+    ctuix_node->ctuix_element_y_units = ctuix_element_y_units;
+    ctuix_node->ctuix_element_x_units = ctuix_element_x_units;
+    ctuix_node->ctuix_element_h_units = ctuix_element_h_units;
+    ctuix_node->ctuix_element_w_units = ctuix_element_w_units;
     ctuix_node->x = x;
     ctuix_node->y = y;
     ctuix_node->w = w;

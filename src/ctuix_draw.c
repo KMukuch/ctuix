@@ -46,6 +46,18 @@ void ctuix_draw_panel(CTUIX_Node *ctuix_node)
     {
         int max_y, max_x;
         getmaxyx(ctuix_node->parent->window, max_y, max_x);
+
+        if(ctuix_node->ctuix_element_w_units == CTUIX_ELEMENT_UNITS_VW)
+        {
+            int vw = max_x * ctuix_node->w / 100;
+            ctuix_node->w = vw;
+        }
+        if(ctuix_node->ctuix_element_h_units == CTUIX_ELEMENT_UNITS_VH)
+        {
+            int vh = max_y * ctuix_node->h / 100;
+            ctuix_node->h = vh;
+        }
+        
         if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
         {
             ctuix_node->x = (max_x - ctuix_node->w) / 2;
@@ -211,7 +223,7 @@ void ctuix_draw_label(CTUIX_Node *ctuix_node)
         getmaxyx(ctuix_node->parent->window, max_y, max_x);
         if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
         {
-            ctuix_node->x = (max_x - ctuix_node->w) / 2;
+            ctuix_node->x = (max_x - strlen(ctuix_node->value)) / 2;
         }
         if(ctuix_node->ctuix_element_y_alignment == CTUIX_ELEMENT_Y_ALIGNMENT_CENTER)
         {

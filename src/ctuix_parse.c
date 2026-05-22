@@ -159,6 +159,11 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     char* content_copy = NULL;
     char* id_copy = NULL;
 
+    CTUIX_Element_Units ctuix_element_y_units = CTUIX_ELEMENT_UNITS_AUTO;
+    CTUIX_Element_Units ctuix_element_x_units = CTUIX_ELEMENT_UNITS_AUTO;
+    CTUIX_Element_Units ctuix_element_h_units = CTUIX_ELEMENT_UNITS_AUTO;
+    CTUIX_Element_Units ctuix_element_w_units = CTUIX_ELEMENT_UNITS_AUTO;
+
     CTUIX_Node *ctuix_node;
     
     xmlChar *node_x = xmlGetProp(xml_node, BAD_CAST "x");
@@ -172,16 +177,48 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     xmlChar *node_content = xmlNodeGetContent(xml_node);
     xmlChar *node_id = xmlGetProp(xml_node, BAD_CAST "id");
     
-    if(node_x) x = atoi((char *)node_x);
-    if(node_y) y = atoi((char *)node_y);
-    if(node_w) w = atoi((char *)node_w);
-    if(node_h) h = atoi((char *)node_h);
+    if(node_x)
+    {
+        // if(strstr(node_x, "vw"))
+        // {
+        //     ctuix_element_x_units = CTUIX_ELEMENT_UNITS_VW;
+        // }
+        
+        x = atoi((char *)node_x);
+    }
+    if(node_y) 
+    {
+        // if(strstr(node_y, "vw"))
+        // {
+        //     ctuix_element_y_units = CTUIX_ELEMENT_UNITS_VW;
+        // }
+        
+        y = atoi((char *)node_y);
+    }
+    if(node_w) 
+    {
+        if(strstr((char *)node_w, "vw"))
+        {
+            ctuix_element_w_units = CTUIX_ELEMENT_UNITS_VW;
+        }
+        
+        w = atoi((char *)node_w);
+    }
+    if(node_h) 
+    {
+        if(strstr((char *)node_h, "vh"))
+        {
+            ctuix_element_h_units = CTUIX_ELEMENT_UNITS_VH;
+        }
+        
+        h = atoi((char *)node_h);
+    }
     
     if(node_name) name_copy = strdup((char*)node_name);
     if(node_content) content_copy = strdup((char*)node_content);
     if(node_id) id_copy = strdup((char*)node_id);
 
-    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), _get_ctuix_element_x_alignment(node_x_alignment), _get_ctuix_element_y_alignment(node_y_alignment), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy, id_copy);
+    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), ctuix_element_x_units, ctuix_element_y_units, ctuix_element_w_units, ctuix_element_h_units, _get_ctuix_element_x_alignment(node_x_alignment), _get_ctuix_element_y_alignment(node_y_alignment), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy, id_copy);
     _set_fnc_pointer(ctuix_node);
 
     if(node_x) xmlFree(node_x);
