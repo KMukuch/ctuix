@@ -2,7 +2,7 @@
 <!DOCTYPE ctuix SYSTEM "ctuix.dtd">
 
 <ctuix>
-    <ctuix_panel x-alignment="center" y-alignment="center" w="30" h="10" name="PANEL">
+    <ctuix_panel x-alignment="center" y-alignment="center" w="50vw" h="50vh" name="PANEL">
         <ctuix_label x="2" y="2">LABEL</ctuix_label>
         <ctuix_panel x="2" y="4" w="10" h="5" name="PANEL">
         
