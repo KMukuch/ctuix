@@ -77,6 +77,30 @@ static CTUIX_Element_Type _get_ctuix_element_type(xmlChar *node_type)
     }
 }
 
+static CTUIX_Element_X_Alignment _get_ctuix_element_x_alignment(xmlChar *x_alignment)
+{
+    if(xmlStrcmp(x_alignment, BAD_CAST "center") == 0)
+    {
+        return CTUIX_ELEMENT_X_ALIGNMENT_CENTER;
+    }
+    else
+    {
+        return CTUIX_ELEMENT_X_ALIGNMENT_AUTO;
+    }
+}
+
+static CTUIX_Element_Y_Alignment _get_ctuix_element_y_alignment(xmlChar *y_alignment)
+{
+    if(xmlStrcmp(y_alignment, BAD_CAST "center") == 0)
+    {
+        return CTUIX_ELEMENT_Y_ALIGNMENT_CENTER;
+    }
+    else
+    {
+        return CTUIX_ELEMENT_Y_ALIGNMENT_AUTO;
+    }
+}
+
 static void _set_fnc_pointer(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
@@ -143,6 +167,8 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     xmlChar *node_h = xmlGetProp(xml_node, BAD_CAST "h");
     xmlChar *node_name = xmlGetProp(xml_node, BAD_CAST "name");
     xmlChar *node_type = xmlStrdup(xml_node->name);
+    xmlChar *node_x_alignment = xmlGetProp(xml_node, BAD_CAST "x-alignment");
+    xmlChar *node_y_alignment = xmlGetProp(xml_node, BAD_CAST "y-alignment");
     xmlChar *node_content = xmlNodeGetContent(xml_node);
     xmlChar *node_id = xmlGetProp(xml_node, BAD_CAST "id");
     
@@ -155,7 +181,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_content) content_copy = strdup((char*)node_content);
     if(node_id) id_copy = strdup((char*)node_id);
 
-    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy, id_copy);
+    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), _get_ctuix_element_x_alignment(node_x_alignment), _get_ctuix_element_y_alignment(node_y_alignment), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy, id_copy);
     _set_fnc_pointer(ctuix_node);
 
     if(node_x) xmlFree(node_x);

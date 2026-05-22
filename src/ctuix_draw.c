@@ -44,6 +44,17 @@ void ctuix_draw_panel(CTUIX_Node *ctuix_node)
 
     if(!ctuix_node->window)
     {
+        int max_y, max_x;
+        getmaxyx(ctuix_node->parent->window, max_y, max_x);
+        if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
+        {
+            ctuix_node->x = (max_x - ctuix_node->w) / 2;
+        }
+        if(ctuix_node->ctuix_element_y_alignment == CTUIX_ELEMENT_Y_ALIGNMENT_CENTER)
+        {
+            ctuix_node->y = (max_y - ctuix_node->h) / 2;
+        }
+            
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
     }
     
@@ -76,6 +87,17 @@ void ctuix_draw_selection_box(CTUIX_Node *ctuix_node)
     
     if(!ctuix_node->window)
     {
+        int max_y, max_x;
+        getmaxyx(ctuix_node->parent->window, max_y, max_x);
+        if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
+        {
+            ctuix_node->x = (max_x - ctuix_node->w) / 2;
+        }
+        if(ctuix_node->ctuix_element_y_alignment == CTUIX_ELEMENT_Y_ALIGNMENT_CENTER)
+        {
+            ctuix_node->y = (max_y - ctuix_node->h) / 2;
+        }
+
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
     }
     if(ctuix_node->window)
@@ -133,6 +155,17 @@ void ctuix_draw_scroll_panel(CTUIX_Node *ctuix_node)
     
     if(!ctuix_node->window)
     {
+        int max_y, max_x;
+        getmaxyx(ctuix_node->parent->window, max_y, max_x);
+        if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
+        {
+            ctuix_node->x = (max_x - ctuix_node->w) / 2;
+        }
+        if(ctuix_node->ctuix_element_y_alignment == CTUIX_ELEMENT_Y_ALIGNMENT_CENTER)
+        {
+            ctuix_node->y = (max_y - ctuix_node->h) / 2;
+        }
+
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
     }
     if(ctuix_node->window)
@@ -174,6 +207,17 @@ void ctuix_draw_label(CTUIX_Node *ctuix_node)
 
     if(!ctuix_node->window)
     {
+        int max_y, max_x;
+        getmaxyx(ctuix_node->parent->window, max_y, max_x);
+        if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
+        {
+            ctuix_node->x = (max_x - ctuix_node->w) / 2;
+        }
+        if(ctuix_node->ctuix_element_y_alignment == CTUIX_ELEMENT_Y_ALIGNMENT_CENTER)
+        {
+            ctuix_node->y = (max_y - ctuix_node->h) / 2;
+        }
+
         ctuix_node->window = derwin(ctuix_node->parent->window, 1, strlen(ctuix_node->value), ctuix_node->y, ctuix_node->x);
     }
     
@@ -190,6 +234,17 @@ void ctuix_draw_button(CTUIX_Node *ctuix_node)
 
     if(!ctuix_node->window)
     {
+        int max_y, max_x;
+        getmaxyx(ctuix_node->parent->window, max_y, max_x);
+        if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
+        {
+            ctuix_node->x = (max_x - ctuix_node->w) / 2;
+        }
+        if(ctuix_node->ctuix_element_y_alignment == CTUIX_ELEMENT_Y_ALIGNMENT_CENTER)
+        {
+            ctuix_node->y = (max_y - ctuix_node->h) / 2;
+        }
+
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
     }
     
@@ -223,6 +278,17 @@ void ctuix_draw_entry(CTUIX_Node *ctuix_node)
 
     if(!ctuix_node->window)
     {
+        int max_y, max_x;
+        getmaxyx(ctuix_node->parent->window, max_y, max_x);
+        if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
+        {
+            ctuix_node->x = (max_x - ctuix_node->w) / 2;
+        }
+        if(ctuix_node->ctuix_element_y_alignment == CTUIX_ELEMENT_Y_ALIGNMENT_CENTER)
+        {
+            ctuix_node->y = (max_y - ctuix_node->h) / 2;
+        }
+        
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
     }
     

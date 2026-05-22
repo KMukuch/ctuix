@@ -24,6 +24,18 @@ typedef enum
 
 typedef enum
 {
+    CTUIX_ELEMENT_X_ALIGNMENT_AUTO,
+    CTUIX_ELEMENT_X_ALIGNMENT_CENTER
+} CTUIX_Element_X_Alignment;
+
+typedef enum
+{
+    CTUIX_ELEMENT_Y_ALIGNMENT_AUTO,
+    CTUIX_ELEMENT_Y_ALIGNMENT_CENTER
+} CTUIX_Element_Y_Alignment;
+
+typedef enum
+{
     CTUIX_EVENT_NONE,
     CTUIX_EVENT_QUIT,
     CTUIX_EVENT_SUBMIT,
@@ -41,6 +53,8 @@ typedef struct CTUIX_Node
     WINDOW* window;
 
     CTUIX_Element_Type ctuix_element_type;
+    CTUIX_Element_X_Alignment ctuix_element_x_alignment;
+    CTUIX_Element_Y_Alignment ctuix_element_y_alignment;
     
     int x, y;
     int w, h;
@@ -89,7 +103,7 @@ typedef struct CTUIX_Manager
     struct CTUIX_Manager *next;
 } CTUIX_Manager;
 
-CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id);
+CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id);
 CTUIX_Manager* ctuix_manager_create(CTUIX_Node *ctuix_node, char* file_path);
 
 int ctuix_count_children(CTUIX_Node *ctuix_node);
