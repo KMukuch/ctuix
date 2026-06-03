@@ -41,86 +41,72 @@ typedef enum
     CTUIX_ELEMENT_Y_ALIGNMENT_CENTER
 } CTUIX_Element_Y_Alignment;
 
-typedef enum
-{
-    CTUIX_EVENT_NONE,
-    CTUIX_EVENT_QUIT,
-    CTUIX_EVENT_SUBMIT,
-    CTUIX_EVENT_LOAD
-} CTUIX_Event_Type;
-
-typedef struct CTUIX_Event
-{
-    CTUIX_Event_Type ctuix_event_type;
-    void *user_data;
-} CTUIX_Event;
-
 typedef struct CTUIX_Node
 {
-    WINDOW* window;
+    // tree
+    struct CTUIX_Node *parent;
+    struct CTUIX_Node *children;
+    struct CTUIX_Node *next;
 
+    // vtable
+    void (*draw)(CTUIX_Node* ctuix_node);
+    void (*key_handler)(CTUIX_Node* ctuix_node, int* ch);
+
+    // meta
     CTUIX_Element_Type ctuix_element_type;
+
+    char* name;
+    char* id;
+
+    // layout
+    int x;
+    int y;
+    int w;
+    int h;
+    
     CTUIX_Element_Units ctuix_element_y_units;
     CTUIX_Element_Units ctuix_element_x_units;
     CTUIX_Element_Units ctuix_element_h_units;
     CTUIX_Element_Units ctuix_element_w_units;
+
     CTUIX_Element_Y_Alignment ctuix_element_y_alignment;
     CTUIX_Element_X_Alignment ctuix_element_x_alignment;
     
-    int x, y;
-    int w, h;
-    
-    int selected_index;
-    int scroll_offset;
-    int line_count;
-    int visible;
-
+    // flags
     bool focusable;
-    bool input_enabled;
+    bool input;
     bool active;
 
-    char* name;
-    char* value;
-    char* id;
+    // base
+    WINDOW* window;
 
-    char buffer[MAX_ENTRY];
-    int cursor_x;
-    
-    void (*draw)(struct CTUIX_Node*);
-    struct CTUIX_Node* (*key_handler)(struct CTUIX_Node* ctuix_node, int* ch);
-
-    CTUIX_Event (*on_click)(struct CTUIX_Node*, void *user_data);
-    CTUIX_Event node_event;
-
-    struct CTUIX_Node *parent;
-    struct CTUIX_Node *children;
-    struct CTUIX_Node *next;
 } CTUIX_Node;
+
+typedef struct CTUIX_Scene
+{
+    CTUIX_Node* root_node;
+    CTUIX_Node* active_node;
+
+} CTUIX_Scene;
 
 typedef struct CTUIX_Manager
 {
     char* file_name;
-
-    CTUIX_Node* root_node;
-    CTUIX_Node* active_node;
-    
-    CTUIX_Event* current_event;
-    int event_count;
-    void (*event_handler)(struct CTUIX_Manager *ctuix_manager, CTUIX_Event *ctuix_event);
-    
-    int ch;
     
     struct CTUIX_Manager *previous;
     struct CTUIX_Manager *next;
+
+    CTUIX_Scene *ctuix_scene;
+
 } CTUIX_Manager;
 
-CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Element_Units ctuix_element_x_units, CTUIX_Element_Units ctuix_element_y_units, CTUIX_Element_Units ctuix_element_w_units, CTUIX_Element_Units ctuix_element_h_units, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id);
+void ctuix_node_set_meta(CTUIX_Node *ctuix_node, CTUIX_Element_Type ctuix_element_type, char* name, char* id);
+void ctuix_node_set_layout(CTUIX_Node *ctuix_node, CTUIX_Element_Units ctuix_element_x_units, CTUIX_Element_Units ctuix_element_y_units, CTUIX_Element_Units ctuix_element_w_units, CTUIX_Element_Units ctuix_element_h_units, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h);
+void ctuix_node_set_flags(CTUIX_Node *ctuix_node, bool focusable, bool input);
+
 CTUIX_Manager* ctuix_manager_create(CTUIX_Node *ctuix_node, char* file_path);
 
-int ctuix_count_children(CTUIX_Node *ctuix_node);
-
 CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id);
-CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node);
 CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *file_path);
 
 void ctuix_node_free(CTUIX_Node *ctuix_node);

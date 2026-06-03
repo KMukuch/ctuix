@@ -6,33 +6,47 @@
 #include "ctuix_tree.h"
 #include "ctuix_draw.h"
 
-CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Element_Units ctuix_element_x_units, CTUIX_Element_Units ctuix_element_y_units, CTUIX_Element_Units ctuix_element_w_units, CTUIX_Element_Units ctuix_element_h_units, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h, bool focusable, bool input_enabled, char* name, char* value, char* id)
+void ctuix_node_set_flags(CTUIX_Node *ctuix_node, bool focusable, bool input)
 {
-    CTUIX_Node *ctuix_node = malloc(sizeof(CTUIX_Node));
     if(!ctuix_node)
     {
-        return NULL;
+        return;
     }
-    ctuix_node->window = NULL;
-    
-    ctuix_node->ctuix_element_type = ctuix_element_type;
-    ctuix_node->ctuix_element_x_alignment = ctuix_element_x_alignment;
-    ctuix_node->ctuix_element_y_alignment = ctuix_element_y_alignment;
+
+    ctuix_node->focusable = focusable;
+    ctuix_node->input = input;
+}
+
+void ctuix_node_set_layout(CTUIX_Node *ctuix_node, CTUIX_Element_Units ctuix_element_x_units, CTUIX_Element_Units ctuix_element_y_units, CTUIX_Element_Units ctuix_element_w_units, CTUIX_Element_Units ctuix_element_h_units, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h)
+{
+    if(!ctuix_node)
+    {
+        return;
+    }
+
     ctuix_node->ctuix_element_y_units = ctuix_element_y_units;
     ctuix_node->ctuix_element_x_units = ctuix_element_x_units;
     ctuix_node->ctuix_element_h_units = ctuix_element_h_units;
     ctuix_node->ctuix_element_w_units = ctuix_element_w_units;
+    
+    ctuix_node->ctuix_element_x_alignment = ctuix_element_x_alignment;
+    ctuix_node->ctuix_element_y_alignment = ctuix_element_y_alignment;
+    
     ctuix_node->x = x;
     ctuix_node->y = y;
     ctuix_node->w = w;
     ctuix_node->h = h;
-    ctuix_node->selected_index = 0;
-    ctuix_node->scroll_offset = 0;
-    ctuix_node->line_count = 0;
-    ctuix_node->visible = 0;
-    ctuix_node->focusable = focusable;
-    ctuix_node->input_enabled = input_enabled;
-    ctuix_node->active = false;
+}
+
+void ctuix_node_set_meta(CTUIX_Node *ctuix_node, CTUIX_Element_Type ctuix_element_type, char* name, char* id)
+{
+    if(!ctuix_node)
+    {
+        return;
+    }
+
+    ctuix_node->ctuix_element_type = ctuix_element_type;
+
     if(name)
     {
         ctuix_node->name = strdup(name);
@@ -40,15 +54,6 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Eleme
     else
     {
         ctuix_node->name = NULL;
-    }
-    
-    if(value)
-    {
-        ctuix_node->value = strdup(value);
-    }
-    else
-    {
-        ctuix_node->value = NULL;
     }
 
     if(id)
@@ -59,50 +64,18 @@ CTUIX_Node* ctuix_node_create(CTUIX_Element_Type ctuix_element_type, CTUIX_Eleme
     {
         ctuix_node->id = NULL;
     }
-
-    ctuix_node->draw = NULL;
-    ctuix_node->key_handler = NULL;
-
-    ctuix_node->on_click = NULL;
-
-    ctuix_node->parent = NULL;
-    ctuix_node->children = NULL;
-    ctuix_node->next = NULL;
-
-    return ctuix_node;
 }
 
 CTUIX_Manager* ctuix_manager_create(CTUIX_Node *root_node, char *file_path)
 {
-    CTUIX_Manager *ctuix_manager = malloc(sizeof(CTUIX_Manager));
+    CTUIX_Manager *ctuix_manager = calloc(1, sizeof(CTUIX_Manager));
 
     ctuix_manager->file_name = strdup(file_path);;
-
-    ctuix_manager->root_node = root_node;
-    ctuix_manager->active_node = root_node;
-
-    ctuix_manager->current_event = NULL;
-    ctuix_manager->event_count = 0;
-    ctuix_manager->event_handler = NULL;
-
-    ctuix_manager->ch = 0;
 
     ctuix_manager->previous = NULL;
     ctuix_manager->next = NULL;
 
     return ctuix_manager;
-}
-
-int ctuix_count_children(CTUIX_Node *ctuix_node)
-{
-    if (!ctuix_node) return 0;
-    int count = 0;
-    CTUIX_Node *child = ctuix_node->children;
-    while (child) {
-        count++;
-        child = child->next;
-    }
-    return count;
 }
 
 CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id)
@@ -146,30 +119,12 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
     return NULL;
 }
 
-CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node)
-{
-    if(!ctuix_node) return 0;
-    
-    CTUIX_Node *current_node = ctuix_node->children;
-    while(current_node)
-    {
-        if(current_node->selected_index == ctuix_node->selected_index)
-        {
-            return current_node;
-        }
-        current_node = current_node->next;
-    }
-    
-    return NULL;
-}
-
 void ctuix_node_free(CTUIX_Node *ctuix_node)
 {
     if (!ctuix_node) return;
 
     if (ctuix_node->window) delwin(ctuix_node->window);
     if (ctuix_node->name) free(ctuix_node->name);
-    if (ctuix_node->value) free(ctuix_node->value);
     if (ctuix_node->id) free(ctuix_node->id);
     
     CTUIX_Node *child_node = ctuix_node->children;
