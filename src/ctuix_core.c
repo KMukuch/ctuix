@@ -31,7 +31,7 @@ int ctuix_run(CTUIX_Manager *ctuix_manager)
         {
             ctuix_manager->active_node = ctuix_manager->active_node->key_handler(ctuix_manager->active_node, &ctuix_manager->ch);
 
-            if(ctuix_manager->active_node->node_event.ctuix_event_type == CTUIX_EVENT_LOAD)
+            if(ctuix_manager->active_node->node_event.ctuix_event_type == CTUIX_EVENT_TYPE_LOAD)
             {
                 CTUIX_Manager *ctuix_manager_new = ctuix_find_manager_by_path(ctuix_manager, ctuix_manager->active_node->node_event.user_data);
                 if(ctuix_manager_new)
@@ -40,7 +40,7 @@ int ctuix_run(CTUIX_Manager *ctuix_manager)
                     ctuix_run(ctuix_manager_new);
                     ctuix_draw_tree(ctuix_manager->root_node);
                 }
-                ctuix_manager->active_node->node_event.ctuix_event_type = CTUIX_EVENT_NONE;
+                ctuix_manager->active_node->node_event.ctuix_event_type = CTUIX_EVENT_TYPE_NONE;
             }
         }
         refresh();

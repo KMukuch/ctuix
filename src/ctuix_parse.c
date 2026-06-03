@@ -9,6 +9,12 @@
 #include "ctuix_error.h"
 #include "ctuix_parse.h"
 #include "ctuix_tree.h"
+#include "ctuix_button.h"
+#include "ctuix_entry.h"
+#include "ctuix_label.h"
+#include "ctuix_panel.h"
+#include "ctuix_scroll_panel.h"
+#include "ctuix_selection_box.h"
 #include "ctuix_draw.h"
 #include "ctuix_key.h"
 #include "ctuix_utils.h"
@@ -25,7 +31,7 @@ static bool _focusable(CTUIX_Element_Type ctuix_element_type)
     }
 }
 
-static bool _user_interaction_enabled(CTUIX_Element_Type ctuix_element_type)
+static bool _input(CTUIX_Element_Type ctuix_element_type)
 {
     if(ctuix_element_type == CTUIX_ELEMENT_LABEL)
     {
@@ -101,70 +107,73 @@ static CTUIX_Element_Y_Alignment _get_ctuix_element_y_alignment(xmlChar *y_align
     }
 }
 
-static void _set_fnc_pointer(CTUIX_Node *ctuix_node)
+static CTUIX_Node* _build_ctuix_widget(CTUIX_Element_Type ctuix_element_type)
 {
-    if(!ctuix_node) return;
-    
-    if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ROOT)
+    if(ctuix_element_type == CTUIX_ELEMENT_PANEL)
     {
-        ctuix_node->draw = ctuix_draw_root;
-        ctuix_node->key_handler = ctuix_key_handler_root;
+        CTUIX_Panel *ctuix_panel = ctuix_panel_create();
+        
+        return (CTUIX_Node*)ctuix_panel;
     }
-    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_PANEL)
+    else if(ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
     {
-        ctuix_node->draw = ctuix_draw_panel;
-        ctuix_node->key_handler = ctuix_key_handler_panel;
+        CTUIX_Selection_Box *ctuix_selection_box = ctuix_selection_box_create();
+        
+        return (CTUIX_Node*)ctuix_selection_box;
     }
-    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
+    else if(ctuix_element_type == CTUIX_ELEMENT_SCROLL_PANEL)
     {
-        ctuix_node->draw = ctuix_draw_selection_box;
-        ctuix_node->key_handler = ctuix_key_handler_selection_box;
+        CTUIX_Scroll_Panel *ctuix_scroll_panel = ctuix_scroll_panel_create();
+        
+        return (CTUIX_Node*)ctuix_scroll_panel;
     }
-    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_SCROLL_PANEL)
+    else if(ctuix_element_type == CTUIX_ELEMENT_ITEM)
     {
-        ctuix_node->draw = ctuix_draw_scroll_panel;
-        ctuix_node->key_handler = ctuix_key_handler_scroll_panel;
+        CTUIX_Item *ctuix_item = ctuix_item_create();
+        
+        return (CTUIX_Node*)ctuix_item;
     }
-    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ITEM)
+    else if(ctuix_element_type == CTUIX_ELEMENT_LABEL)
     {
-        ctuix_node->draw = ctuix_draw_item;
-        ctuix_node->key_handler = ctuix_key_handler_item;
+        CTUIX_Label *ctuix_label = ctuix_label_create();
+        
+        return (CTUIX_Node*)ctuix_label;
     }
-    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_LABEL)
+    else if(ctuix_element_type == CTUIX_ELEMENT_BUTTON)
     {
-        ctuix_node->draw = ctuix_draw_label;
-        ctuix_node->key_handler = NULL;
+        CTUIX_Button *ctuix_button = ctuix_button_create();
+        
+        return (CTUIX_Node*)ctuix_button;
     }
-    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_BUTTON)
+    else if(ctuix_element_type == CTUIX_ELEMENT_ENTRY)
     {
-        ctuix_node->draw = ctuix_draw_button;
-        ctuix_node->key_handler = ctuix_key_handler_button;
-    }
-    else if(ctuix_node->ctuix_element_type == CTUIX_ELEMENT_ENTRY)
-    {
-        ctuix_node->draw = ctuix_draw_entry;
-        ctuix_node->key_handler = ctuix_key_handler_entry;
+        CTUIX_Entry *ctuix_entry = ctuix_entry_create();
+        
+        return (CTUIX_Node*)ctuix_entry;   
     }
     else
     {
-        ctuix_node->draw = NULL;
-        ctuix_node->key_handler = NULL;
+        return NULL;
     }
 }
 
 static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
 {
-    int x = 0, y = 0, w = 0, h = 0;
+    int x = 0;
+    int y = 0;
+    int w = 0;
+    int h = 0;
+
     char* name_copy = NULL;
     char* content_copy = NULL;
     char* id_copy = NULL;
+
+    CTUIX_Node *ctuix_node;
 
     CTUIX_Element_Units ctuix_element_y_units = CTUIX_ELEMENT_UNITS_AUTO;
     CTUIX_Element_Units ctuix_element_x_units = CTUIX_ELEMENT_UNITS_AUTO;
     CTUIX_Element_Units ctuix_element_h_units = CTUIX_ELEMENT_UNITS_AUTO;
     CTUIX_Element_Units ctuix_element_w_units = CTUIX_ELEMENT_UNITS_AUTO;
-
-    CTUIX_Node *ctuix_node;
     
     xmlChar *node_x = xmlGetProp(xml_node, BAD_CAST "x");
     xmlChar *node_y = xmlGetProp(xml_node, BAD_CAST "y");
@@ -177,6 +186,8 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     xmlChar *node_content = xmlNodeGetContent(xml_node);
     xmlChar *node_id = xmlGetProp(xml_node, BAD_CAST "id");
     
+    CTUIX_Element_Type ctuix_element_type = _get_ctuix_element_type(node_type);
+
     if(node_x)
     {
         // if(strstr(node_x, "vw"))
@@ -217,9 +228,11 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_name) name_copy = strdup((char*)node_name);
     if(node_content) content_copy = strdup((char*)node_content);
     if(node_id) id_copy = strdup((char*)node_id);
-
-    ctuix_node = ctuix_node_create(_get_ctuix_element_type(node_type), ctuix_element_x_units, ctuix_element_y_units, ctuix_element_w_units, ctuix_element_h_units, _get_ctuix_element_x_alignment(node_x_alignment), _get_ctuix_element_y_alignment(node_y_alignment), x, y, w, h, _focusable(_get_ctuix_element_type(node_type)),_user_interaction_enabled(_get_ctuix_element_type(node_type)), name_copy, content_copy, id_copy);
-    _set_fnc_pointer(ctuix_node);
+    
+    ctuix_node = _build_ctuix_widget(ctuix_element_type);
+    ctuix_node_set_meta(ctuix_node, ctuix_element_type, name_copy, id_copy);
+    ctuix_node_set_layout(ctuix_element_x_units, ctuix_element_y_units, ctuix_element_w_units, ctuix_element_h_units, _get_ctuix_element_x_alignment(node_x_alignment), _get_ctuix_element_y_alignment(node_y_alignment), ctuix_node, node_x, node_y, node_w, node_h);
+    ctuix_node_set_flags(ctuix_node, _focusable(ctuix_element_type), _input(ctuix_element_type));
 
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);
@@ -231,38 +244,6 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     if(node_id) xmlFree(node_id);
     
     return ctuix_node;
-}
-
-static void _set_default(CTUIX_Node *ctuix_node)
-{
-    if(!ctuix_node) return;
-    
-    CTUIX_Node *current_node = ctuix_node->children;
-    while(current_node)
-    {
-        if(current_node->ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
-        {
-            CTUIX_Node *child = current_node->children;
-            current_node->selected_index = 0;
-            current_node->scroll_offset = 0;
-            current_node->visible = current_node->h - 4;
-            for(int i = 0; i < ctuix_count_children(current_node); i++)
-            {
-                child->selected_index = i;
-                child->y = 2 + (i % current_node->visible);
-                child->x = 1;
-                child->h = 1;
-                child->w = child->parent->w - 2;
-                child = child->next;
-            }
-        }
-        else if(current_node->ctuix_element_type == CTUIX_ELEMENT_ENTRY)
-        {
-            current_node->visible = (current_node->h - 2) * (current_node->w - 2);
-        }
-        current_node = current_node->next;
-    }
-    _set_default(ctuix_node->next);
 }
 
 static void _read_xml_node(xmlNode *xml_node, CTUIX_Node *parent_ctuix_node)
@@ -304,7 +285,6 @@ CTUIX_Manager* ctuix_parse(char *file_path)
     CTUIX_Node *ctuix_root = _build_ctuix_node(xml_root);
     CTUIX_Manager *ctuix_manager = ctuix_manager_create(ctuix_root, file_path);
     _read_xml_node(xml_root, ctuix_root);
-    _set_default(ctuix_root);
 
     xmlFreeDoc(xml_doc);
 
@@ -322,7 +302,7 @@ CTUIX_Manager* ctuix_parse_multiple(char **file_path_array, int count)
 
         if (ctuix_manager)
         {
-            if (!head)
+            if(!head)
             {
                 head = ctuix_manager;
                 tail = ctuix_manager;
@@ -344,7 +324,7 @@ void ctuix_delete(CTUIX_Manager *ctuix_manager)
     {
         CTUIX_Manager *next = ctuix_manager->next;
         if (ctuix_manager->file_name) free(ctuix_manager->file_name);
-        ctuix_node_free(ctuix_manager->root_node);
+        ctuix_node_free(ctuix_manager->ctuix_scene->root_node);
         free(ctuix_manager);
         ctuix_manager = next;
     }
