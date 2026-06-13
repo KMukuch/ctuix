@@ -15,16 +15,7 @@ pkg_check_modules(LIBXML2 REQUIRED libxml-2.0)
 pkg_check_modules(NCURSES REQUIRED ncurses)
 
 # Source files
-set(CTUIX_SOURCES
-    src/ctuix_core.c
-    src/ctuix_draw.c
-    src/ctuix_error.c
-    src/ctuix_key.c
-    src/ctuix_nav.c
-    src/ctuix_parse.c
-    src/ctuix_tree.c
-    src/ctuix_utils.c
-)
+file(GLOB CTUIX_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 
 # Create library
 add_library(ctuix STATIC ${CTUIX_SOURCES})

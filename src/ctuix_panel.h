@@ -17,4 +17,8 @@ typedef struct CTUIX_Panel
 
 CTUIX_Panel* ctuix_panel_create();
 
+void ctuix_key_handler_panel(CTUIX_Node *ctuix_node);
+
+void ctuix_draw_panel(CTUIX_Node *ctuix_node);
+
 #endif

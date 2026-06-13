@@ -18,21 +18,15 @@ typedef struct CTUIX_Scroll_Panel
     int scroll_offset;
     int line_count;
     int visible;
-    
-} CTUIX_Scroll_Panel;
-
-typedef struct CTUIX_Item
-{
-    CTUIX_Node base_node;
-
-    // meta
-    int index;
 
     char* value;
     
-} CTUIX_Item;
+} CTUIX_Scroll_Panel;
 
 CTUIX_Scroll_Panel* ctuix_scroll_panel_create();
-CTUIX_Item* ctuix_item_create();
+
+void ctuix_key_handler_scroll_panel(CTUIX_Node *ctuix_node);
+
+void ctuix_draw_scroll_panel(CTUIX_Node *ctuix_node);
 
 #endif

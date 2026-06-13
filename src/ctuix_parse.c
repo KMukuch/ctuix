@@ -109,45 +109,67 @@ static CTUIX_Element_Y_Alignment _get_ctuix_element_y_alignment(xmlChar *y_align
 
 static CTUIX_Node* _build_ctuix_widget(CTUIX_Element_Type ctuix_element_type)
 {
-    if(ctuix_element_type == CTUIX_ELEMENT_PANEL)
+    if(ctuix_element_type == CTUIX_ELEMENT_ROOT)
     {
         CTUIX_Panel *ctuix_panel = ctuix_panel_create();
+        ctuix_panel->base_node.draw = ctuix_draw_root;
+        ctuix_panel->base_node.key_handler = ctuix_key_handler_root;
+
+        return (CTUIX_Node*)ctuix_panel; 
+    }
+    else if(ctuix_element_type == CTUIX_ELEMENT_PANEL)
+    {
+        CTUIX_Panel *ctuix_panel = ctuix_panel_create();
+        ctuix_panel->base_node.draw = ctuix_draw_panel;
+        ctuix_panel->base_node.key_handler = ctuix_key_handler_panel;
         
         return (CTUIX_Node*)ctuix_panel;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
     {
         CTUIX_Selection_Box *ctuix_selection_box = ctuix_selection_box_create();
-        
+        ctuix_selection_box->base_node.draw = ctuix_draw_selection_box;
+        ctuix_selection_box->base_node.key_handler = ctuix_key_handler_selection_box;
+
         return (CTUIX_Node*)ctuix_selection_box;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_SCROLL_PANEL)
     {
         CTUIX_Scroll_Panel *ctuix_scroll_panel = ctuix_scroll_panel_create();
+        ctuix_scroll_panel->base_node.draw = ctuix_draw_scroll_panel;
+        ctuix_scroll_panel->base_node.key_handler = ctuix_key_handler_scroll_panel;
         
         return (CTUIX_Node*)ctuix_scroll_panel;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_ITEM)
     {
         CTUIX_Item *ctuix_item = ctuix_item_create();
-        
+        ctuix_item->base_node.draw = ctuix_draw_item;
+        ctuix_item->base_node.key_handler = ctuix_key_handler_item;
+
         return (CTUIX_Node*)ctuix_item;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_LABEL)
     {
         CTUIX_Label *ctuix_label = ctuix_label_create();
+        ctuix_label->base_node.draw = ctuix_draw_label;
+        ctuix_label->base_node.key_handler = NULL;
         
         return (CTUIX_Node*)ctuix_label;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_BUTTON)
     {
         CTUIX_Button *ctuix_button = ctuix_button_create();
+        ctuix_button->base_node.draw = ctuix_draw_button;
+        ctuix_button->base_node.key_handler = ctuix_key_handler_button;
         
         return (CTUIX_Node*)ctuix_button;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_ENTRY)
     {
         CTUIX_Entry *ctuix_entry = ctuix_entry_create();
+        ctuix_entry->base_node.draw = ctuix_draw_entry;
+        ctuix_entry->base_node.key_handler = ctuix_key_handler_entry;
         
         return (CTUIX_Node*)ctuix_entry;   
     }
@@ -231,8 +253,10 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     
     ctuix_node = _build_ctuix_widget(ctuix_element_type);
     ctuix_node_set_meta(ctuix_node, ctuix_element_type, name_copy, id_copy);
-    ctuix_node_set_layout(ctuix_element_x_units, ctuix_element_y_units, ctuix_element_w_units, ctuix_element_h_units, _get_ctuix_element_x_alignment(node_x_alignment), _get_ctuix_element_y_alignment(node_y_alignment), ctuix_node, node_x, node_y, node_w, node_h);
+    ctuix_node_set_layout(ctuix_node, ctuix_element_x_units, ctuix_element_y_units, ctuix_element_w_units, ctuix_element_h_units, _get_ctuix_element_x_alignment(node_x_alignment), _get_ctuix_element_y_alignment(node_y_alignment), x, y, w, h);
     ctuix_node_set_flags(ctuix_node, _focusable(ctuix_element_type), _input(ctuix_element_type));
+    
+    ctuix_label_set_value(ctuix_node, content_copy);
 
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);
