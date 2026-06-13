@@ -15,10 +15,15 @@ typedef struct CTUIX_Entry
 
     // meta
     char buffer[MAX_ENTRY];
+    int visible;
     int cursor_x;
     
 } CTUIX_Entry;
 
 CTUIX_Entry* ctuix_entry_create();
+
+void ctuix_key_handler_entry(CTUIX_Node *ctuix_node);
+
+void ctuix_draw_entry(CTUIX_Node *ctuix_node);
 
 #endif

@@ -12,6 +12,7 @@
 
 CTUIX_Manager* ctuix_parse(char *file_path);
 CTUIX_Manager* ctuix_parse_multiple(char **file_path, int count);
+
 void ctuix_delete(CTUIX_Manager *ctuix_manager);
 void ctuix_cleanup();
 

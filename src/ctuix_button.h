@@ -19,4 +19,8 @@ typedef struct CTUIX_Button
 
 CTUIX_Button* ctuix_button_create();
 
+void ctuix_key_handler_button(CTUIX_Node *ctuix_node);
+
+void ctuix_draw_button(CTUIX_Node *ctuix_node);
+
 #endif

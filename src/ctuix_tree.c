@@ -70,7 +70,17 @@ CTUIX_Manager* ctuix_manager_create(CTUIX_Node *root_node, char *file_path)
 {
     CTUIX_Manager *ctuix_manager = calloc(1, sizeof(CTUIX_Manager));
 
-    ctuix_manager->file_name = strdup(file_path);;
+    ctuix_manager->file_name = strdup(file_path);
+
+    ctuix_manager->ctuix_scene = calloc(1, sizeof(CTUIX_Scene));
+    if (!ctuix_manager->ctuix_scene) {
+        free(ctuix_manager->file_name);
+        free(ctuix_manager);
+        
+        return NULL;
+    }
+    ctuix_manager->ctuix_scene->root_node = root_node;
+    ctuix_manager->ctuix_scene->active_node = root_node; 
 
     ctuix_manager->previous = NULL;
     ctuix_manager->next = NULL;

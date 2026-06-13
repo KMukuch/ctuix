@@ -49,8 +49,8 @@ typedef struct CTUIX_Node
     struct CTUIX_Node *next;
 
     // vtable
-    void (*draw)(CTUIX_Node* ctuix_node);
-    void (*key_handler)(CTUIX_Node* ctuix_node, int* ch);
+    void (*draw)(struct CTUIX_Node* ctuix_node);
+    void (*key_handler)(struct CTUIX_Node* ctuix_node);
 
     // meta
     CTUIX_Element_Type ctuix_element_type;
