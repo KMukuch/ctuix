@@ -6,7 +6,6 @@
 #include "ctuix_panel.h"
 #include "ctuix_root.h"
 #include "ctuix_nav.h"
-#include "ctuix_event.h"
 
 CTUIX_Panel* ctuix_panel_create()
 {

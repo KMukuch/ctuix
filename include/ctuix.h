@@ -46,6 +46,7 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
 /// @brief Free memory from CTUIX library
 /// @param ctuix_manager 
 void ctuix_delete(CTUIX_Manager *ctuix_manager);
+
 /// @brief Free memory from libxml after parsing
 void ctuix_cleanup();
 
