@@ -6,7 +6,6 @@
 #include "ctuix_button.h"
 #include "ctuix_root.h"
 #include "ctuix_nav.h"
-#include "ctuix_event.h"
 
 CTUIX_Button* ctuix_button_create()
 {

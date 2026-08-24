@@ -6,7 +6,6 @@
 #include "ctuix_entry.h"
 #include "ctuix_root.h"
 #include "ctuix_nav.h"
-#include "ctuix_event.h"
 
 CTUIX_Entry* ctuix_entry_create()
 {

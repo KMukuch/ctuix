@@ -7,7 +7,6 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_tree.h"
-#include "ctuix_event.h"
 
 typedef struct CTUIX_Scroll_Panel
 {

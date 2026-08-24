@@ -6,7 +6,6 @@
 #include "ctuix_label.h"
 #include "ctuix_root.h"
 #include "ctuix_nav.h"
-#include "ctuix_event.h"
 
 CTUIX_Label* ctuix_label_create()
 {
