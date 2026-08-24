@@ -2,15 +2,15 @@
 #include <ctuix.h>
 
 // #define FILEPATH1 "../data/ctuix_example_1.xml"
-// #define FILEPATH2 "../data/ctuix_example_2.xml"
-#define FILEPATH3 "../data/ctuix_example_3.xml"
+#define FILEPATH2 "../data/ctuix_example_2.xml"
+// #define FILEPATH3 "../data/ctuix_example_3.xml"
 
 int main()
-{   
+{
     ctuix_init();
 
     // char *files[] = {FILEPATH1, FILEPATH2, FILEPATH3, FILEPATH4};
-    CTUIX_Manager *ctuix_manager = ctuix_parse(FILEPATH3);
+    CTUIX_Manager *ctuix_manager = ctuix_parse(FILEPATH2);
     if(!ctuix_manager)
     {
         ctuix_error_show("Error", "No file parsed!");

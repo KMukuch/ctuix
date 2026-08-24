@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_button.h"
-#include "ctuix_draw.h"
+#include "ctuix_root.h"
 #include "ctuix_nav.h"
 #include "ctuix_event.h"
 
@@ -17,14 +17,14 @@ CTUIX_Button* ctuix_button_create()
     }
 
     // set up the base node
-    ctuix_button->base_node.ctuix_element_type = CTUIX_ELEMENT_PANEL;
+    ctuix_button->base_node.ctuix_element_type = CTUIX_ELEMENT_BUTTON;
     ctuix_button->base_node.draw = NULL;
     ctuix_button->base_node.key_handler = NULL;
 
     return ctuix_button;
 }
 
-void ctuix_key_handler_button(CTUIX_Node *ctuix_node)
+CTUIX_Node* ctuix_button_key_handler(CTUIX_Node *ctuix_node)
 {
     int ch = wgetch(ctuix_node->window);
     if(ch == '\t')
@@ -38,16 +38,22 @@ void ctuix_key_handler_button(CTUIX_Node *ctuix_node)
             ctuix_draw_tree(current_active);
             ctuix_draw_tree(next_node);
 
-            ctuix_node = next_node;
+            return next_node;
         }
     }
     else if(ch == '\n' || ch == '\r' || ch == KEY_ENTER)
     {
         
     }
+    else if(ch == 'q')
+    {
+        return NULL;
+    }
+
+    return ctuix_node;
 }
 
-void ctuix_draw_button(CTUIX_Node *ctuix_node)
+void ctuix_button_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
@@ -91,4 +97,14 @@ void ctuix_draw_button(CTUIX_Node *ctuix_node)
         }
         wrefresh(ctuix_node->window);
     }
+}
+
+void ctuix_button_set_value(CTUIX_Node *ctuix_node, char* value)
+{
+    if(!ctuix_node) return;
+    if(ctuix_node->ctuix_element_type != CTUIX_ELEMENT_BUTTON) return;
+    if(!value) return;
+
+    CTUIX_Button *ctuix_button = (CTUIX_Button*)ctuix_node;
+    ctuix_button->value = strdup(value);
 }

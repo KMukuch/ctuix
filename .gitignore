@@ -1,3 +1,5 @@
+docs/private/
+docs/public/
 build/
 build-asan/
 Doxyfile

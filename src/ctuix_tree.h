@@ -9,6 +9,7 @@
 
 #define MAX_ENTRY 256
 
+/// @brief 
 typedef enum
 {
     CTUIX_ELEMENT_ERROR = -1,
@@ -22,6 +23,7 @@ typedef enum
     CTUIX_ELEMENT_ENTRY
 } CTUIX_Element_Type;
 
+/// @brief 
 typedef enum
 {
     CTUIX_ELEMENT_UNITS_AUTO,
@@ -29,18 +31,21 @@ typedef enum
     CTUIX_ELEMENT_UNITS_VH
 } CTUIX_Element_Units;
 
+/// @brief 
 typedef enum
 {
     CTUIX_ELEMENT_X_ALIGNMENT_AUTO,
     CTUIX_ELEMENT_X_ALIGNMENT_CENTER
 } CTUIX_Element_X_Alignment;
 
+/// @brief 
 typedef enum
 {
     CTUIX_ELEMENT_Y_ALIGNMENT_AUTO,
     CTUIX_ELEMENT_Y_ALIGNMENT_CENTER
 } CTUIX_Element_Y_Alignment;
 
+/// @brief Base CTUIX struct
 typedef struct CTUIX_Node
 {
     // tree
@@ -50,7 +55,7 @@ typedef struct CTUIX_Node
 
     // vtable
     void (*draw)(struct CTUIX_Node* ctuix_node);
-    void (*key_handler)(struct CTUIX_Node* ctuix_node);
+    struct CTUIX_Node* (*key_handler)(struct CTUIX_Node* ctuix_node);
 
     // meta
     CTUIX_Element_Type ctuix_element_type;
@@ -82,6 +87,7 @@ typedef struct CTUIX_Node
 
 } CTUIX_Node;
 
+/// @brief 
 typedef struct CTUIX_Scene
 {
     CTUIX_Node* root_node;
@@ -89,6 +95,7 @@ typedef struct CTUIX_Scene
 
 } CTUIX_Scene;
 
+/// @brief 
 typedef struct CTUIX_Manager
 {
     char* file_name;
@@ -100,15 +107,60 @@ typedef struct CTUIX_Manager
 
 } CTUIX_Manager;
 
+/// @brief 
+/// @param ctuix_node 
+/// @param ctuix_element_type 
+/// @param name 
+/// @param id 
 void ctuix_node_set_meta(CTUIX_Node *ctuix_node, CTUIX_Element_Type ctuix_element_type, char* name, char* id);
+
+/// @brief 
+/// @param ctuix_node 
+/// @param ctuix_element_x_units 
+/// @param ctuix_element_y_units 
+/// @param ctuix_element_w_units 
+/// @param ctuix_element_h_units 
+/// @param ctuix_element_x_alignment 
+/// @param ctuix_element_y_alignment 
+/// @param x 
+/// @param y 
+/// @param w 
+/// @param h 
+
 void ctuix_node_set_layout(CTUIX_Node *ctuix_node, CTUIX_Element_Units ctuix_element_x_units, CTUIX_Element_Units ctuix_element_y_units, CTUIX_Element_Units ctuix_element_w_units, CTUIX_Element_Units ctuix_element_h_units, CTUIX_Element_X_Alignment ctuix_element_x_alignment, CTUIX_Element_Y_Alignment ctuix_element_y_alignment, int x, int y, int w, int h);
+
+/// @brief 
+/// @param ctuix_node 
+/// @param focusable 
+/// @param input 
 void ctuix_node_set_flags(CTUIX_Node *ctuix_node, bool focusable, bool input);
 
+/// @brief 
+/// @param ctuix_node 
+/// @param file_path 
+/// @return 
 CTUIX_Manager* ctuix_manager_create(CTUIX_Node *ctuix_node, char* file_path);
 
+void ctuix_set_event_handler();
+
+/// @brief 
+/// @param ctuix_node 
+/// @param ctuix_node_id 
+/// @return 
 CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id);
+
+/// @brief 
+/// @param ctuix_manager
+/// @param file_path 
+/// @return 
 CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *file_path);
 
+/// @brief 
+/// @param ctuix_node 
+void ctuix_draw_tree(CTUIX_Node *ctuix_node);
+
+/// @brief 
+/// @param ctuix_node 
 void ctuix_node_free(CTUIX_Node *ctuix_node);
 
 #endif

@@ -25,8 +25,10 @@ typedef struct CTUIX_Scroll_Panel
 
 CTUIX_Scroll_Panel* ctuix_scroll_panel_create();
 
-void ctuix_key_handler_scroll_panel(CTUIX_Node *ctuix_node);
+CTUIX_Node* ctuix_scroll_panel_key_handler(CTUIX_Node *ctuix_node);
 
-void ctuix_draw_scroll_panel(CTUIX_Node *ctuix_node);
+void ctuix_scroll_panel_draw(CTUIX_Node *ctuix_node);
+
+void ctuix_scroll_panel_set_value(CTUIX_Node *ctuix_node, char* value);
 
 #endif

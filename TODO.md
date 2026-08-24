@@ -1,17 +1,39 @@
-#TODO
+# CTUIX TODO
 
-- replace or delete unused bool in node
+## Events
 
-- error checks
+* Define events
+* Button emits CLICKED
+* Entry emits SUBMITTED
+* Quit emits QUIT_REQUESTED
+* Add event handlers
+* Register handlers before `ctuix_run`
+* Pass UI context to handlers
+* Let handlers access other nodes
 
-- scroll panel
+## Input
 
-- entry
+* Widgets read their own input
+* Widgets interpret keys
+* Keep widget actions inside widgets
 
-- layout
+## XML
 
-- colors
+* Parse node IDs and names
+* Connect XML events to handlers
 
-- macros for tree traversing
+## API
 
-- font
+* Find nodes
+* Read node values
+* Change node values
+* Application can control TUI
+
+## Test
+
+* Button → CLICKED → handler → find Entry → read value → change TUI → return to run
+
+## Later
+
+* Improve node lookup if needed
+* Refactor after it works

@@ -1,6 +1,6 @@
 # CMakeLists.txt for your C library – works with GCC and Clang
 cmake_minimum_required(VERSION 3.10)
-project(ctuix VERSION 1.0.0 LANGUAGES C)
+project(ctuix VERSION 0.1.0 LANGUAGES C)
 
 # Set C standard (adjust to your needs: 99, 11, 17, etc.)
 set(CMAKE_C_STANDARD 99)

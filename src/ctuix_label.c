@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_label.h"
-#include "ctuix_draw.h"
+#include "ctuix_root.h"
 #include "ctuix_nav.h"
 #include "ctuix_event.h"
 
@@ -24,7 +24,7 @@ CTUIX_Label* ctuix_label_create()
     return ctuix_label;
 }
 
-void ctuix_draw_label(CTUIX_Node *ctuix_node)
+void ctuix_label_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 

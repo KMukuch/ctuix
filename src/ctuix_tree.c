@@ -4,7 +4,6 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_tree.h"
-#include "ctuix_draw.h"
 
 void ctuix_node_set_flags(CTUIX_Node *ctuix_node, bool focusable, bool input)
 {
@@ -127,6 +126,27 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
     }
 
     return NULL;
+}
+
+void ctuix_draw_tree(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return;
+
+    if(ctuix_node->draw)
+    {
+        ctuix_node->draw(ctuix_node);
+    }
+
+    CTUIX_Node *ctuix_node_child = ctuix_node->children;
+    while(ctuix_node_child)
+    {
+        ctuix_draw_tree(ctuix_node_child);
+        ctuix_node_child = ctuix_node_child->next;
+    }
+    if(ctuix_node->window)
+    {
+        wrefresh(ctuix_node->window);
+    }
 }
 
 void ctuix_node_free(CTUIX_Node *ctuix_node)

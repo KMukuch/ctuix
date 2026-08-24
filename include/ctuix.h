@@ -5,38 +5,53 @@
 #define CTUIX_VERSION_MINOR 0
 #define CTUIX_VERSION_PATCH 0
 
-typedef enum
-{
-    CTUIX_EVENT_TYPE_NONE,
-    CTUIX_EVENT_TYPE_QUIT,
-    CTUIX_EVENT_TYPE_LOAD,
-    CTUIX_EVENT_TYPE_UPDATE
-} CTUIX_Event_Type;
-
-typedef struct CTUIX_Event
-{
-    CTUIX_Event_Type ctuix_event_type;
-    void *user_data;
-} CTUIX_Event;
-
 typedef struct CTUIX_Node CTUIX_Node;
 typedef struct CTUIX_Manager CTUIX_Manager;
 
-/*
- * Function prototypes
- */
-
+/// @brief Initilizing CTUIX and NCURSES library
+/// @param void
 void ctuix_init(void);
+
+/// @brief Running the CTUIX core
+/// @param ctuix_manager 
+/// @return If no error, returns 1
 int ctuix_run(CTUIX_Manager *ctuix_manager);
+
+/// @brief End CTUIX and NCURSES library
+/// @param void
 void ctuix_end(void);
 
+/// @brief Parse an XML file
+/// @param file_path 
+/// @return If no error, returns an allocated memory for a new CTUIX_Manager
 CTUIX_Manager* ctuix_parse(char *file_path);
+/// @brief Parse multiple XML files
+/// @param file_path 
+/// @param count 
+/// @return If no error, returns an allocated memory for list of new CTUIX_Managers
 CTUIX_Manager* ctuix_parse_multiple(char **file_path, int count);
+
+/// @brief 
+/// @param ctuix_node 
+/// @param ctuix_node_id 
+/// @return 
+CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id);
+
+/// @brief 
+/// @param ctuix_manager
+/// @param file_path 
+/// @return 
+CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *file_path);
+
+/// @brief Free memory from CTUIX library
+/// @param ctuix_manager 
 void ctuix_delete(CTUIX_Manager *ctuix_manager);
+/// @brief Free memory from libxml after parsing
 void ctuix_cleanup();
 
-void ctuix_set_on_click(CTUIX_Manager *ctuix_manager, char *file_path, char *ctuix_node_id, CTUIX_Event (*on_click)(CTUIX_Node*, void *user_data), void *user_data);
-
+/// @brief 
+/// @param title 
+/// @param message 
 void ctuix_error_show(const char *title, const char *message);
 
 #endif

@@ -15,8 +15,7 @@
 #include "ctuix_panel.h"
 #include "ctuix_scroll_panel.h"
 #include "ctuix_selection_box.h"
-#include "ctuix_draw.h"
-#include "ctuix_key.h"
+#include "ctuix_root.h"
 #include "ctuix_utils.h"
 
 static bool _focusable(CTUIX_Element_Type ctuix_element_type)
@@ -120,39 +119,39 @@ static CTUIX_Node* _build_ctuix_widget(CTUIX_Element_Type ctuix_element_type)
     else if(ctuix_element_type == CTUIX_ELEMENT_PANEL)
     {
         CTUIX_Panel *ctuix_panel = ctuix_panel_create();
-        ctuix_panel->base_node.draw = ctuix_draw_panel;
-        ctuix_panel->base_node.key_handler = ctuix_key_handler_panel;
+        ctuix_panel->base_node.draw = ctuix_panel_draw;
+        ctuix_panel->base_node.key_handler = ctuix_panel_key_handler;
         
         return (CTUIX_Node*)ctuix_panel;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_SELECTION_BOX)
     {
         CTUIX_Selection_Box *ctuix_selection_box = ctuix_selection_box_create();
-        ctuix_selection_box->base_node.draw = ctuix_draw_selection_box;
-        ctuix_selection_box->base_node.key_handler = ctuix_key_handler_selection_box;
+        ctuix_selection_box->base_node.draw = ctuix_selection_box_draw;
+        ctuix_selection_box->base_node.key_handler = ctuix_selection_box_key_handler;
 
         return (CTUIX_Node*)ctuix_selection_box;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_SCROLL_PANEL)
     {
         CTUIX_Scroll_Panel *ctuix_scroll_panel = ctuix_scroll_panel_create();
-        ctuix_scroll_panel->base_node.draw = ctuix_draw_scroll_panel;
-        ctuix_scroll_panel->base_node.key_handler = ctuix_key_handler_scroll_panel;
+        ctuix_scroll_panel->base_node.draw = ctuix_scroll_panel_draw;
+        ctuix_scroll_panel->base_node.key_handler = ctuix_scroll_panel_key_handler;
         
         return (CTUIX_Node*)ctuix_scroll_panel;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_ITEM)
     {
         CTUIX_Item *ctuix_item = ctuix_item_create();
-        ctuix_item->base_node.draw = ctuix_draw_item;
-        ctuix_item->base_node.key_handler = ctuix_key_handler_item;
+        ctuix_item->base_node.draw = ctuix_item_draw;
+        ctuix_item->base_node.key_handler = ctuix_item_key_handler;
 
         return (CTUIX_Node*)ctuix_item;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_LABEL)
     {
         CTUIX_Label *ctuix_label = ctuix_label_create();
-        ctuix_label->base_node.draw = ctuix_draw_label;
+        ctuix_label->base_node.draw = ctuix_label_draw;
         ctuix_label->base_node.key_handler = NULL;
         
         return (CTUIX_Node*)ctuix_label;
@@ -160,16 +159,16 @@ static CTUIX_Node* _build_ctuix_widget(CTUIX_Element_Type ctuix_element_type)
     else if(ctuix_element_type == CTUIX_ELEMENT_BUTTON)
     {
         CTUIX_Button *ctuix_button = ctuix_button_create();
-        ctuix_button->base_node.draw = ctuix_draw_button;
-        ctuix_button->base_node.key_handler = ctuix_key_handler_button;
+        ctuix_button->base_node.draw = ctuix_button_draw;
+        ctuix_button->base_node.key_handler = ctuix_button_key_handler;
         
         return (CTUIX_Node*)ctuix_button;
     }
     else if(ctuix_element_type == CTUIX_ELEMENT_ENTRY)
     {
         CTUIX_Entry *ctuix_entry = ctuix_entry_create();
-        ctuix_entry->base_node.draw = ctuix_draw_entry;
-        ctuix_entry->base_node.key_handler = ctuix_key_handler_entry;
+        ctuix_entry->base_node.draw = ctuix_entry_draw;
+        ctuix_entry->base_node.key_handler = ctuix_entry_key_handler;
         
         return (CTUIX_Node*)ctuix_entry;   
     }
@@ -257,6 +256,8 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     ctuix_node_set_flags(ctuix_node, _focusable(ctuix_element_type), _input(ctuix_element_type));
     
     ctuix_label_set_value(ctuix_node, content_copy);
+    ctuix_button_set_value(ctuix_node, content_copy);
+    ctuix_scroll_panel_set_value(ctuix_node, content_copy);
 
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);

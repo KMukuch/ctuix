@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_selection_box.h"
-#include "ctuix_draw.h"
+#include "ctuix_root.h"
 #include "ctuix_nav.h"
 #include "ctuix_utils.h"
 
@@ -40,7 +40,7 @@ CTUIX_Item* ctuix_item_create()
     return ctuix_item;
 }
 
-void ctuix_key_handler_selection_box(CTUIX_Node *ctuix_node)
+CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node)
 {
     int ch = wgetch(ctuix_node->window);
     if(ch == '\t')
@@ -54,16 +54,22 @@ void ctuix_key_handler_selection_box(CTUIX_Node *ctuix_node)
             ctuix_draw_tree(current_active);
             ctuix_draw_tree(next_node);
 
-            ctuix_node = next_node;
+            return next_node;
         }
     }
     else if(ch == KEY_DOWN)
     {
         
     }
+    else if(ch == 'q')
+    {
+        return NULL;
+    }
+
+    return ctuix_node;
 }
 
-void ctuix_key_handler_item(CTUIX_Node *ctuix_node)
+CTUIX_Node* ctuix_item_key_handler(CTUIX_Node *ctuix_node)
 {
     // int ch = wgetch(ctuix_node->parent->window);
     // if(*ch == KEY_UP)
@@ -108,7 +114,7 @@ void ctuix_key_handler_item(CTUIX_Node *ctuix_node)
     // }
 }
 
-void ctuix_draw_selection_box(CTUIX_Node *ctuix_node)
+void ctuix_selection_box_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
     
@@ -152,7 +158,7 @@ void ctuix_draw_selection_box(CTUIX_Node *ctuix_node)
     }
 }
 
-void ctuix_draw_item(CTUIX_Node *ctuix_node)
+void ctuix_item_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
