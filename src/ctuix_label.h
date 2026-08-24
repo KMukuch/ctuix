@@ -14,12 +14,12 @@ typedef struct CTUIX_Label
     CTUIX_Node base_node;
 
     char* value;
-    
+
 } CTUIX_Label;
 
 CTUIX_Label* ctuix_label_create();
 
-void ctuix_draw_label(CTUIX_Node *ctuix_node);
+void ctuix_label_draw(CTUIX_Node *ctuix_node);
 
 void ctuix_label_set_value(CTUIX_Node *ctuix_node, char* value);
 

@@ -36,11 +36,11 @@ typedef struct CTUIX_Item
 CTUIX_Selection_Box* ctuix_selection_box_create();
 CTUIX_Item* ctuix_item_create();
 
-void ctuix_key_handler_selection_box(CTUIX_Node *ctuix_node);
-void ctuix_key_handler_item(CTUIX_Node *ctuix_node);
+CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node);
+CTUIX_Node* ctuix_item_key_handler(CTUIX_Node *ctuix_node);
 
-void ctuix_draw_selection_box(CTUIX_Node *ctuix_node);
-void ctuix_draw_item(CTUIX_Node *ctuix_node);
+void ctuix_selection_box_draw(CTUIX_Node *ctuix_node);
+void ctuix_item_draw(CTUIX_Node *ctuix_node);
 
 CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node);
 

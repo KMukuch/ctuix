@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_panel.h"
-#include "ctuix_draw.h"
+#include "ctuix_root.h"
 #include "ctuix_nav.h"
 #include "ctuix_event.h"
 
@@ -24,7 +24,7 @@ CTUIX_Panel* ctuix_panel_create()
     return ctuix_panel;
 }
 
-void ctuix_key_handler_panel(CTUIX_Node *ctuix_node)
+CTUIX_Node* ctuix_panel_key_handler(CTUIX_Node *ctuix_node)
 {
     int ch = wgetch(ctuix_node->window);
     if(ch == '\t')
@@ -38,12 +38,18 @@ void ctuix_key_handler_panel(CTUIX_Node *ctuix_node)
             ctuix_draw_tree(current_active);
             ctuix_draw_tree(next_node);
             
-            ctuix_node = next_node;
+            return next_node;
         }
     }
+    else if(ch == 'q')
+    {
+        return NULL;
+    }
+
+    return ctuix_node;
 }
 
-void ctuix_draw_panel(CTUIX_Node *ctuix_node)
+void ctuix_panel_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 

@@ -4,7 +4,6 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_tree.h"
-#include "ctuix_draw.h"
 #include "ctuix_nav.h"
 #include "ctuix_utils.h"
 
@@ -38,23 +37,22 @@ void ctuix_draw_root(CTUIX_Node *ctuix_node)
     }
 }
 
-void ctuix_draw_tree(CTUIX_Node *ctuix_node)
+CTUIX_Node* ctuix_key_handler_root(CTUIX_Node *ctuix_node)
 {
-    if(!ctuix_node) return;
+    int ch = wgetch(ctuix_node->window);
+    if(ch == '\t')
+    {
+        CTUIX_Node *current_active = ctuix_node;
+        CTUIX_Node *next_node = ctuix_select_next_window(ctuix_node);
+        if(next_node)
+        {
+            current_active->active = false;
+            next_node->active = true;
+            ctuix_draw_tree(next_node);
 
-    if(ctuix_node->draw)
-    {
-        ctuix_node->draw(ctuix_node);
+            return next_node;
+        }
     }
 
-    CTUIX_Node *ctuix_node_child = ctuix_node->children;
-    while(ctuix_node_child)
-    {
-        ctuix_draw_tree(ctuix_node_child);
-        ctuix_node_child = ctuix_node_child->next;
-    }
-    if(ctuix_node->window)
-    {
-        wrefresh(ctuix_node->window);
-    }
+    return ctuix_node;
 }

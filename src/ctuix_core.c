@@ -6,8 +6,7 @@
 #include "ctuix_core.h"
 #include "ctuix_tree.h"
 #include "ctuix_utils.h"
-#include "ctuix_draw.h"
-#include "ctuix_key.h"
+#include "ctuix_root.h"
 
 void ctuix_init()
 {
@@ -25,16 +24,13 @@ int ctuix_run(CTUIX_Manager *ctuix_manager)
     ctuix_draw_tree(ctuix_manager->ctuix_scene->root_node);
     refresh();
 
-    int ch = getch();
-    while(ch != 'q')
+    while(ctuix_manager->ctuix_scene->active_node)
     {
         if(ctuix_manager->ctuix_scene->active_node->key_handler)
         {
-            ctuix_manager->ctuix_scene->active_node->key_handler(ctuix_manager->ctuix_scene->active_node);
+            ctuix_manager->ctuix_scene->active_node = ctuix_manager->ctuix_scene->active_node->key_handler(ctuix_manager->ctuix_scene->active_node);
         }
         refresh();
-        
-        ch = getch();
     }
 
     return 1;
