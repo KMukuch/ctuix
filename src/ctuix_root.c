@@ -53,6 +53,10 @@ CTUIX_Node* ctuix_key_handler_root(CTUIX_Node *ctuix_node)
             return next_node;
         }
     }
+    else if(ch == 'q')
+    {
+        return NULL;
+    }
 
     return ctuix_node;
 }
