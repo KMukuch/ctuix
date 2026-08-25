@@ -4,7 +4,6 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_tree.h"
-#include "ctuix_utils.h"
 
 CTUIX_Node* ctuix_select_next_window(CTUIX_Node *ctuix_node)
 {

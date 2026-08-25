@@ -20,7 +20,8 @@ typedef enum
     CTUIX_ELEMENT_ITEM,
     CTUIX_ELEMENT_LABEL,
     CTUIX_ELEMENT_BUTTON,
-    CTUIX_ELEMENT_ENTRY
+    CTUIX_ELEMENT_ENTRY,
+    CTUIX_ELEMENT_ENTRY_BUFFER
 } CTUIX_Element_Type;
 
 /// @brief 
@@ -155,7 +156,7 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
 
 /// @brief 
 /// @param ctuix_node 
-void ctuix_draw_tree(CTUIX_Node *ctuix_node);
+void ctuix_tree_draw(CTUIX_Node *ctuix_node);
 
 /// @brief 
 /// @param ctuix_node 

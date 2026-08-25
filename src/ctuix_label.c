@@ -17,7 +17,7 @@ CTUIX_Label* ctuix_label_create()
 
     // set up the base node
     ctuix_label->base_node.ctuix_element_type = CTUIX_ELEMENT_LABEL;
-    ctuix_label->base_node.draw = NULL;
+    ctuix_label->base_node.draw = ctuix_label_draw;
     ctuix_label->base_node.key_handler = NULL;
 
     return ctuix_label;

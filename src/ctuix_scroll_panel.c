@@ -3,10 +3,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ncurses.h>
+#include <ctype.h>
 #include "ctuix_scroll_panel.h"
 #include "ctuix_root.h"
 #include "ctuix_nav.h"
-#include "ctuix_utils.h"
 
 CTUIX_Scroll_Panel* ctuix_scroll_panel_create()
 {
@@ -18,8 +18,8 @@ CTUIX_Scroll_Panel* ctuix_scroll_panel_create()
 
     // set up the base node
     ctuix_scroll_panel->base_node.ctuix_element_type = CTUIX_ELEMENT_PANEL;
-    ctuix_scroll_panel->base_node.draw = NULL;
-    ctuix_scroll_panel->base_node.key_handler = NULL;
+    ctuix_scroll_panel->base_node.draw = ctuix_scroll_panel_draw;
+    ctuix_scroll_panel->base_node.key_handler = ctuix_scroll_panel_key_handler;
 
     return ctuix_scroll_panel;
 }
@@ -33,7 +33,7 @@ CTUIX_Node* ctuix_scroll_panel_key_handler(CTUIX_Node *ctuix_node)
         if(ctuix_scroll_panel->scroll_offset > 0)
         {
             ctuix_scroll_panel->scroll_offset--;
-            ctuix_draw_tree(ctuix_node);
+            ctuix_tree_draw(ctuix_node);
         }
     }
     else if(ch == KEY_DOWN)
@@ -41,7 +41,7 @@ CTUIX_Node* ctuix_scroll_panel_key_handler(CTUIX_Node *ctuix_node)
         if(ctuix_scroll_panel->scroll_offset < ctuix_scroll_panel->line_count - 1)
         {
             ctuix_scroll_panel->scroll_offset++;
-            ctuix_draw_tree(ctuix_node);
+            ctuix_tree_draw(ctuix_node);
         }
     }
     else if(ch == '\t')
@@ -52,8 +52,8 @@ CTUIX_Node* ctuix_scroll_panel_key_handler(CTUIX_Node *ctuix_node)
         {
             current_active->active = false;
             next_node->active = true;
-            ctuix_draw_tree(current_active);
-            ctuix_draw_tree(next_node);
+            ctuix_tree_draw(current_active);
+            ctuix_tree_draw(next_node);
 
             return next_node;
         }
@@ -102,7 +102,7 @@ void ctuix_scroll_panel_draw(CTUIX_Node *ctuix_node)
             wattroff(ctuix_node->window, A_REVERSE);
             box(ctuix_node->window, 0, 0);
         }
-        char **wrapped_value = ctuix_wrap_value(ctuix_node);
+        char **wrapped_value = ctuix_scroll_panel_wrap_value(ctuix_node);
         if(wrapped_value)
         {
             for(int i = 0; i + ctuix_scroll_panel->scroll_offset < ctuix_scroll_panel->line_count && i < ctuix_node->h - 2; i++)
@@ -128,4 +128,78 @@ void ctuix_scroll_panel_set_value(CTUIX_Node *ctuix_node, char* value)
 
     CTUIX_Scroll_Panel *ctuix_scroll_panel = (CTUIX_Scroll_Panel*)ctuix_node;
     ctuix_scroll_panel->value = strdup(value);
+}
+
+char** ctuix_scroll_panel_wrap_value(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return NULL;
+
+    CTUIX_Scroll_Panel *ctuix_scroll_panel = (CTUIX_Scroll_Panel*)ctuix_node;
+
+    if(!ctuix_scroll_panel->value) return NULL;
+
+    int max_lines = strlen(ctuix_scroll_panel->value) + 1;
+    int line_count = 0;
+    char *text = ctuix_scroll_panel->value;
+    char **lines = malloc(max_lines * sizeof(char*));
+    if(!lines) return NULL;
+    
+    if(text)
+    {
+        int width = ctuix_node->w - 2;
+        int start = 0;
+        int len = strlen(text);
+        
+        for (int i = 0; i < max_lines && start < len; i++)
+        {
+            // Calculate end
+            int end = start + width;
+            if (end >= len) end = len;
+            
+            // Look back for a space to break at (if not last line)
+            int break_point = end;
+            if (end < len)
+            {
+                while (break_point > start && !isspace(text[break_point]))
+                {
+                    break_point--;
+                }
+                if (break_point > start) end = break_point;  // break at space
+            }
+            
+            // Copy the line
+            int line_len = end - start;
+            lines[i] = malloc(line_len + 1);
+            if (!lines[i])
+            {
+                // cleanup on failure
+                for (int j = 0; j < i; j++) 
+                {
+                    free(lines[j]);
+                }
+                free(lines);
+                return NULL;
+            }
+            
+            strncpy(lines[i], text + start, line_len);
+            lines[i][line_len] = '\0';
+            
+            // Move start to next line (skip space if present)
+            start = end;
+            if (start < len && isspace(text[start])) start++;
+
+            line_count++;
+        }
+        ctuix_scroll_panel->line_count = line_count;
+    }
+    
+    char **result = realloc(lines, line_count * sizeof(char*));
+    if(result)
+    {
+        return result;
+    }
+    else
+    {
+        return lines;
+    }
 }

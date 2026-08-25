@@ -17,8 +17,8 @@ CTUIX_Button* ctuix_button_create()
 
     // set up the base node
     ctuix_button->base_node.ctuix_element_type = CTUIX_ELEMENT_BUTTON;
-    ctuix_button->base_node.draw = NULL;
-    ctuix_button->base_node.key_handler = NULL;
+    ctuix_button->base_node.draw = ctuix_button_draw;
+    ctuix_button->base_node.key_handler = ctuix_button_key_handler;
 
     return ctuix_button;
 }
@@ -34,8 +34,8 @@ CTUIX_Node* ctuix_button_key_handler(CTUIX_Node *ctuix_node)
         {
             current_active->active = false;
             next_node->active = true;
-            ctuix_draw_tree(current_active);
-            ctuix_draw_tree(next_node);
+            ctuix_tree_draw(current_active);
+            ctuix_tree_draw(next_node);
 
             return next_node;
         }

@@ -6,7 +6,6 @@
 #include "ctuix_selection_box.h"
 #include "ctuix_root.h"
 #include "ctuix_nav.h"
-#include "ctuix_utils.h"
 
 CTUIX_Selection_Box* ctuix_selection_box_create()
 {
@@ -18,8 +17,8 @@ CTUIX_Selection_Box* ctuix_selection_box_create()
 
     // set up the base node
     ctuix_selection_box->base_node.ctuix_element_type = CTUIX_ELEMENT_PANEL;
-    ctuix_selection_box->base_node.draw = NULL;
-    ctuix_selection_box->base_node.key_handler = NULL;
+    ctuix_selection_box->base_node.draw = ctuix_selection_box_draw;
+    ctuix_selection_box->base_node.key_handler = ctuix_selection_box_key_handler;
 
     return ctuix_selection_box;
 }
@@ -34,8 +33,9 @@ CTUIX_Item* ctuix_item_create()
 
     // set up the base node
     ctuix_item->base_node.ctuix_element_type = CTUIX_ELEMENT_PANEL;
-    ctuix_item->base_node.draw = NULL;
-    ctuix_item->base_node.key_handler = NULL;
+    ctuix_item->base_node.draw = ctuix_item_draw;
+    ctuix_item->base_node.key_handler = ctuix_item_key_handler;
+
 
     return ctuix_item;
 }
@@ -51,8 +51,8 @@ CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node)
         {
             current_active->active = false;
             next_node->active = true;
-            ctuix_draw_tree(current_active);
-            ctuix_draw_tree(next_node);
+            ctuix_tree_draw(current_active);
+            ctuix_tree_draw(next_node);
 
             return next_node;
         }

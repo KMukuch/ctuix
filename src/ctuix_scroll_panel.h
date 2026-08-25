@@ -30,4 +30,6 @@ void ctuix_scroll_panel_draw(CTUIX_Node *ctuix_node);
 
 void ctuix_scroll_panel_set_value(CTUIX_Node *ctuix_node, char* value);
 
+char** ctuix_scroll_panel_wrap_value(CTUIX_Node *ctuix_node);
+
 #endif
