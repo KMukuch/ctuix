@@ -43,6 +43,12 @@ CTUIX_Node* ctuix_find_node_by_id(CTUIX_Node *ctuix_node, char *ctuix_node_id);
 /// @return 
 CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *file_path);
 
+/// @brief 
+/// @param ctuix_manager 
+/// @param ctuix_node_id 
+/// @param event_handler 
+void ctuix_button_set_event_handler(CTUIX_Manager *ctuix_manager, char *ctuix_node_id, void (*event_handler)(void));
+
 /// @brief Free memory from CTUIX library
 /// @param ctuix_manager 
 void ctuix_delete(CTUIX_Manager *ctuix_manager);

@@ -141,8 +141,6 @@ void ctuix_node_set_flags(CTUIX_Node *ctuix_node, bool focusable, bool input);
 /// @return 
 CTUIX_Manager* ctuix_manager_create(CTUIX_Node *ctuix_node, char* file_path);
 
-void ctuix_set_event_handler();
-
 /// @brief 
 /// @param ctuix_node 
 /// @param ctuix_node_id 
