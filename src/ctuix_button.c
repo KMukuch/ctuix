@@ -42,7 +42,12 @@ CTUIX_Node* ctuix_button_key_handler(CTUIX_Node *ctuix_node)
     }
     else if(ch == '\n' || ch == '\r' || ch == KEY_ENTER)
     {
-        
+        CTUIX_Button *ctuix_button = (CTUIX_Button*)ctuix_node;
+        if(ctuix_button->event_holder)
+        {
+            ctuix_button->event_holder();
+        }
+
     }
     else if(ch == 'q')
     {
@@ -106,4 +111,14 @@ void ctuix_button_set_value(CTUIX_Node *ctuix_node, char* value)
 
     CTUIX_Button *ctuix_button = (CTUIX_Button*)ctuix_node;
     ctuix_button->value = strdup(value);
+}
+
+void ctuix_button_set_event_handler(CTUIX_Manager *ctuix_manager, char *ctuix_node_id, void (*event_handler)(void))
+{
+    CTUIX_Node *ctuix_node = ctuix_find_node_by_id(ctuix_manager->ctuix_scene->root_node, ctuix_node_id);
+    if(ctuix_node)
+    {
+        CTUIX_Button *ctuix_button = (CTUIX_Button*)ctuix_node;
+        ctuix_button->event_holder = event_handler;
+    }
 }
