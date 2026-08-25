@@ -4,10 +4,26 @@
 #include <string.h>
 #include <ncurses.h>
 #include "ctuix_tree.h"
+#include "ctuix_root.h"
 #include "ctuix_nav.h"
-#include "ctuix_utils.h"
 
-void ctuix_draw_root(CTUIX_Node *ctuix_node)
+CTUIX_Root* ctuix_root_create()
+{
+    CTUIX_Root *ctuix_root = calloc(1, sizeof(CTUIX_Root));
+    if(!ctuix_root)
+    {
+        return NULL;
+    }
+
+    // set up the base node
+    ctuix_root->base_node.ctuix_element_type = CTUIX_ELEMENT_PANEL;
+    ctuix_root->base_node.draw = ctuix_root_draw;
+    ctuix_root->base_node.key_handler = ctuix_root_key_handler;
+
+    return ctuix_root;
+}
+
+void ctuix_root_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
@@ -37,7 +53,7 @@ void ctuix_draw_root(CTUIX_Node *ctuix_node)
     }
 }
 
-CTUIX_Node* ctuix_key_handler_root(CTUIX_Node *ctuix_node)
+CTUIX_Node* ctuix_root_key_handler(CTUIX_Node *ctuix_node)
 {
     int ch = wgetch(ctuix_node->window);
     if(ch == '\t')
@@ -48,7 +64,7 @@ CTUIX_Node* ctuix_key_handler_root(CTUIX_Node *ctuix_node)
         {
             current_active->active = false;
             next_node->active = true;
-            ctuix_draw_tree(next_node);
+            ctuix_tree_draw(next_node);
 
             return next_node;
         }

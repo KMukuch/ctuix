@@ -128,7 +128,7 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
     return NULL;
 }
 
-void ctuix_draw_tree(CTUIX_Node *ctuix_node)
+void ctuix_tree_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
 
@@ -140,7 +140,7 @@ void ctuix_draw_tree(CTUIX_Node *ctuix_node)
     CTUIX_Node *ctuix_node_child = ctuix_node->children;
     while(ctuix_node_child)
     {
-        ctuix_draw_tree(ctuix_node_child);
+        ctuix_tree_draw(ctuix_node_child);
         ctuix_node_child = ctuix_node_child->next;
     }
     if(ctuix_node->window)

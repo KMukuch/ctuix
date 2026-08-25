@@ -1,5 +1,5 @@
-#ifndef CTUIX_DRAW_H
-#define CTUIX_DRAW_H
+#ifndef CTUIX_ROOT_H
+#define CTUIX_ROOT_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,8 +8,16 @@
 #include <ncurses.h>
 #include "ctuix_tree.h"
 
-void ctuix_draw_root(CTUIX_Node *ctuix_node);
+typedef struct CTUIX_Root
+{
+    CTUIX_Node base_node;
 
-CTUIX_Node* ctuix_key_handler_root(CTUIX_Node *ctuix_node);
+} CTUIX_Root;
+
+CTUIX_Root* ctuix_root_create();
+
+void ctuix_root_draw(CTUIX_Node *ctuix_node);
+
+CTUIX_Node* ctuix_root_key_handler(CTUIX_Node *ctuix_node);
 
 #endif
