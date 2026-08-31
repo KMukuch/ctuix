@@ -156,6 +156,12 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
 
 /// @brief 
 /// @param ctuix_node 
+/// @param ctuix_node_id 
+/// @return 
+CTUIX_Node* ctuix_find_node_in_manager_by_id(CTUIX_Manager *ctuix_manager, char *ctuix_node_id);
+
+/// @brief 
+/// @param ctuix_node 
 void ctuix_tree_draw(CTUIX_Node *ctuix_node);
 
 /// @brief 

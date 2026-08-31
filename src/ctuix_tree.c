@@ -128,6 +128,11 @@ CTUIX_Manager* ctuix_find_manager_by_path(CTUIX_Manager *ctuix_manager, char *fi
     return NULL;
 }
 
+CTUIX_Node* ctuix_find_node_in_manager_by_id(CTUIX_Manager *ctuix_manager, char *ctuix_node_id)
+{
+    return ctuix_find_node_by_id(ctuix_manager->ctuix_scene->root_node, ctuix_node_id);
+}
+
 void ctuix_tree_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;

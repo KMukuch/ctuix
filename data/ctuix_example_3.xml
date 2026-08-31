@@ -2,7 +2,5 @@
 <!DOCTYPE ctuix SYSTEM "ctuix.dtd">
 
 <ctuix>
-    <ctuix_panel x-alignment="center" y-alignment="center" w="50vw" h="50vh" name="DIALOG BOX">
-        <ctuix_label x="2" y="2">Message</ctuix_label>
-    </ctuix_panel>
+    <ctuix_scroll_panel x-alignment="center" y-alignment="center" w="80vw" h="80vh" name="DIALOG BOX" id="scrl1"></ctuix_scroll_panel>
 </ctuix>

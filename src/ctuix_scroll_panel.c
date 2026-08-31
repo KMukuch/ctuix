@@ -76,6 +76,16 @@ void ctuix_scroll_panel_draw(CTUIX_Node *ctuix_node)
     {
         int max_y, max_x;
         getmaxyx(ctuix_node->parent->window, max_y, max_x);
+        if(ctuix_node->ctuix_element_w_units == CTUIX_ELEMENT_UNITS_VW)
+        {
+            int vw = max_x * ctuix_node->w / 100;
+            ctuix_node->w = vw;
+        }
+        if(ctuix_node->ctuix_element_h_units == CTUIX_ELEMENT_UNITS_VH)
+        {
+            int vh = max_y * ctuix_node->h / 100;
+            ctuix_node->h = vh;
+        }
         if(ctuix_node->ctuix_element_x_alignment == CTUIX_ELEMENT_X_ALIGNMENT_CENTER)
         {
             ctuix_node->x = (max_x - ctuix_node->w) / 2;
@@ -114,7 +124,7 @@ void ctuix_scroll_panel_draw(CTUIX_Node *ctuix_node)
         }
         if(ctuix_node->name)
         {
-            mvwprintw(ctuix_node->window, 0, 0, "%s", ctuix_node->name);
+            mvwprintw(ctuix_node->window, 0, 1, "%s", ctuix_node->name);
         }
         wrefresh(ctuix_node->window);
     }
