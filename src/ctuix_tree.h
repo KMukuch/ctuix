@@ -162,6 +162,11 @@ CTUIX_Node* ctuix_find_node_in_manager_by_id(CTUIX_Manager *ctuix_manager, char 
 
 /// @brief 
 /// @param ctuix_node 
+/// @return 
+int ctuix_node_count_children(CTUIX_Node *ctuix_node);
+
+/// @brief 
+/// @param ctuix_node 
 void ctuix_tree_draw(CTUIX_Node *ctuix_node);
 
 /// @brief 

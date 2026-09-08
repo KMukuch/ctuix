@@ -34,7 +34,7 @@ CTUIX_Item* ctuix_item_create()
     // set up the base node
     ctuix_item->base_node.ctuix_element_type = CTUIX_ELEMENT_PANEL;
     ctuix_item->base_node.draw = ctuix_item_draw;
-    ctuix_item->base_node.key_handler = ctuix_item_key_handler;
+    ctuix_item->base_node.key_handler = NULL;
 
 
     return ctuix_item;
@@ -43,6 +43,7 @@ CTUIX_Item* ctuix_item_create()
 CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node)
 {
     int ch = wgetch(ctuix_node->window);
+    CTUIX_Selection_Box *ctuix_selection_box = (CTUIX_Selection_Box*)ctuix_node;
     if(ch == '\t')
     {
         CTUIX_Node *current_active = ctuix_node;
@@ -57,9 +58,31 @@ CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node)
             return next_node;
         }
     }
+    else if(ch == KEY_UP)
+    {
+        if(ctuix_selection_box->selected_index > 0)
+        {
+            ctuix_selection_box->selected_index--;
+            if(ctuix_selection_box->selected_index < ctuix_selection_box->scroll_offset)
+            {
+                ctuix_selection_box->scroll_offset = ctuix_selection_box->selected_index;
+            }
+            ctuix_tree_draw(ctuix_node->parent);  
+        }
+        return ctuix_find_item_by_ind(ctuix_node);
+    }
     else if(ch == KEY_DOWN)
     {
-        
+        if(ctuix_selection_box->selected_index < ctuix_node_count_children(ctuix_node) - 1)
+        {
+            ctuix_selection_box->selected_index++;
+            if(ctuix_selection_box->selected_index >= ctuix_selection_box->scroll_offset + ctuix_selection_box->visible)
+            {
+                ctuix_selection_box->scroll_offset = ctuix_selection_box->selected_index - ctuix_selection_box->visible + 1;
+            }
+            ctuix_tree_draw(ctuix_node->parent);  
+        }
+        return ctuix_find_item_by_ind(ctuix_node);
     }
     else if(ch == 'q')
     {
@@ -69,54 +92,56 @@ CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node)
     return ctuix_node;
 }
 
-CTUIX_Node* ctuix_item_key_handler(CTUIX_Node *ctuix_node)
-{
-    // int ch = wgetch(ctuix_node->parent->window);
-    // if(*ch == KEY_UP)
-    // {
-    //     if(ctuix_node->parent->selected_index > 0)
-    //     {
-    //         ctuix_node->parent->selected_index--;
-    //         if(ctuix_node->parent->selected_index < ctuix_node->parent->scroll_offset)
-    //         {
-    //             ctuix_node->parent->scroll_offset = ctuix_node->parent->selected_index;
-    //         }
-    //         ctuix_draw_tree(ctuix_node->parent);  
-    //     }
-    //     return ctuix_find_item_by_ind(ctuix_node->parent);
-    // }
-    // else if(*ch == KEY_DOWN)
-    // {
-    //     if(ctuix_node->parent->selected_index < ctuix_count_children(ctuix_node->parent) - 1)
-    //     {
-    //         ctuix_node->parent->selected_index++;
-    //         if(ctuix_node->parent->selected_index >= ctuix_node->parent->scroll_offset + ctuix_node->parent->visible)
-    //         {
-    //             ctuix_node->parent->scroll_offset = ctuix_node->parent->selected_index - ctuix_node->parent->visible + 1;
-    //         }
-    //         ctuix_draw_tree(ctuix_node->parent);  
-    //     }
-    //     return ctuix_find_item_by_ind(ctuix_node->parent);
-    // }
-    // else if(*ch == '\t')
-    // {
-    //     CTUIX_Node *current_active = ctuix_node->parent;
-    //     CTUIX_Node *next_node = ctuix_select_next_window(current_active);
-    //     if(next_node)
-    //     {
-    //         current_active->active = false;
-    //         next_node->active = true;
-    //         ctuix_draw_tree(current_active);
-    //         ctuix_draw_tree(next_node);
+// CTUIX_Node* ctuix_item_key_handler(CTUIX_Node *ctuix_node)
+// {
+//     int ch = wgetch(ctuix_node->parent->window);
+//     if(*ch == KEY_UP)
+//     {
+//         if(ctuix_node->parent->selected_index > 0)
+//         {
+//             ctuix_node->parent->selected_index--;
+//             if(ctuix_node->parent->selected_index < ctuix_node->parent->scroll_offset)
+//             {
+//                 ctuix_node->parent->scroll_offset = ctuix_node->parent->selected_index;
+//             }
+//             ctuix_draw_tree(ctuix_node->parent);  
+//         }
+//         return ctuix_find_item_by_ind(ctuix_node->parent);
+//     }
+//     else if(*ch == KEY_DOWN)
+//     {
+//         if(ctuix_node->parent->selected_index < ctuix_node_count_children(ctuix_node->parent) - 1)
+//         {
+//             ctuix_node->parent->selected_index++;
+//             if(ctuix_node->parent->selected_index >= ctuix_node->parent->scroll_offset + ctuix_node->parent->visible)
+//             {
+//                 ctuix_node->parent->scroll_offset = ctuix_node->parent->selected_index - ctuix_node->parent->visible + 1;
+//             }
+//             ctuix_draw_tree(ctuix_node->parent);  
+//         }
+//         return ctuix_find_item_by_ind(ctuix_node->parent);
+//     }
+//     else if(*ch == '\t')
+//     {
+//         CTUIX_Node *current_active = ctuix_node->parent;
+//         CTUIX_Node *next_node = ctuix_select_next_window(current_active);
+//         if(next_node)
+//         {
+//             current_active->active = false;
+//             next_node->active = true;
+//             ctuix_draw_tree(current_active);
+//             ctuix_draw_tree(next_node);
 
-    //         return next_node;
-    //     }
-    // }
-}
+//             return next_node;
+//         }
+//     }
+// }
 
 void ctuix_selection_box_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
+    
+    CTUIX_Selection_Box *ctuix_selection_box = (CTUIX_Selection_Box*)ctuix_node;
     
     if(!ctuix_node->window)
     {
@@ -130,7 +155,9 @@ void ctuix_selection_box_draw(CTUIX_Node *ctuix_node)
         {
             ctuix_node->y = (max_y - ctuix_node->h) / 2;
         }
-
+        ctuix_selection_box_set_item_ind(ctuix_node);
+        ctuix_selection_box->item_count = ctuix_node_count_children(ctuix_node);
+        ctuix_selection_box->visible = ctuix_node->h - 4;
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
     }
     if(ctuix_node->window)
@@ -173,15 +200,14 @@ void ctuix_item_draw(CTUIX_Node *ctuix_node)
             if (ctuix_selection_box->selected_index == ctuix_item->index)
             {
                 wattron(ctuix_node->parent->window, A_REVERSE);
-                mvwprintw(ctuix_node->parent->window, row, ctuix_node->x, "%s", ctuix_item->value);
+                mvwprintw(ctuix_node->parent->window, row, 1, "%s", ctuix_item->value);
                 wattroff(ctuix_node->parent->window, A_REVERSE);
             }
             else
             {
-                mvwprintw(ctuix_node->parent->window, row, ctuix_node->x, "%s", ctuix_item->value);
+                mvwprintw(ctuix_node->parent->window, row, 1, "%s", ctuix_item->value);
             }
         }
-        wrefresh(ctuix_node->parent->window);
     }
 }
 
@@ -190,29 +216,30 @@ CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node)
     
 }
 
-void ctuix_item_set_ind(CTUIX_Item *ctuix_item)
+void ctuix_selection_box_set_item_ind(CTUIX_Node *ctuix_node)
 {
-    if(ctuix_item) return;
-
-    CTUIX_Node *parent = ctuix_item->base_node.parent;
-    if(!parent) return;
-
-    CTUIX_Node *child = parent->children;
+    if(!ctuix_node) return;
+    if(ctuix_node->ctuix_element_type != CTUIX_ELEMENT_SELECTION_BOX) return;
     
     int i = 0;
-    while(child)
+
+    CTUIX_Selection_Box *ctuix_selection_box = (CTUIX_Selection_Box*)ctuix_node;
+    CTUIX_Node *current_node = ctuix_node->children;
+    while(current_node)
     {
-        if (child == &ctuix_item->base_node)
-        {
-            ctuix_item->index = i;
-            return;
-        }
-        child = child->next;
+        CTUIX_Item *ctuix_item = (CTUIX_Item*)current_node;
+        ctuix_item->index = i;
+
+        current_node = current_node->next;
         i++;
     }
 }
 
-void ctuix_selection_box_set_item_count(CTUIX_Selection_Box *ctuix_selection_box)
+void ctuix_item_set_value(CTUIX_Node *ctuix_node, char* value)
 {
-
+    if(!ctuix_node) return;
+    if(ctuix_node->ctuix_element_type != CTUIX_ELEMENT_ITEM) return;
+    
+    CTUIX_Item *ctuix_item = (CTUIX_Item*)ctuix_node;
+    ctuix_item->value = value;
 }

@@ -133,6 +133,22 @@ CTUIX_Node* ctuix_find_node_in_manager_by_id(CTUIX_Manager *ctuix_manager, char 
     return ctuix_find_node_by_id(ctuix_manager->ctuix_scene->root_node, ctuix_node_id);
 }
 
+int ctuix_node_count_children(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return 0;
+    
+    int count = 0;
+
+    CTUIX_Node *current_node = ctuix_node->children;
+    while(current_node)
+    {
+        count++;
+        current_node = current_node->next;
+    }
+
+    return count;
+}
+
 void ctuix_tree_draw(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
