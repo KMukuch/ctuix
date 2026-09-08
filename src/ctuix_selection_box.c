@@ -69,7 +69,6 @@ CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node)
             }
             ctuix_tree_draw(ctuix_node->parent);  
         }
-        return ctuix_find_item_by_ind(ctuix_node);
     }
     else if(ch == KEY_DOWN)
     {
@@ -82,7 +81,6 @@ CTUIX_Node* ctuix_selection_box_key_handler(CTUIX_Node *ctuix_node)
             }
             ctuix_tree_draw(ctuix_node->parent);  
         }
-        return ctuix_find_item_by_ind(ctuix_node);
     }
     else if(ch == 'q')
     {
