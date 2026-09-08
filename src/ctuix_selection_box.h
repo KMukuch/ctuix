@@ -43,8 +43,7 @@ void ctuix_item_draw(CTUIX_Node *ctuix_node);
 
 CTUIX_Node* ctuix_find_item_by_ind(CTUIX_Node *ctuix_node);
 
-void ctuix_item_set_ind(CTUIX_Item *ctuix_item);
-void ctuix_selection_box_set_item_count(CTUIX_Selection_Box *ctuix_selection_box);
-
+void ctuix_selection_box_set_item_ind(CTUIX_Node *ctuix_node);
+void ctuix_item_set_value(CTUIX_Node *ctuix_node, char* value);
 
 #endif

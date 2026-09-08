@@ -241,6 +241,7 @@ static CTUIX_Node* _build_ctuix_node(xmlNode *xml_node)
     ctuix_label_set_value(ctuix_node, content_copy);
     ctuix_button_set_value(ctuix_node, content_copy);
     ctuix_scroll_panel_set_value(ctuix_node, content_copy);
+    ctuix_item_set_value(ctuix_node, content_copy);
 
     if(node_x) xmlFree(node_x);
     if(node_y) xmlFree(node_y);

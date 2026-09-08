@@ -49,7 +49,7 @@ int main()
 
 void on_click_btn1()
 {
-    CTUIX_Manager *ctuix_manager = ctuix_parse(FILEPATH3);
+    CTUIX_Manager *ctuix_manager = ctuix_parse(FILEPATH1);
     if(!ctuix_manager)
     {
         ctuix_error_show("Error", "Files not parsed!");
