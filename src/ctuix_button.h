@@ -22,6 +22,8 @@ CTUIX_Button* ctuix_button_create();
 
 CTUIX_Node* ctuix_button_key_handler(CTUIX_Node *ctuix_node);
 
+void ctuix_button_init(CTUIX_Node *ctuix_node);
+
 void ctuix_button_draw(CTUIX_Node *ctuix_node);
 
 void ctuix_button_set_value(CTUIX_Node *ctuix_node, char* value);

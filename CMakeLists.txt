@@ -17,24 +17,53 @@ pkg_check_modules(NCURSES REQUIRED ncurses)
 # Source files
 file(GLOB CTUIX_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 
-# Create library
-add_library(ctuix STATIC ${CTUIX_SOURCES})
+# Create libraries
+add_library(ctuix_static STATIC ${CTUIX_SOURCES})
+add_library(ctuix_dynamic SHARED ${CTUIX_SOURCES})
+
+# Set the same library output name
+set_target_properties(ctuix_static PROPERTIES
+    OUTPUT_NAME ctuix
+)
+
+set_target_properties(ctuix_dynamic PROPERTIES
+    OUTPUT_NAME ctuix
+)
 
 # Include paths (PUBLIC for users of the library)
-target_include_directories(ctuix PUBLIC 
+target_include_directories(ctuix_static PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
+
+target_include_directories(ctuix_dynamic PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
 # Private includes for your code only
-target_include_directories(ctuix PRIVATE 
+target_include_directories(ctuix_static PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${LIBXML2_INCLUDE_DIRS}
+    ${NCURSES_INCLUDE_DIRS}
+)
+
+target_include_directories(ctuix_dynamic PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${LIBXML2_INCLUDE_DIRS}
     ${NCURSES_INCLUDE_DIRS}
 )
 
 # Link dependencies
-target_link_libraries(ctuix PUBLIC ${LIBXML2_LIBRARIES} ${NCURSES_LIBRARIES})
+target_link_libraries(ctuix_static PUBLIC
+    ${LIBXML2_LIBRARIES}
+    ${NCURSES_LIBRARIES}
+)
+
+target_link_libraries(ctuix_dynamic PUBLIC
+    ${LIBXML2_LIBRARIES}
+    ${NCURSES_LIBRARIES}
+)
 
 # Remove installed files
 add_custom_target(clean-all
@@ -44,7 +73,7 @@ add_custom_target(clean-all
 
 # Add executable from demo folder
 add_executable(ctuix_demo EXCLUDE_FROM_ALL demo/ctuix_demo.c)
-target_link_libraries(ctuix_demo PRIVATE ctuix)
+target_link_libraries(ctuix_demo PRIVATE ctuix_static)
 
 # Build-only target
 add_custom_target(demo
@@ -52,9 +81,10 @@ add_custom_target(demo
     COMMENT "Build the demo program from demo/ folder"
 )
 
-# Install the static library
-install(TARGETS ctuix
+# Install the static and dynamic libraries
+install(TARGETS ctuix_static ctuix_dynamic
     ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
 )
 
 # Install headers manually (alternative to PUBLIC_HEADER above)

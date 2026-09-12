@@ -17,6 +17,7 @@ CTUIX_Button* ctuix_button_create()
 
     // set up the base node
     ctuix_button->base_node.ctuix_element_type = CTUIX_ELEMENT_BUTTON;
+    ctuix_button->base_node.init = ctuix_button_init;
     ctuix_button->base_node.draw = ctuix_button_draw;
     ctuix_button->base_node.key_handler = ctuix_button_key_handler;
 
@@ -57,11 +58,9 @@ CTUIX_Node* ctuix_button_key_handler(CTUIX_Node *ctuix_node)
     return ctuix_node;
 }
 
-void ctuix_button_draw(CTUIX_Node *ctuix_node)
+void ctuix_button_init(CTUIX_Node *ctuix_node)
 {
     if(!ctuix_node) return;
-
-    CTUIX_Button *ctuix_button = (CTUIX_Button*)ctuix_node;
 
     if(!ctuix_node->window)
     {
@@ -77,11 +76,19 @@ void ctuix_button_draw(CTUIX_Node *ctuix_node)
         }
 
         ctuix_node->window = derwin(ctuix_node->parent->window, ctuix_node->h, ctuix_node->w, ctuix_node->y, ctuix_node->x);
+
+        keypad(ctuix_node->window, TRUE);
     }
-    
+}
+
+void ctuix_button_draw(CTUIX_Node *ctuix_node)
+{
+    if(!ctuix_node) return;
+
+    CTUIX_Button *ctuix_button = (CTUIX_Button*)ctuix_node;
+
     if(ctuix_node->window)
     {
-        keypad(ctuix_node->window, TRUE);
         werase(ctuix_node->window);
         if(ctuix_button->value)
         {

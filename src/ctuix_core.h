@@ -5,10 +5,10 @@
 #include "ctuix_tree.h"
 #include "ctuix_parse.h"
 
-void ctuix_init();
+void ctuix_core_init();
 
-int ctuix_run(CTUIX_Manager *ctuix_manager);
+int ctuix_core_run(CTUIX_Manager *ctuix_manager);
 
-void ctuix_end();
+void ctuix_core_end();
 
 #endif
