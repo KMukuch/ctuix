@@ -55,6 +55,7 @@ typedef struct CTUIX_Node
     struct CTUIX_Node *next;
 
     // vtable
+    void (*init)(struct CTUIX_Node *ctuix_node);
     void (*draw)(struct CTUIX_Node* ctuix_node);
     struct CTUIX_Node* (*key_handler)(struct CTUIX_Node* ctuix_node);
 

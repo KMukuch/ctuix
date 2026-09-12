@@ -10,16 +10,16 @@ typedef struct CTUIX_Manager CTUIX_Manager;
 
 /// @brief Initilizing CTUIX and NCURSES library
 /// @param void
-void ctuix_init(void);
+void ctuix_core_init(void);
 
 /// @brief Running the CTUIX core
 /// @param ctuix_manager 
 /// @return If no error, returns 1
-int ctuix_run(CTUIX_Manager *ctuix_manager);
+int ctuix_core_run(CTUIX_Manager *ctuix_manager);
 
 /// @brief End CTUIX and NCURSES library
 /// @param void
-void ctuix_end(void);
+void ctuix_core_end(void);
 
 /// @brief Parse an XML file
 /// @param file_path 
